@@ -1,0 +1,88 @@
+{% extends "form.html" %}
+{% block title %}LINUX命令配置服务器{% endblock %}
+{% block title1 %}LINUX命令配置服务器{% endblock %}
+{% block form %}
+				<form action="ServerConfig.do" method="post" class="form-horizontal" id="formID"/>
+							<div class="control-group">
+								<label class="control-label">LINUX命令</label>
+								<div class="controls">
+									<span class="help-block"><code>{{linux_command}}</code></span>
+								</div>
+							</div>
+					{% if config %}
+						{% for conf in config %}
+							<div class="control-group">
+								<label class="control-label">监控频率</label>
+								<div class="controls">
+									<input id="frequency" name="frequency" class="validate[required]"  value="{{conf.frequency}}" />（单位：秒）
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+							<div class="control-group">
+								<label class="control-label">监控频率</label>
+								<div class="controls">
+									<input id="frequency" name="frequency" class="validate[required]"  />（单位：秒）
+								</div>
+							</div>
+					{% endif %}
+							<div class="control-group">
+								<label class="control-label" >监控状态</label>
+								<div class="controls radio-group">
+									<label class="inline"><input id="open" type="radio" name="status" value='0' class="validate[required]" checked/> 开启</label>
+									<label class="inline"><input id="close" type="radio" name="status" value='1' class="validate[required]"/> 关闭</label>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">服务器</label>
+								<div class="controls checkbox-group server-group">
+									<dl class="dl-horizontal">
+									<span class="help-block"><code>说明：以下为按服务器分配情况进行展示，人员和服务器都需要进行勾选，如涉及到此人员，则人员名称前面的勾必选。</code></span></br>
+										{% for managers in serverManagers%}
+											{% if server_sn5 %}
+                                                                                        {% for group in managers.groupNames %}
+                                                                                                <dt><label><input type="checkbox" id="{{group.groupSn}}" name="groupName" value="{{group.groupSn}}" />{{group.groupName}}</label></dt>
+                                                                                                        <dd class="all-check-group">
+                                                                                                                <label class="inline bold"><input type="checkbox" id="serverName_{{group.groupSn}}" name="all_check"/> 全选</label>
+                                                                                                                {% for server in managers.serverNames %}
+															{% if server.serverSn not in server_sn5 %}
+																<label class="inline"><input type="checkbox" id="{{server.serverSn}}" name="serverName_{{group.groupSn}}" value="{{server.serverSn}}"/>{{server.serverName}}</label>
+															{% endif %}
+                                                                                                                {% endfor %}
+                                                                                                        </dd>
+                                                                                        {% endfor %}
+											{% else %}
+											{% for group in managers.groupNames %}
+												<dt><label><input type="checkbox" id="{{group.groupSn}}" name="groupName" value="{{group.groupSn}}" />{{group.groupName}}</label></dt>
+													<dd class="all-check-group">
+														<label class="inline bold"><input type="checkbox" id="serverName_{{group.groupSn}}" name="all_check"/> 全选</label>
+														{% for server in managers.serverNames %}
+														<label class="inline"><input type="checkbox" id="{{server.serverSn}}" name="serverName_{{group.groupSn}}" value="{{server.serverSn}}"/>{{server.serverName}}</label>
+														{% endfor %}
+													</dd>
+											{% endfor %}
+											{% endif %}
+										 {% endfor %}
+									</dl>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">追加通知组</label>
+								<div class="controls checkbox-group group-name all-check-group">
+									<label class="inline bold"><input type="checkbox" id="GroupName" name="all_check"/> 全选</label>
+									{% for group in GroupNames %}
+											{% if group.groupSnCmp in message.add_group_sn%}
+												<label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}" checked="checked"/> {{group.groupName}}</label>
+											{% else %}
+												<label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}" /> {{group.groupName}}</label>
+											{% endif %}	
+									{% endfor %}
+								</div>
+							</div>
+							<input type="hidden" name="monitor_type" value="1" />
+							<input type="hidden" name="id" value="{{id}}" />
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">保存</button>
+							</div>
+					</form>
+{% endblock %}

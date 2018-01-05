@@ -1,0 +1,43 @@
+{% extends "table5.html" %}
+{% block title %}手机接收查询(inbox){% endblock %}
+{% block href %}
+
+                            <li><a href="select_cm.do">移动</a></li>
+                            <li class="active"><a href="select_un.do">联通</a></li>
+                            <li><a href="select_cdma.do">电信</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select_un.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="CommPort">手机号码</option>
+										<option value="Sender">接入号</option>
+					</select>
+					 起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>接入号</th>
+											<th>手机号码</th>
+											<th>接收内容</th>
+											<th>接收时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for send in table_list %}
+										<tr>
+											<td>{{send.id}}</td>
+											<td>{{send.Sender}}</td>
+											<td>{{send.mobile}}</td>
+											<td>{{send.Msg}}</td>
+											<td>{{send.ArrivedTime|date:"Y-m-d H:i:s"}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "table.html" %}
+{% block title %}预警参数管理(config_info表){% endblock %}
+{% block title1 %}预警程序参数信息{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>参数名</th>
+											<th>参数值</th>
+											<th>描述</th>
+											<th>更新时间</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for config in table_list %}
+										<tr>
+											<td>{{config.id}}</td>
+											<td>{{config.key}}</td>
+											{% if config.id == 1 %}
+											<td><div title="调用告警的URL接口地址">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 2 %}
+											<td><div title="上面URL地址的传参账号参数">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 3 %}
+											<td><div title="上面URL地址的传参密码参数">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 4 %}
+											<td><div title="linux监控异常时给该组的人员进行告警通知">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 5 %}
+											<td><div title="数据库监控异常时给该组的人员进行告警通知">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 6 %}
+											<td><div title="linux监控异常时产生告警的级别（0：紧急，1：重要，2：一般）">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 7 %}
+											<td><div title="数据库监控异常时产生告警的级别（0：紧急，1：重要，2：一般）">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 8 %}
+											<td><div title="余额告警级别（0：紧急，1：重要，2：一般）">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 9 %}
+											<td><div title="监测sql预警间隔时间（秒）（废弃字段，目前无用）">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 10 %}
+											<td><div title="监测sql预警恢复时长倍数  （废弃字段，目前无用）">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 11 %}
+											<td><div title="在服务器上监测linux命令是否运行：0:关闭、1:开启">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 12 %}
+											<td><div title="目前用于数据库异常预警、余额预警、linux异常预警恢复时是否提醒，默认提醒：0:关闭、1:开启">{{config.value}}<div></td>
+											{% endif %}
+											{% if config.id == 13 %}
+											<td><div title="目前用于数据库异常预警、余额预警、linux异常预警恢复时是否提醒，默认提醒：0:关闭、1:开启">{{config.value}}<div></td>
+											{% endif %}
+											<td>{{config.insert_time|date:"Y-m-d H:i:s"}}</td>
+											<td><a href="update?id={{config.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

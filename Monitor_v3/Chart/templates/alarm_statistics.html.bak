@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="static/js/echarts.js"></script>
+</head>
+<body>
+    <form action="alarm_statistics" method="post" class="form-horizontal" id="formID"/>
+	统计日期：<input type="date" id="first_day"  name="first_day" value='{{first_day}}' />至<input type="date" id="end_day"  name="end_day" value='{{end_day}}'/>
+	<button type="submit" class="btn btn-primary">查询</button>(默认查看前10天)
+    </form>
+    <p>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width:1200px;height:400px;"></div>
+    
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var option = {
+           //标题
+            title: {
+                text: '告警数量统计'
+            },
+            //工具栏
+             toolbox: {
+        	show: true,
+       		feature: {
+			//数据视图
+            		dataView:{
+                		show:true
+            			 },
+			//数据视图还原	
+            		restore:{
+                		show:true
+            			},
+			//缩放区域
+            		dataZoom:{
+                		show:true
+            			},
+			//保存图片
+            		saveAsImage: {
+                		show: true
+            			},
+			//柱状和折线图展示原则
+            		magicType: {
+                		type: ['line', 'bar']
+            			}
+       		 	}
+	    	},
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis:{
+                data: [{% for table in table_list %}
+                       " {{table.comment}}",
+                        {% endfor %}]
+             },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: [{% for table in table_list %}
+                        {{table.count}},
+                        {% endfor %}]
+            }]
+        };
+        
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

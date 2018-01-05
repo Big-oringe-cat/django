@@ -1,0 +1,46 @@
+{% extends "table5.html" %}
+{% block title %}运营商返回上行查询(deliver_sms_info){% endblock %}
+{% block href %}
+
+                            <li class="active"><a href="select_auto_cm.do">移动</a></li>
+                            <li><a href="select_auto_un.do">联通</a></li>
+                            <li><a href="select_auto_cdma.do">电信</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select_auto_cm.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="src_terminal_id">手机号码</option>
+										<option value="msg_content">内容</option>
+										<option value="dest_mobile">接入号</option>
+					</select>
+					 起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>接入号</th>
+											<th>手机号码</th>
+											<th>省份</th>
+											<th>上行内容</th>
+											<th>上行时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for deliver in table_list %}
+										<tr>
+											<td>{{deliver.id}}</td>
+											<td>{{deliver.dest_mobile}}</td>
+											<td>{{deliver.src_terminal_id}}</td>
+											<td>{{deliver.province}}</td>
+											<td>{{deliver.msg_content}}</td>
+											<td>{{deliver.insert_time}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

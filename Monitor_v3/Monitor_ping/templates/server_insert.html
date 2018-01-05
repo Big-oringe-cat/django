@@ -1,0 +1,48 @@
+{%extends "form.html" %}
+{% block title %}业务服务器添加{% endblock %}
+{% block title1 %}server监控信息{% endblock %}
+{% block form %}
+					<form  action="server_insert" method="post" class="form-horizontal"  id="formID">
+					<div class="control-group">
+								<label class="control-label">服务器ip</label>
+								<div class="controls">
+									<input  id="server_ip" name="server_ip" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">私网ip</label>
+								<div class="controls">
+									<input  id="private_ip" name="private_ip" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">服务器标识</label>
+								<div class="controls">
+								<input  id="server_id" name="server_id" class="validate[required]" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+                                                                <label class="control-label">服务器名称</label>
+                                                                <div class="controls">
+                                                                        <input  id="server_desc" name="server_desc" class="validate[required]" style="width:220px;"/>
+                                                                </div>
+                                        </div>				
+
+					
+					<div class="control-group">
+									<label class="control-label">域名</label>
+									<div class="controls">
+                                                                        <input  id="domain_name" name="domain_name"  style="width:220px;"/>
+									</div>
+					</div>
+					
+					<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存</button>
+					</div>
+					</form>
+
+					
+{% endblock %}

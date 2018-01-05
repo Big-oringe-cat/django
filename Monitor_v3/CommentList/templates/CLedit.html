@@ -1,0 +1,34 @@
+{% extends "form.html" %}
+{% block title %}修改{% endblock %}
+{% block title1 %}监控分类信息{% endblock %}
+{% block form %}
+					<form  action="modify.do" method="post" class="form-horizontal"  id="formID">
+					{% for message in table_list %}
+					<div class="control-group">
+								<label class="control-label">监控分类</label>
+								<div class="controls">
+								<input  id="comment" name="comment" class="validate[required]" value="{{message.comment}}"/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控类型</label>
+								<div class="controls">
+									<select name="monitor_type">
+									{% if message.monitor_type == '0' %}
+										<option value="0" selected>SQL语句</option>
+										<option value="1">LINUX命令</option>
+									{% else %}
+										<option value="0">SQL语句</option>
+										<option value="1" selected>LINUX命令</option>
+									{% endif %}
+									</select>
+								</div>
+					</div>
+					<input type="hidden" name="id" value="{{message.id}}" />
+					{% endfor %}
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

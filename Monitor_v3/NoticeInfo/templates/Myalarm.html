@@ -1,0 +1,115 @@
+{% extends "table.html" %}
+{% block title %}{{operatorName}}的预警信息{% endblock %}
+{% block title1 %}最新预警展示{% endblock %}
+
+{% block form %}
+	<form action="Myalarm" method="post" class="form-inline" />
+					<select name="search">
+						{% if search == 'alarm_value' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="comment" >监控类别</option>
+						<option value="recover">恢复状态</option>
+						<option value="status">发送状态</option>
+						{% elif search == 'monitor_level' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_level" selected>预警级别</option>
+						<option value="comment">监控类别</option>
+						<option value="recover">恢复状态</option>
+						<option value="status">发送状态</option>
+						{% elif search == 'comment' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="comment" selected>监控类别</option>
+						<option value="recover">恢复状态</option>
+						<option value="status">发送状态</option>
+						{% elif search == 'recover' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="comment" >监控类别</option>
+						<option value="recover" selected >恢复状态</option>
+						<option value="status">发送状态</option>
+						{% elif search == 'status' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="comment" >监控类别</option>
+						<option value="recover">恢复状态</option>
+						<option value="status" selected>发送状态</option>
+						{% else %}
+						<option value="content" selected>预警内容</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="comment">监控类别</option>
+						<option value="recover">恢复状态</option>
+						<option value="status">发送状态</option>
+						{% endif %}
+					</select>
+                                                   起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="{{startTime}}" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="{{endTime}}" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" value='{{value}}'  placeholder="查询关键词"/>
+					<input type="submit" class="btn btn-primary"  value="查询" />
+					&nbsp&nbsp&nbsp&nbsp<input type="button" class="btn" value="批量恢复" onclick="window.location.href ='recover'" />
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+						
+										<tr>
+											<th>ID</th>
+											<th>预警内容</th>
+											<th  nowrap="nowrap">已预警次数</th>
+											<th  nowrap="nowrap">处理原因</th>
+											<th  nowrap="nowrap"> 状态 </th>
+											<th  nowrap="nowrap">预警责任人</th>
+											<th  nowrap="nowrap">预警知会人</th>
+											<th  nowrap="nowrap">状态</th>
+											<th  nowrap="nowrap">预警时间</th>
+                                                                                        <th  nowrap="nowrap">响应时间</th>
+											<th  nowrap="nowrap">原因记录</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										
+										{% for mobile in table_list %}
+{{alarm_uname3}}
+										<tr>
+											<td>{{mobile.id}}</td>
+											{% if mobile.monitor_level == '0' %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#EA0000"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% elif mobile.monitor_level == '1'  %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#FF00FF"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% else %}
+											<td style="word-break:break-all; word-wrap: break-word"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.alarm_amount}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><div style="white-space:nowrap;width:6em;text-overflow:ellipsis;overflow:hidden;" title="{{mobile.reason}}">{{mobile.reason}}</div></td>
+											{% if mobile.recover == '0' %}
+											<td nowrap="nowrap"><font color="#EA0000">未恢复</td>
+											{% endif %}
+											{% if mobile.recover == '1' %}
+											<td style="word-break:break-all; word-wrap: break-word">恢复</td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word"> <font color="#FF00FF">{{mobile.alarm_uname1}}</font>,{{mobile.alarm_uname}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.alarm_addname}}</td>
+                                                                                        {% if mobile.note_time == NULL %}
+                                                                                        <td nowrap="nowrap"><font color="#EA0000"><a href="Myalarm?id={{mobile.id}}">立即响应</a></td>
+                                                                                        {% endif %}
+                                                                                        {% if mobile.note_time != NULL %}
+                                                                                        <td nowrap="nowrap"><font color="#EA0000">响应中</td>
+                                                                                        {% endif %}
+											<td nowrap="nowrap">{{mobile.insert_time|date:"Y-m-d H:i:s"}}</td>
+                                                                                        <td nowrap="nowrap">{{mobile.note_time|date:"Y-m-d H:i:s"}}</td>
+                                                                                        {% if mobile.note_time == NULL %}
+                                                                                        <td><a href="addReason?id={{mobile.id}}" onclick="return false">处理记录</a>
+                                                                                            <a href="ignore?id={{mobile.id}}">忽略告警</a></td>
+                                                                                        {% endif %}
+                                                                                        {% if mobile.note_time != NULL %}
+                                                                                        <td><a href="addReason?id={{mobile.id}}">处理记录</a>
+                                                                                            <a href="ignore?id={{mobile.id}}">忽略告警</a></td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+
+{% endblock %}						
+				
+

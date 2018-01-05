@@ -1,0 +1,42 @@
+{% extends "table6.html" %}
+{% block title %}网关客户交互IP查询{% endblock %}
+{% block title1 %}网关客户交互IP查询{% endblock %}
+{% block href %}
+                            <li><a href="customerSubmit.do"> 提交记录</a></li>
+                            <li><a href="customerSpeed.do">提交速度</a></li>
+                            <li><a href="tdSend.do">通道发送速度</a></li>
+                            <li class='active'><a href="request_ip">交互ip</a></li>
+{% endblock %}
+{% block form %}
+	<form action="request_ip" method="post" class="form-inline" name="formID" id="formID"  />
+			服务器：<select id="server" name="server" class="validate[required]">
+								{% for server1 in server_list %}
+									{% ifequal server1.ip server %}
+									<option value="{{server1.ip}}" selected>{{server1.server_name}}</option>
+									{% else %}
+									<option value="{{server1.ip}}">{{server1.server_name}}</option>
+									{% endifequal %}
+								{% endfor %}
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;账户id：<input type="text" name="user_id" id="user_id" value="{{user_id}}" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">客户使用ip</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td  style="word-break:break-all; word-wrap: break-word">{{message.content}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

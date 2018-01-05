@@ -1,0 +1,96 @@
+{% extends "form.html" %}
+{% block title %}告警原因添加{% endblock %}
+{% block title1 %}告警原因及处理进度记录{% endblock %}
+{% block form %}
+		<form  action="addReason" method="post" class="form-horizontal"  id="formID">
+		
+				{% for reason in reasonList %}
+				
+						<div class="control-group">
+								<label class="control-label">预警内容</label>
+								<div class="controls">
+									<textarea id="msg_content" name="msg_content" class="validate[required]">{{reason.content}}</textarea>
+								</div>
+						</div>
+						<div class="control-group">
+								<label class="control-label">分析后请选择预测原因</label>
+								<div class="controls">
+								 <select name="search" style="width:700px;">
+									{% for reason in table_list3 %}
+									<option value="{{reason.reason}}" >
+									{{ forloop.counter }}、
+									{{reason.reason|default_if_none:"请选择"}}
+									{% endfor %}
+									</option>
+								</select>
+						</div>
+						</div>
+						<div class="control-group">
+								<label class="control-label">历史告警趋势</label>
+								<div class="controls">
+							<div id="main" style="float:left; width:800px; height:300px; border:0px solid #0000FF;">
+    							<script type="text/javascript">
+        						var myChart = echarts.init(document.getElementById('main'));
+        						var option = {
+            							tooltip: {},
+           							 legend: {
+  						              data:['告警数量']
+          								  },
+            							xAxis: {
+               							 data: [
+									{% for table in table_list2 %}
+										"{{table.insert_time}}",
+									{% endfor %}
+									],
+									boundaryGap : false
+            								},
+           							 yAxis: {},
+            							series: [{
+               							 name: '告警数量',
+                						type: 'line',
+               							 data: [
+									{% for table in table_list2 %}
+										{{table.count}},
+									{% endfor %}
+									]
+         								   }]
+        									};
+        					myChart.setOption(option);
+   						 </script>
+						</div>
+						</div>
+						</div>
+						<div class="control-group">
+								<label class="control-label">实际原因是否在预测原因内:</label>
+								<dl class="dl-horizontal">
+								<div class="controls checkbox-group server-group">
+								<label class="inline"><input type="radio" id="yes" name="yes" value="0" checked='checked'/>是</label>
+                                                                        <label class="inline"><input type="radio" id="yes" name="yes" value="1" />否</label>
+								</div>
+								</dl>
+						</div>
+						<div class="control-group">
+								<label class="control-label">预警原因及处理进度记录</label>
+								<div class="controls">
+									<textarea id="reason" name="reason" class="validate[required]">{{reason.reason}}</textarea>
+								</div>
+						</div>
+						{% if reason.is_recover == '0' %}
+								<label class="control-label">预警状态</label>
+								<dl class="dl-horizontal">
+								<div class="controls checkbox-group server-group">
+									<label class="inline"><input type="radio" id="is_recover" name="is_recover" value="0" checked='checked'/>未恢复</label>
+									<label class="inline"><input type="radio" id="is_recover" name="is_recover" value="1" />恢复</label>
+								</div>
+								</dl>
+						{% endif %}
+						<input type="hidden" name="id" value="{{reason.id}}" />
+						<input type="hidden" name="note_taker" value="{{note_taker}}" />
+						<input type="hidden" name="md5" value="{{md5}}" />
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+						</div>
+				{% endfor %}		
+		</form>							
+{% endblock %}						
+				

@@ -1,0 +1,51 @@
+{% extends "table.html" %}
+{% block title %}服务器端口管理{% endblock %}
+{% block title1 %}端口监控{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+						<option value="parameter_name">监控协议</option>
+						<option value="parameter_value">IP/端口</option>
+						<option value="status">状态</option>
+					</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+{% if role == 4 %}
+					<a class="btn" href="insert.do" >添加端口监控</a>
+{% endif %}
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>服务器名称</th>
+											<th>IP:端口</th>
+											<th>状态</th>
+											<th>插入时间</th>
+{% if role == 4 %}
+                                                                                        <th>操作</th>
+{% endif %}
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{message.id}}</td>
+											<td>{{message.parameter_name}}</td>
+											<td>{{message.parameter_value}}</td>
+											{% if message.status == 0 %}
+											<td>启动</td>
+											{% elif message.status == 1 %}
+											<td style="color:red;">关闭</td>
+											{% endif %}										
+											<td>{{message.insert_time}}</td>
+{% if role == 4 %}
+											<td><a href="update?id={{message.id}}">修改</a></td>
+{% endif %}
+										</tr>
+										{% endfor %}
+
+{% endblock %}	 

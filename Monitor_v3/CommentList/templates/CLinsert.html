@@ -1,0 +1,27 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}监控分类信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">监控分类</label>
+								<div class="controls">
+									<input  id="comment" name="comment" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控类型</label>
+								<div class="controls">
+									<select name="monitor_type">
+										<option value="0">SQL语句</option>
+										<option value="1">LINUX命令</option>
+									</select>
+								</div>
+					</div>
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

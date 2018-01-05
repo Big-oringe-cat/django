@@ -1,0 +1,42 @@
+{% extends "table.html" %}
+{% block title %}责任分配表{% endblock %}
+{% block title1 %}服务器负责人信息{% endblock %}
+{% block form %}
+					<a class="btn" href="insert" >添加</a>
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th nowrap="nowrap">业务负责组</th>
+											<th nowrap="nowrap">责任人</th>
+											<th>负责服务器</th>
+											<th nowrap="nowrap">分配客服</th>
+										       <!-- <th>负责机房</th>-->
+											<th nowrap="nowrap">代理人</th>
+											<th nowrap="nowrap">代理状态</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for manager in table_list %}
+										<tr>
+											<td>{{manager.id}}</td>
+											<td>{{manager.group_mark}}</td>
+											<td  nowrap="nowrap"><B>{{manager.group_name}}</B></td>
+											<td>{{manager.server_name}}</td>
+											<td>{{manager.service_staff}}</td>
+											<!--<td>{{manager.server_room}}</td>-->
+											<td nowrap="nowrap"><font color="#FF00FF">{{manager.agent_name}}</font></td>
+											{% if manager.agentic_state == 0 %}
+											<td><font color="#EA0000">代理中</td>
+											{% endif %}
+											{% if manager.agentic_state == 1 %}
+											<td>未代理</td>
+											{% endif %}
+											<td><a href="agentic?id={{manager.id}}&&agentic_state=1">设代理&nbsp;&nbsp<a href="update?id={{manager.id}}">修改</a><p><a href="agentic?id={{manager.id}}&&agentic_state=0">取消代理&nbsp<a href="delete?id={{manager.id}}">删除</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

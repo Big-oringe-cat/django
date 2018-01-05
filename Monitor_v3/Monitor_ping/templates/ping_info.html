@@ -1,0 +1,74 @@
+{% extends "table.html" %}
+{% block title %}ping监控管理{% endblock %}
+{% block title1 %}网络监控管理{% endblock %}
+{% block form %}
+	<form action="ping_info" method="post" class="form-inline" name="formID" id="formID"/>
+			<!--		<select name="search">
+						{% if search == 'server_id' %}
+						<option value="dest_ip">目标IP</option>
+						<option value="server_id" selected>源服务器</option>
+						{% else %}
+						<option value="dest_ip" selected>目标IP</option>
+						<option value="server_id">源服务器</option>
+						{% endif %}
+						
+						    <option value="ip">服务器IP</option>    
+						    <option value="monitor_command">LINUX命令</option>    
+					</select>
+					<input type="text" name="value" placeholder="查询关键词" value={{value}}/> 
+                          -->
+			&nbsp;&nbsp;源服务器：<input type="text"  name="search1"   value="{{search1}}"  placeholder="源ip或标识（cmpp_22）" />
+			&nbsp;&nbsp;&nbsp;&nbsp;目标ip或类型：<input type="text" name="search2"   value="{{search2}}" placeholder="如183.192.160.22或数北或者用户"/>
+
+			&nbsp;&nbsp;&nbsp;&nbsp;用户类型：<input type="text" name="search3"   value="{{search3}}" placeholder="如自有平台或者运营商"/>
+		                <!--	<input type="hidden" name="monitor_type" value="1" />  -->
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="ping_insert" >添加</a>
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">服务器</th>
+											<th nowrap="nowrap">服务器源IP</th>
+											<th nowraip="nowrap">源IP类型</th>
+											<th nowrap="nowrap">目标IP</th>
+											<th nowraip="nowrap">目标IP类型</th>
+											<th nowrap="nowrap">用户类型</th>
+											<th nowrap="nowrap">替换ip</th>
+											<th nowrap="nowrap">监控级别</th>	
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+					 {% for mobile in table_list %}
+						<tr>
+						<td>{{mobile.sn}}</td>
+						<td>{{mobile.server_id}}</td>
+						<td>{{mobile.src_ip}}</td>
+						<td>{{mobile.src_type}}</td>
+						<td>{{mobile.dest_ip}}</td>
+						<td>{{mobile.dest_type}}</td>
+						<td>{{mobile.dest_comment}}</td>
+						<td>{{mobile.replace_ip}}</td>
+						{% if mobile.monitor_level == 1 %}
+						<td>重要</td>
+						{% endif %}
+						{% if mobile.monitor_level == 2 %}
+                                                <td>一般</td>
+                                                {% endif %}
+						{% if mobile.monitor_level == 0 %}
+                                                <td>紧急</td>
+                                                {% endif %}
+						<td>
+						{% if mobile.flag == 1 %}
+						<a href="ping_update?sn={{mobile.sn}}">修改</a>
+						&nbsp;&nbsp;<a href="ping_delete?sn={{mobile.sn}}">删除</a></td>
+						{% endif %}
+						</tr>
+					{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends "form.html" %}
+{% block title %}监控语句配置服务器{% endblock %}
+{% block title1 %}批量修改追加通知人{% endblock %}
+{% block form %}
+				<form action="add_group" method="post" class="form-horizontal" id="formID"/>
+							<div class="control-group">
+								<label class="control-label">监控语句</label>
+								<div class="controls">
+									<span class="help-block"><code>{{monitor_command}}</code></span>
+								</div>
+							</div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">追加通知组</label>
+                                                                <div class="controls checkbox-group group-name all-check-group">
+                                                                        <label class="inline bold"><input type="checkbox" id="GroupName" name="all_check"/> 全选</label>
+                                                                        {% for group in GroupNames %}
+                                                                                        {% if group.groupSn in add_group_sn %}
+                                                                                                <label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}" checked="checked"/> {{group.groupName}}</label>
+                                                                                        {% else %}
+                                                                                                <label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}"/> {{group.groupName}}</label>
+                                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                </div>
+                                                        </div>
+                                                        <input type="hidden" name="id" value="{{id}}" />
+                                                        <div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+                                                        </div>
+
+					</form>
+{% endblock %}

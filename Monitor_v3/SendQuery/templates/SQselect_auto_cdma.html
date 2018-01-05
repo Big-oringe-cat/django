@@ -1,0 +1,49 @@
+{% extends "table5.html" %}
+{% block title %}状态报告查询(receive_report_info){% endblock %}
+{% block href %}
+
+                            <li><a href="select_auto_cm.do">移动</a></li>
+                            <li><a href="select_auto_un.do">联通</a></li>
+                            <li class="active"><a href="select_auto_cdma.do">电信</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select_auto_cdma.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="td_code">通道代码</option>
+										<option value="mobile">手机号码</option>
+					</select>
+					 起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>通道代码</th>
+											<th>手机号码</th>
+											<th>省份</th>
+											<th>状态(status)</th>
+											<th>结果(result)</th>
+											<th>描述(fail_describe)</th>
+											<th>时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for report in table_list %}
+										<tr>
+											<td>{{report.id}}</td>
+											<td>{{report.td_code}}</td>
+											<td>{{report.mobile}}</td>
+											<td>{{report.province}}</td>
+											<td>{{report.status}}</td>
+											<td>{{report.result}}</td>
+											<td>{{report.fail_describe}}</td>
+											<td>{{report.insert_time}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

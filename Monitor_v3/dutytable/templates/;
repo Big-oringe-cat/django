@@ -1,0 +1,95 @@
+{% extends "form.html" %}
+
+{% block title %}值班表{% endblock %}
+
+{% block title1 %}值班信息填写{% endblock %}
+
+{% block form %}
+					
+					<form action="Zzhi.do" method="post" class="form-horizontal" id="formID"/>
+  <table width="1000" border="1" cellpadding="0" cellspacing="0" style='width:1175.25pt;border-collapse:collapse;table-layout:fixed;'>
+    <td  height="82" width="72" style='height:61.50pt;width:54.00pt;'></td>
+    <td  width="10"></td>
+    <td  width="10" style='width:54.00pt;'></td>
+    <td  width="72" style='width:54.00pt;'></td>
+    <td  width="72" style='width:54.00pt;'></td>
+    <td  width="72" style='width:54.00pt;'></td>
+    <td  width="95" style='width:71.25pt;'></td>
+    <td  width="752" colspan="4" style='width:564.00pt;border-right:none;border-bottom:none;' x:str>2016年09月份运维值班表</td>
+   <tr height="78" style='height:58.50pt;mso-height-source:userset;mso-height-alt:1170;'>
+    <td class="xl65" height="78" colspan="7" style='height:58.50pt;mso-ignore:colspan;'></td>
+    <td >值班日期</td>
+    <td >值班人员</td>
+    <td >备注<font class="font30"><br/></font><font class="font7">晚班时间：11:00-20:00</font><font class="font30"><br/></font><font class="font7">早班时间：08:00-17:00</font></td>
+    <td >调休安排</td>
+   </tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/3</td>
+    <td >詹瑞杉</td>
+    <td >早班（09月01日~09月15日）</td>
+    <td >2016/9/18</td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/4</td>
+    <td >未丽华</td>
+    <td >晚班（09月01日~09月15日）</td>
+    <td >2016/9/23</td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/10</td>
+    <td >高宇</td>
+    <td ></td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/11</td>
+    <td >吴伟杰</td>
+    <td >对接（09月16日~09月30日）</td>
+    <td >2016/9/14</td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/15</td>
+    <td >叶辉煌</td>
+    <td >法定节假日（中秋节）</td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/16</td>
+    <td >吴云</td>
+    <td >早班（09月16日~09月30日）</td>
+    <td >法定节假日</td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/17</td>
+    <td >郭小蕾</td>
+    <td >法定节假日</td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/24</td>
+    <td >陈青云</td>
+    <td >对接（09月01日~09月15日）</td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+   <tr>
+    <td class="xl65" height="46.80" colspan="7" style='height:35.10pt;mso-ignore:colspan;'></td>
+    <td >2016/9/25</td>
+    <td >黄振根</td>
+    <td >晚班（09月16日~09月30日）</td>
+    <td colspan="4" style='mso-ignore:colspan;'></td>
+   </tr>
+    <td class="xl65" height="84" colspan="7" style='height:63.00pt;mso-ignore:colspan;'></td>
+    <td class="xl70" colspan="4" style='border-right:none;border-bottom:none;' x:str>双休日节假日值班时间：09:00-18:00  升级反馈：13716413611、15201186062</td>
+   </tr>
+  							</table>
+
+					</form>
+					
+
+{% endblock %}

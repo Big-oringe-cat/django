@@ -1,0 +1,98 @@
+{% extends "table.html" %}
+{% block title %}批量恢复{% endblock %}
+{% block title1 %}最新预警展示{% endblock %}
+
+{% block form %}
+	<form action="recover" method="post" class="form-inline" />
+					<select name="search">
+						{% if search == 'alarm_value' %}
+						<option value="content" >预警内容</option>
+						<option value="alarm_value" selected>预警责任人</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="status">发送状态</option>
+						<option value="jilu">未恢复未处理记录</option>
+						{% elif search == 'monitor_level' %}
+						<option value="content" >预警内容</option>
+						<option value="alarm_value">预警责任人</option>
+						<option value="monitor_level" selected>预警级别</option>
+						<option value="status">发送状态</option>
+						<option value="jilu">未恢复未处理记录</option>
+						{% elif search == 'status' %}
+						<option value="content" >预警内容</option>
+						<option value="alarm_value">预警责任人</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="status" selected>发送状态</option>
+						<option value="jilu">未恢复未处理记录</option>
+						{% elif search == 'jilu' %}
+						<option value="content" >预警内容</option>
+						<option value="alarm_value">预警责任人</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="status" selected>发送状态</option>
+						<option value="jilu" selected>未恢复未处理记录</option>
+						{% else %}
+						<option value="content" selected>预警内容</option>
+						<option value="alarm_value">预警责任人</option>
+						<option value="monitor_level">预警级别</option>
+						<option value="status">发送状态</option>
+						<option value="jilu">未恢复未处理记录</option>
+						{% endif %}
+					</select>
+                                                   起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="{{startTime}}" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="{{endTime}}" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" value='{{value}}'  placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />(查询未恢复未处理记录的只能查询负责人)
+ 	</form>	
+{% endblock %}
+
+{% block thread %}
+						
+										<tr>
+											<th>ID</th>
+											<th>预警内容</th>
+											<th  nowrap="nowrap">处理原因</th>
+											<th  nowrap="nowrap">已预警次数</th>
+											<th  nowrap="nowrap"> 状态 </th>
+											<th  nowrap="nowrap">预警责任人</th>
+											<th  nowrap="nowrap">发送状态</th>
+											<th  nowrap="nowrap">入表时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+	<form action="recover_add_reason" method="post" class="form-inline" />
+										
+										{% for mobile in table_list %}
+										<tr>
+											<td nowrap="nowrap"><label class="inline"><input type="checkbox" id="id" name="id" value="{{mobile.id}}"/>{{mobile.id}}</label></td>
+											{% if mobile.monitor_level == '0' %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#EA0000"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% elif mobile.monitor_level == '1'  %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#FF00FF"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% else %}
+											<td style="word-break:break-all; word-wrap: break-word"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.reason}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.alarm_amount}}</td>
+											{% if mobile.recover == '0' %}
+											<td nowrap="nowrap"><font color="#EA0000">未恢复</td>
+											{% endif %}
+											{% if mobile.recover == '1' %}
+											<td style="word-break:break-all; word-wrap: break-word">恢复</td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word"> <font color="#FF00FF">{{mobile.alarm_uname1}}</font>,{{mobile.alarm_uname}}</td>
+											{% if mobile.status == 0 %}
+											<td><font color="#EA0000">未发送</td>
+										    {% else %}
+											<td>已发送</td>
+											{% endif %}
+											<td nowrap="nowrap">{{mobile.insert_time|date:"Y-m-d H:i:s"}}</td>
+										</tr>
+										{% endfor %}
+										<tr>
+											<td align="center"  colspan="7"><input type="submit" class="btn"  value="处理方式" /></td>
+											<input type="hidden" name="value" value="{{value}}" />
+											<input type="hidden" name="search" value="{{search}}" />
+										</tr>
+
+ 	</form>	
+{% endblock %}						
+				

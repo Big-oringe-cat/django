@@ -1,0 +1,105 @@
+{% extends "table5.html" %}
+{% block title %}Linux命令管理{% endblock %}
+{% block title1 %}Linux监控命令{% endblock %}
+{% block href %}
+                            <li><a href="select.do?monitor_type=0">SQL监控语句</a></li>
+                            <li class="active"><a href="select.do?monitor_type=1">LINUX监控语句</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+						{% if search == 'warning_content' %}
+						<option value="monitor_command">Linux命令</option>
+						<option value="warning_content" selected>预警内容</option>
+						<option value="comment">监控类别</option>
+						<option value="expect_result">期望结果</option>
+						<option value="monitor_sn">语句序号</option>
+						{% elif search == 'comment' %}
+						<option value="monitor_command">Linux命令</option>
+						<option value="warning_content">预警内容</option>
+						<option value="comment" selected>监控类别</option>
+						<option value="expect_result">期望结果</option>
+						<option value="monitor_sn">语句序号</option>
+						{% elif search == 'expect_result' %}
+						<option value="monitor_command">Linux命令</option>
+						<option value="warning_content">预警内容</option>
+						<option value="comment">监控类别</option>
+						<option value="expect_result">期望结果</option>
+						<option value="monitor_sn">语句序号</option>
+						{% elif search == 'monitor_sn' %}
+						<option value="monitor_command">Linux命令</option>
+						<option value="warning_content">预警内容</option>
+						<option value="comment">监控类别</option>
+						<option value="expect_result">期望结果</option>
+						<option value="monitor_sn" selected>语句序号</option>
+						{% else %}
+						<option value="monitor_command">Linux命令</option>
+						<option value="warning_content">预警内容</option>
+						<option value="comment">监控类别</option>
+						<option value="expect_result">期望结果</option>
+						<option value="monitor_sn">语句序号</option>
+						{% endif %}
+					</select>
+					<input type="text" name="value" placeholder="查询关键词" value='{{value}}'/>
+					<input type="hidden" name="monitor_type" value="1"/>
+					<input type="submit" class="btn"  value="查询" />
+{% if role == 4 or username == '吴伟杰' %}
+					<a class="btn" href="insert.do?monitor_type=1" >添加LINUX命令</a>
+{% endif %}
+	</form>	
+
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th>linux命令</th>
+											<th width="70px">预警内容</th>
+											<th>监控类别</th>
+											<th>敏感度</th>
+											<th nowrap="nowrap">期望结果</th>
+											<th>预警等级</th>
+{% if role == 4  or username == '吴伟杰' %}
+                                                                                        <th>操作</th>
+{% endif %}
+										</tr>
+{% endblock %}
+							
+{% block tbody %}
+
+										
+										{% for message in table_list %}
+										<tr>
+											<td>{{message.id}}</td>
+											<td class="text-left"   style="word-break:break-all; word-wrap: break-word;width:60%"><code>{{message.monitor_command}}</code></td>
+											<td  style="word-break:break-all; word-wrap: break-word;width:17%">{{message.warning_content}}</td>
+											<td  nowrap="nowrap">{{message.comment}}</td>
+											{% if message.sensitivity == '1' %}
+                                                                                        <td nowrap="nowrap">出现一次告警</td>
+                                                                                        {% endif %}
+                                                                                        {% if message.sensitivity == '2' %}
+                                                                                        <td nowrap="nowrap">连续出现两次告警</td>
+                                                                                        {% endif %}
+                                                                                        {% if message.sensitivity == '3' %}
+                                                                                        <td nowrap="nowrap">连续出现3次告警</td>
+                                                                                        {% endif %}
+                                                                                        {% if message.sensitivity == '5' %}
+                                                                                        <td nowrap="nowrap">连续出现5次告警</td>
+                                                                                        {% endif %}
+											<td  style="word-break:break-all; word-wrap: break-word;width:5%">{{message.expect_result}}</td>
+											{% if message.monitor_level == '0'%}
+											<td  style="word-break:break-all; word-wrap: break-word;width:8%">紧急</td>
+											{% endif %}
+											{% if message.monitor_level == '1'%}
+											<td  style="word-break:break-all; word-wrap: break-word;width:8%">重要</td>
+											{% endif %}
+											{% if message.monitor_level == '2'%}
+											<td  style="word-break:break-all; word-wrap: break-word;width:8%">一般</td>
+											{% endif %}
+{% if role == 4 or username == '吴伟杰' %}
+											<td nowrap="nowrap"><a href="update?id={{message.id}}&monitor_type=1">修改</a>&nbsp;&nbsp;<a href="panduan?id={{message.id}}&monitor_type=1">配置</a></td>
+{% endif %}
+										</tr>
+										{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "table.html" %}
+{% block title %}监测点管理{% endblock %}
+{% block title1 %}监测点管理{% endblock %}
+{% block form %}
+	<form action="site_info" method="post" class="form-inline" name="formID" id="formID"/>
+			&nbsp;&nbsp;服务器标识或组别：<input type="text"  name="search1"   value="{{search1}}" />
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="site_insert" >添加</a>
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">组别</th>
+											<th nowrap="nowrap">服务器标识</th>
+											<th nowrap="nowrap">服务器类型</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+					 {% for mobile in table_list %}
+						<tr>
+						<td>{{mobile.sn}}</td>
+						<td>{{mobile.group_name}}</td>
+						<td>{{mobile.server_id}}</td>
+						<td>{{mobile.server_name}}</td>
+						<td><a href="site_update?sn={{mobile.sn}}">修改</a>&nbsp;&nbsp;<a href="site_delete?sn={{mobile.sn}}">删除</a></td>
+						</tr>
+					{% endfor %}
+{% endblock %}
+

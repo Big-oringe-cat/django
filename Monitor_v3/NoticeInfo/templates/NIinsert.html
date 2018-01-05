@@ -1,0 +1,25 @@
+{% extends "frame.html" %}
+{% block title %}�������{% endblock %}
+{% block mobile %}<li class="active">{%endblock%}
+{% block command %}<li  class="submenu">{%endblock%}
+{% block content %}
+					<form method="post" action="insert">
+					<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>����</th>
+											<th>����</th>
+											<th>����</th>
+										</tr>
+									</thead>
+									<tbody>
+											<tr>
+											<td><textarea name="type_desc"></textarea></td>
+											<td><textarea name="mobiles"></textarea></td>
+											<td><input type="text" style="width:50px"  name="type"/></td>
+											</tr>
+											<tr> <input type="submit" value="�ύ" /></tr>
+									</tbody>
+				  	 </table>	
+				  </form>		
+{% endblock %}		

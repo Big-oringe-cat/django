@@ -1,0 +1,135 @@
+{% extends "form.html" %}
+{% block title %}修改{% endblock %}
+{% block title1 %}LINUX监控命令{% endblock %}
+{% block form %}
+				<form action="modify.do" method="post" class="form-horizontal" />
+				{% for message in table_list %}
+                                                        <div class="control-group">
+                                                                <label class="control-label">命令说明：</label>
+                                                                <div class="controls">
+                                                                        <span class="help-block"><code>如果此条命令需要告警给客服，告警内容中需要有：user_id:具体的值  后面只能用英文空格或者英文分号与后面的内容分开。如：user_id:hongshu 客户名称：告警账号</code></span>
+                                                                </div>
+                                                        </div>
+
+							<div class="control-group">
+								<label class="control-label">LINUX命令</label>
+								<div class="controls">
+									<textarea id="monitor_command" name="monitor_command" class="validate[required]">{{message.monitor_command}}</textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">预警内容</label>
+								<div class="controls">
+									<textarea id="warning_content" name="warning_content" class="validate[required]">{{message.warning_content}}</textarea>
+									<span class="help-block">* 告警内容中用${result}来取命令输出的结果。</span>
+								</div>
+							</div>
+							<div class="control-group">
+                                                                <label class="control-label">处理方式</label>
+                                                                <div class="controls">
+                                                                        <textarea id="deal_way" name="deal_way" class="validate[required]">{{message.deal_way}}</textarea>
+                                                                </div>
+                                                        </div>
+
+							<div class="control-group">
+								<label class="control-label">期望结果</label>
+								<div class="controls">
+									<input type="text" style="width:205px;"  id="expect_result" name="expect_result" class="validate[required]" value="{{message.expect_result}}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">描述</label>
+								<div class="controls">
+									<select id="comment" name="comment" class="validate[required]"> 
+									{% for list in commentList %}
+										{% ifequal message.comment list.comment%}
+										<option value="{{list.comment}}" selected>{{list.comment}}</option>
+										{% else %}
+										<option value="{{list.comment}}">{{list.comment}}</option>
+										{% endifequal %}
+									{% endfor %}
+									</select>
+								</div>
+							</div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">监控等级</label>
+                                                                <div class="controls">
+                                                                        <select id="monitor_level" name="monitor_level" class="validate[required]">
+                                                                                {% if message.monitor_level == '0' %}
+                                                                                <option value="0" selected>紧急</option>
+                                                                                <option value="1" >重要</option>
+                                                                                <option value="2" >一般</option>
+                                                                                {% endif %}
+                                                                                {% if message.monitor_level == '1' %}
+                                                                                <option value="1" selected>重要</option>
+                                                                                <option value="0" >紧急</option>
+                                                                                <option value="2" >一般</option>
+                                                                                {% endif %}
+                                                                                {% if message.monitor_level == '2' %}
+                                                                                <option value="2" selected>一般</option>
+                                                                                <option value="1" >重要</option>
+                                                                                <option value="0" >紧急</option>
+                                                                                {% endif %}
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+							<div class="control-group">
+                                                                <label class="control-label">敏感度设置</label>
+                                                                <div class="controls">
+                                                                        <select id="sensitivity" name="sensitivity" class="validate[required]">
+                                                                                {% if message.sensitivity == 1 %}
+                                                                                <option value="1" selected>出现一次告警</option>
+                                                                                <option value="2" >连续出现2次告警</option>
+                                                                                <option value="3" >连续出现3次告警</option>
+                                                                                <option value="5" >连续出现5次告警</option>
+                                                                                {% endif %}
+                                                                                {% if message.sensitivity == 2 %}
+                                                                                <option value="1" >出现一次告警</option>
+                                                                                <option value="2" selected>连续出现2次告警</option>
+                                                                                <option value="3" >连续出现3次告警</option>
+                                                                                <option value="5" >连续出现5次告警</option>
+                                                                                {% endif %}
+                                                                                {% if message.sensitivity == 3 %}
+                                                                                <option value="1" >出现一次告警</option>
+                                                                                <option value="2" >连续出现2次告警</option>
+                                                                                <option value="3" selected>连续出现3次告警</option>
+                                                                                <option value="5" >连续出现5次告警</option>
+                                                                                {% endif %}
+                                                                                {% if message.sensitivity == 5 %}
+                                                                                <option value="1" >出现一次告警</option>
+                                                                                <option value="2" >连续出现2次告警</option>
+                                                                                <option value="3" >连续出现3次告警</option>
+                                                                                <option value="5" selected>连续出现5次告警</option>
+                                                                                {% endif %}
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">告警次数</label>
+                                                                <div class="controls">
+                                                        <input type='text' style="width:205px;"  id='alarm_count' name='alarm_count' value='{{message.alarm_count}}'/>
+                                                                </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">告警频率</label>
+                                                                <div class="controls">
+                                                        <input type='text' style="width:205px;" id='alarm_frequency' name='alarm_frequency' value='{{message.alarm_frequency}}'/>
+                                                                </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                                <label class="control-label"> 告警时间段</label>
+                                                                <div class="controls">
+                                                        <input type="text" style="width:120px;"  name="alarm_time" value='{{message.alarm_time}}'/>
+							 <span class="help-block">格式HH:MM-HH:MM</span>
+                                                                </div>
+                                                        </div>
+
+
+							<input type="hidden" name="monitor_type" value="1"/>
+							<input type="hidden" name="id" value="{{message.id}}" />
+						{% endfor %}
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">保存</button>
+							</div>
+					</form>
+{% endblock %}

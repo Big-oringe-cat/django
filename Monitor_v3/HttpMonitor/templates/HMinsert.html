@@ -1,0 +1,50 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}监控信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">监控名称</label>
+								<div class="controls">
+									<input  id="monitor_name" name="monitor_name" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控地址</label>
+								<div class="controls">
+								<textarea  id="monitor_url" name="monitor_url" class="validate[required]" ></textarea>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控参数</label>
+								<div class="controls">
+								<textarea  id="msg_content" name="msg_content" class="validate[required]" ></textarea>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">期望结果</label>
+								<div class="controls">
+								<textarea  id="response" name="response" class="validate[required]" ></textarea>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控频率(秒)</label>
+								<div class="controls">
+							<input  id="frequence" name="frequence" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">监控状态</label>
+								<div class="controls radio-group">
+									<label class="inline"><input id="status" type="radio" name="status" value='0' class="validate[required]"/>开启</label>
+									<label class="inline"><input id="status" type="radio" name="status" value='1' class="validate[required]"/>关闭</label>
+								</div>
+					</div>
+					
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >确定</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

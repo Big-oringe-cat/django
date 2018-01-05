@@ -1,0 +1,33 @@
+{%extends "form.html" %}
+{% block title %}监测点添加{% endblock %}
+{% block title1 %}监测点监控信息{% endblock %}
+{% block form %}
+					<form  action="site_insert" method="post" class="form-horizontal"  id="formID">
+					<div class="control-group">
+								<label class="control-label">组别</label>
+								<div class="controls">
+									<input  id="group_name" name="group_name" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">服务器标识</label>
+								<div class="controls">
+									<input  id="server_id" name="server_id" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">服务器类型</label>
+								<div class="controls">
+									<input  id="server_name" name="server_name" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存</button>
+					</div>
+					</form>
+
+					
+{% endblock %}

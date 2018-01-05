@@ -1,0 +1,52 @@
+from django.conf.urls import patterns, include, url
+from django.conf import settings
+
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'MonitorSystem.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^.*static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
+    url(r'^index', 'ShareMethod.views.index'),
+    url(r'^test', 'ShareMethod.views.test'),
+    url(r'^SuccessMessage', 'ShareMethod.views.SuccessMessage'),
+    url(r'^FailureMessage', 'ShareMethod.views.FailureMessage'),
+    url(r'^login$', 'Login.views.login'),
+    url(r'^login2', 'Login.views.login2'),
+    url(r'^logout$', 'Login.views.logout'),
+    url(r'^MonitorInfo/',include('MonitorInfo.urls')),
+    url(r'^ServerInfo/',include('ServerInfo.urls')),
+    url(r'^UserInfo/',include('UserInfo.urls')),
+    url(r'^UserGroup/',include('UserGroup.urls')),
+    url(r'^ServerMonitorInfo/',include('ServerMonitorInfo.urls')),
+    url(r'^AdminUser/',include('AdminUser.urls')),
+    url(r'^CommentList/',include('CommentList.urls')),
+    url(r'^HttpMonitor/',include('HttpMonitor.urls')),
+    url(r'^MonitorPort/',include('MonitorPort.urls')),
+    url(r'^ServerManager/',include('ServerManager.urls')),
+    url(r'^TableBackup/',include('TableBackup.urls')),
+    url(r'^DNSManage/',include('DNSManage.urls')),
+    url(r'^ConfigInfo/',include('ConfigInfo.urls')),
+    url(r'^NoticeInfo/',include('NoticeInfo.urls')),
+    url(r'^LogQuery/select.do', 'AdminUser.views.LogQuery'),
+    url(r'^dutytable/',include('dutytable.urls')),
+    url(r'^Chart/',include('Chart.urls')),
+    url(r'^Monitor_ping/',include('Monitor_ping.urls')),
+    url(r'^CommandQuery/',include('CommandQuery.urls')),
+    url(r'^LogAnalysis/',include('LogAnalysis.urls')),
+    url(r'^Smsweb/',include('Smsweb.urls')),
+    url(r'^LiuliangQuery/',include('LiuliangQuery.urls')),
+    url(r'^VoiceQuery/',include('VoiceQuery.urls')),
+    url(r'^PhoneCard/',include('PhoneCard.urls')),
+    url(r'^OutBox/',include('OutBox.urls')),
+    url(r'^DeliverQuery/',include('DeliverQuery.urls')),
+    url(r'^SendQuery/',include('SendQuery.urls')),
+    url(r'^ServiceSmsInfo/',include('ServiceSmsInfo.urls')),
+    url(r'^AutoSendConfig/',include('AutoSendConfig.urls')),
+    url(r'^Repository/',include('Repository.urls')),
+    url(r'^clusterlog/',include('clusterlog.urls')),
+)

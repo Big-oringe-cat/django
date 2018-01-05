@@ -1,0 +1,27 @@
+{%extends "form.html" %}
+{% block title %}ip替换添加{% endblock %}
+{% block title1 %}replace监控信息{% endblock %}
+{% block form %}
+					<form  action="replace_insert" method="post" class="form-horizontal"  id="formID">
+					<div class="control-group">
+								<label class="control-label">服务器ip或域名</label>
+								<div class="controls">
+									<input  id="gate_ip" name="gate_ip" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">替换ip</label>
+								<div class="controls">
+									<input  id="replace_ip" name="replace_ip" style="width:220px;"/>
+								</div>
+					</div>
+					
+					
+					<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存</button>
+					</div>
+					</form>
+
+					
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "table2.html" %}
+{% block title %}网关通道积压查询{% endblock %}
+{% block title1 %}通道积压展示{% endblock %}
+{% block form %}
+	<form action="tdOverStock.do" method="post" class="form-inline" name="formID" id="formID" />
+					服务器：<select id="server" name="server" class="validate[required]">
+								{% for server1 in server_list %}
+									{% ifequal server1.ip server %}
+									<option value="{{server1.ip}}" selected>{{server1.server_name}}</option>
+									{% else %}
+									<option value="{{server1.ip}}">{{server1.server_name}}</option>
+									{% endifequal %}
+								{% endfor %}
+							</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">通道名称</th>
+											<th nowrap="nowrap">通道代码</th>
+											<th nowrap="nowrap">积压文件数</th>
+											<th nowrap="nowrap">积压号码数</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.td_name}}</td>
+											<td>{{message.td_code}}</td>
+											<td>{{message.file_count}}</td>
+											<td>{{message.mobile_count}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

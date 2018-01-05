@@ -1,0 +1,65 @@
+{% extends "table.html" %}
+{% block title %}服务器信息管理{% endblock %}
+{% block title1 %}服务器信息{% endblock %}
+{% block form %}
+				
+        <form action="serverinfomation" method="post" class="form-inline" />
+                                        <select name="search">
+                                                {% if search == 'src_ip' %}
+                                                <option value="server_id" >服务器</option>
+                                                <option value="src_ip" selected>源ip</option>
+                                                <option value="dest_ip">目的ip</option>
+                                                <option value="curPage">页数</option>
+						{% elif search == 'dest_ip' %}
+                                                <option value="server_id" >服务器</option>
+                                                <option value="src_ip" >源ip</option>
+                                                <option value="dest_ip" selected>目的ip</option>
+                                                <option value="curPage">页数</option>
+						{% elif search == 'curPage' %}
+                                                <option value="server_id" >服务器</option>
+                                                <option value="src_ip" >源ip</option>
+                                                <option value="dest_ip">目的ip</option>
+                                                <option value="curPage" selected>页数</option>
+						{% else %}
+                                                <option value="server_id" selected>服务器</option>
+                                                <option value="src_ip" >源ip</option>
+                                                <option value="dest_ip">目的ip</option>
+                                                <option value="curPage">页数</option>
+						{% endif %}
+                                        </select>
+                                        <input type="text" name="value" value='{{value}}'  placeholder="查询关键词"/>
+                                        <input type="submit" class="btn btn-primary"  value="查询" />
+        </form>
+
+{% endblock %}
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th nowrap="nowrap">server_id</th>
+											<th nowrap="nowrap">src_ip</th>
+											<th nowrap="nowrap">dest_ip</th>
+											<th>src_type</th>
+											<th nowrap="nowrap">dest_type</th>
+											<th>dest_comment</th>
+											<th>net_type</th>
+											<th>replace_ip</th>
+											<th>status</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for manager in table_list %}
+										<tr>
+											<td>{{manager.sn}}</td>
+											<td>{{manager.server_id}}</td>
+											<td  nowrap="nowrap"><B>{{manager.src_ip}}</B></td>
+											<td  nowrap="nowrap"><B>{{manager.dest_ip}}</B></td>
+											<td>{{manager.src_type}}</td>
+											<td>{{manager.dest_type}}</td>
+											<td>{{manager.dest_comment}}</td>
+											<td>{{manager.net_type}}</td>
+											<td>{{manager.replace_ip}}</td>
+											<td>{{manager.status}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

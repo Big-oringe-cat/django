@@ -1,0 +1,71 @@
+{%extends "form.html" %}
+{% block title %}ping监控添加{% endblock %}
+{% block title1 %}ping监控信息{% endblock %}
+{% block form %}
+					<form  action="ping_insert" method="post" class="form-horizontal"  id="formID">
+					<div class="control-group">
+								<label class="control-label">服务器标识</label>
+								<div class="controls">
+								<select name="server_id" >
+									{% for mobile in table_list %}
+										<option value={{mobile.server_id}}>{{mobile.server_id}}</option>
+									{% endfor %}
+								</select>
+								</div>
+					</div>
+					
+					
+					<div class="control-group">
+								<label class="control-label">目标IP</label>
+								<div class="controls">
+									<input  id="dest_ip" name="dest_ip" class="validate[required]" style="width:220px;"/>
+								</div>
+					</div>
+					
+					
+					<div class="control-group">
+								<label class="control-label">目标IP类型</label>
+								<div class="controls">
+								<input  id="dest_type" name="dest_type" class="validate[required]" placeholder="如:客户名称_线路类型" style="width:220px;"/>
+								</div>
+					</div>
+					
+				<!--	<div class="control-group">
+                                                                <label class="control-label">替换ip</label>
+                                                                <div class="controls">
+                                                                        <input  id="replace_ip" name="replace_ip"  style="width:220px;"/>
+                                                                </div>
+                                        </div>				
+				--!>
+	
+						<div class="control-group">
+								<label class="control-label">用户类型</label>
+								<div class="controls">
+								<select name="dest_comment">
+	                               					<option value="运营商">运营商</option> 
+	                                				<option value="自有网关">自有网关</option	> 
+	                                				<option value="用户" selected>用户</option>
+								</select>
+								</div>
+					</div>
+
+
+					
+					<div class="control-group">
+									<label class="control-label">监控级别</label>
+									<div class="controls">
+										<select name="monitor_level">
+											<option value="2">一般</option>
+											<option value="1">重要</option>
+											<option value="0">紧急</option>
+										</select>
+									</div>
+					</div>
+					
+					<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存</button>
+					</div>
+					</form>
+
+					
+{% endblock %}

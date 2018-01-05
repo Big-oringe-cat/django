@@ -1,0 +1,31 @@
+{% extends "frame.html" %}
+{% block title %}号码管理{% endblock %}
+{% block mobile %}<li class="active">{%endblock%}
+{% block command %}<li  class="submenu">{%endblock%}
+{% block content %}
+					<form method="post" action="modify">
+					<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>类型</th>
+											<th>描述</th>
+											<th>号码</th>
+											<th>时间</th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for mobile in mobiles_list %}
+											<tr>
+											<td><input type="hidden" value="{{mobile.id}}" style="width:30px" name="id"/></td>
+											<td><input type="text" style="width:30px" value="{{mobile.type}}" name="type"/></td>
+											<td><textarea name="type_desc">{{mobile.type_desc}}</textarea></td>
+											<td><textarea name="mobiles">{{mobile.mobiles}}</textarea></td>
+											<td><input type="hidden" value="{{mobile.insert_time}}" name="insert_time"/></td>
+											</tr>
+											<tr> <input type="submit" value="ok" /></tr>
+									{% endfor %}
+									</tbody>
+				  	 </table>	
+				  </form>		
+{% endblock %}	

@@ -1,0 +1,28 @@
+{% extends "table.html" %}
+{% block title %}机房负责人管理{% endblock %}
+{% block title1 %}机房负责人信息{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th nowrap="nowrap">负责人</th>
+											<th>负责机房</th>
+											<th>IDC客户支持</th>
+											<th nowrap="nowrap">代理人</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for manager in table_list %}
+										<tr>
+											<td>{{manager.id}}</td>
+											<td>{{manager.owner}}</td>
+											<td  nowrap="nowrap">{{manager.server_room}}</td>
+											<td>{{manager.idc_service}}</td>
+											<td>{{manager.agent}}</td>
+											<td><a href="room_update?id={{manager.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

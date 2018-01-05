@@ -1,0 +1,48 @@
+{% extends "table.html" %}
+{% block title %}用户管理{% endblock %}
+{% block title1 %}用户信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="user_id">工号</option>
+										<option value="user_name">姓名</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="insert.do" >添加通知用户</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>用户ID</th>
+											<th>用户名</th>
+											<th>手机号码</th>
+											<th>邮箱</th>
+											<th>时间</th>
+											<th>状态</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for user in table_list %}
+										<tr>
+											<td>{{user.id}}</td>
+											<td>{{user.user_id}}</td>
+											<td>{{user.user_name}}</td>
+											<td>{{user.mobile}}</td>
+											<td>{{user.email}}</td>
+											<td>{{user.insert_time|date:"Y-m-d H:i:s"}}</td>
+											{% if user.status == 0 %}
+											<td>开启</td>
+											{% else %}
+											<td style="color:red;">关闭</td>
+											{% endif %}
+											<td><a href="update?id={{user.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

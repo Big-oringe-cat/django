@@ -1,0 +1,65 @@
+{% extends "table4.html" %}
+{% block title %}预警内容详细{% endblock %}
+
+{% block title1 %}预警信息详细（单击ID列可查看监控详情）{% endblock %}
+
+
+{% block form %}
+	<form action="select" method="post" class="form-inline" />
+         <label style="font-size:20px">预警类别：{{alarmtype}}</label>
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+						
+										<tr>
+											<th>ID</th>
+											<th>预警内容</th>
+											<th  nowrap="nowrap">已预警次数</th>
+											<th  nowrap="nowrap">处理原因</th>
+											<th  nowrap="nowrap"> 状态 </th>
+											<th  nowrap="nowrap">预警责任人</th>
+											<th  nowrap="nowrap">预警知会人</th>
+											<th  nowrap="nowrap">监控类别</th>
+											<th  nowrap="nowrap">发送状态</th>
+											<th  nowrap="nowrap">入表时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										
+										{% for mobile in table_list %}
+{{alarm_uname3}}
+										<tr>
+											<td><a href="alarm_detail?id={{mobile.monitor_sn}}&sn={{mobile.id}}">{{mobile.id}}</a></td>
+											{% if mobile.monitor_level == '0' %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#EA0000"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% elif mobile.monitor_level == '1'  %}
+											<td style="word-break:break-all; word-wrap: break-word"><font color="#FF00FF"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></font></td>
+											{% else %}
+											<td style="word-break:break-all; word-wrap: break-word"><div title="monitor_sn:{{mobile.monitor_sn}}处理方式:{{mobile.deal}}">{{mobile.content}}</div></td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.alarm_amount}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><div style="white-space:nowrap;width:6em;text-overflow:ellipsis;overflow:hidden;" title="{{mobile.reason}}">{{mobile.reason}}</div></td>
+											{% if mobile.recover == '0' %}
+											<td nowrap="nowrap"><font color="#EA0000">未恢复</td>
+											{% endif %}
+											{% if mobile.recover == '1' %}
+											<td style="word-break:break-all; word-wrap: break-word">恢复</td>
+											{% endif %}
+											<td style="word-break:break-all; word-wrap: break-word"> <font color="#FF00FF">{{mobile.alarm_uname1}}</font>,{{mobile.alarm_uname}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.alarm_addname}}</td>
+											<td nowrap="nowrap">{{mobile.comment}}</td>
+											{% if mobile.status == 0 %}
+											<td><font color="#EA0000">未发送</td>
+										    {% else %}
+											<td>已发送</td>
+											{% endif %}
+											<td nowrap="nowrap">{{mobile.insert_time|date:"Y-m-d H:i:s"}}</td>
+										</tr>
+										{% endfor %}
+
+{% endblock %}						
+				
+

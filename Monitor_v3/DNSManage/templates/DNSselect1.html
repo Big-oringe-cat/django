@@ -1,0 +1,42 @@
+{% extends "table.html" %}
+{% block title %}域名管理{% endblock %}
+{% block title1 %}域名信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="yw_type">业务类型</option>
+										<option value="port">端口</option>
+										<option value="yw_desc">业务描述</option>
+										<option value="dns_name">域名名称</option>
+										<option value="ip">解析IP</option>
+									</select>
+                                        <input type="text" name="value" value='{{value}}' placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">业务类型</th>
+											<th nowrap="nowrap">业务描述</th>
+											<th>域名名称</th>
+											<th style="word-wrap: break-word">端口</th>
+											<th>解析IP</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for dns in table_list %}
+										<tr>
+											<td>{{dns.id}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><code>{{dns.yw_type}}</code></td>
+											<td>{{dns.yw_desc}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><code>{{dns.dns_name}}</code></td>
+											<td style="word-break:break-all; word-wrap: break-word">{{dns.port}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{dns.ip}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

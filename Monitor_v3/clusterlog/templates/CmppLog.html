@@ -1,0 +1,111 @@
+{% extends "table6.html" %}
+{% block title %}集群客户交互日志查询{% endblock %}
+{% block title1 %}交互日志展示{% endblock %}
+{% block href %}
+                            <li><a href="HttpLog">HTTP协议</a></li>
+                            <li class="active"><a href="CmppLog">cmpp协议</a></li>
+                            <li><a href="SgipLog">sgip协议</a></li>
+                            <li><a href="SmgpLog">smgp协议</a></li>
+{% endblock %}
+{% block form %}
+	<form action="CmppLog" method="post" class="form-inline" name="formID" id="formID"/>
+									服务器：<select name="type">
+										{% if type == "cluster_227" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227" selected>cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_226" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226" selected>cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_35" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" selected>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_21" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" s>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21" selected>cluster_21</option>
+										{% else %}
+										<option value="cluster_64" selected>cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% endif %}
+									</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询类型：<select name="type" style="width:200px;">
+										{% if type == "cluster_227" %}
+										<option value="Request_ip">客户交互IP地址</option>
+										<option value="login" selected>客户登录记录</option>
+										<option value="submit">客户提交短信记录</option>
+										<option value="loginfail">客户登录失败日志</option>
+										<option value="speedsec">客户提交速度top20(秒级)</option>
+										<option value="speedmin">客户提交速度top20(分钟级)</option>
+										{% elif type == "cluster_226" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226" selected>cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_35" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" selected>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_21" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" s>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21" selected>cluster_21</option>
+										{% else %}
+										<option value="cluster_64">客户交互IP地址</option>
+										<option value="cluster_227" selected>客户登录记录</option>
+										<option value="cluster_35">客户提交短信记录</option>
+										<option value="cluster_226">客户登录失败日志</option>
+										<option value="cluster_21">客户提交速度top20(秒级)</option>
+										<option value="cluster_21">客户提交速度top20(分钟级)</option>
+										{% endif %}
+									</select>
+					&nbsp;&nbsp;查询时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/><br><br>
+					账号id：<input type="text" style="width:140px;" name="user_id" id="user_id"  value="{{user_id}}" placeholder="输入账号ID" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;错误码：<input type="text" name="search2" id="search"  value="{{search2}}" placeholder="错误码输入"/>
+					&nbsp;&nbsp;搜索关键字：<input type="text" name="search2" id="search"  value="{{search2}}" placeholder="输入手机号码等"/>
+					<input type="submit" class="btn"  value="查询" />(64集群可查询半个月记录,其他集群可查询一个月记录)
+ 	</form>	
+ 				<p></p>
+ 				{%if command%}
+					<span><code>命令：{{command}}</code></span>
+ 				{% else %}
+ 					<span></span>
+				{%endif%}
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">服务器IP</th>
+											<th nowrap="nowrap">查询结果</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.server}}</td>
+											<td  style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

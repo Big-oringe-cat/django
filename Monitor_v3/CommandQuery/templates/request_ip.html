@@ -1,0 +1,95 @@
+{% extends "table6.html" %}
+{% block title %}集群客户交互IP查询{% endblock %}
+{% block href %}
+                            <li><a href="clusterSubmit.do">提交记录</a></li>
+                            <li><a href="clusterSpeed.do">提交速度</a></li>
+                            <li><a href="clusterSend.do">发送记录</a></li>
+                            <li class="active"><a href="request_ip">交互ip</a></li>
+{% endblock %}
+{% block form %}
+	<form action="request_ip" method="post" class="form-inline" name="formID" id="formID"/>
+									服务器：<select name="type">
+										{% if type == "cluster_227" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227" selected>cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_226" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226" selected>cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_35" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" selected>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% elif type == "cluster_21" %}
+										<option value="cluster_64">cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35" s>cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21" selected>cluster_21</option>
+										{% else %}
+										<option value="cluster_64" selected>cluster_64</option>
+										<option value="cluster_227">cluster_227</option>
+										<option value="cluster_35">cluster_35</option>
+										<option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+										{% endif %}
+									</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询类型：<select name="pro" style="width:200px;">
+										{% if pro == "smgp" %}
+										<option value="http">Http协议</option>
+										<option value="cmpp">cmpp协议 </option>
+										<option value="sgip">sgip协议</option>
+										<option value="smgp" selected>smgp协议</option>
+										{% elif pro == "cmpp" %}
+										<option value="http">Http协议</option>
+										<option value="cmpp" selected>cmpp协议 </option>
+										<option value="sgip">sgip协议</option>
+										<option value="smgp">smgp协议</option>
+										{% elif pro == "sgip" %}
+										<option value="http">Http协议</option>
+										<option value="cmpp">cmpp协议 </option>
+										<option value="sgip" selected>sgip协议</option>
+										<option value="smgp">smgp协议</option>
+										{% else %}
+										<option value="http">Http协议</option>
+										<option value="cmpp">cmpp协议 </option>
+										<option value="sgip">sgip协议</option>
+										<option value="smgp">smgp协议</option>
+										{% endif %}
+									</select>
+					账号id：<input type="text" style="width:140px;" name="user_id" id="user_id"  value="{{user_id}}" placeholder="输入账号ID" class="validate[required]"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+ 				<p></p>
+ 				{%if command%}
+					<span><code>命令：{{command}}</code></span>
+ 				{% else %}
+ 					<span></span>
+				{%endif%}
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">服务器IP</th>
+											<th nowrap="nowrap">查询结果</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.server}}</td>
+											<td  style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

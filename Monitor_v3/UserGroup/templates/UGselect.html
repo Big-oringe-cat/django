@@ -1,0 +1,44 @@
+{% extends "table.html" %}
+{% block title %}用户组管理{% endblock %}
+{% block title1 %}用户组信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+						<option value="group_name">用户组名</option>
+					</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="insert.do" >添加通知用户组</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">用户组ID</th>
+											<th>用户组名称</th>
+											<th>用户名称</th>
+											<th>时间</th>
+											<th nowrap="nowrap">状态</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for group in table_list%}
+										<tr>
+											<td>{{group.id}}</td>
+											<td>{{group.group_name}}</td>
+											<td>{{group.user_name}}</td>
+											<td>{{group.insert_time|date:"Y-m-d H:i:s"}}</td>
+											{% if group.status == 0 %}
+												<td>开启</td>
+											{% else %}
+												<td style="color:red;">关闭</td>
+											{% endif %}
+												
+											<td><a href="update?id={{group.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

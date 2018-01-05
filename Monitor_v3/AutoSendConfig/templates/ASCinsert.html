@@ -1,0 +1,101 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}线程信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">通道类型</label>
+								<div class="controls">
+									<select id="td_type" name="td_type" class="validate[required]"> 
+										<option value="cmpp">移动</option>
+										<option value="sgip">联通</option>
+										<option value="smgp">电信</option>
+									</select>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">通道代码</label>
+								<div class="controls">
+								<input  id="td_code" name="td_code" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">通道接入号</label>
+								<div class="controls">
+								<input  id="td_sp_number" name="td_sp_number" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">通道签名字数</label>
+								<div class="controls">
+								<input  id="td_sign" name="td_sign" class="validate[required]" />***无签名则写0
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">网关ip</label>
+								<div class="controls">
+								<input  id="gate_ip" name="gate_ip" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">网关端口</label>
+								<div class="controls">
+								<input  id="gate_port" name="gate_port" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">用户ID</label>
+								<div class="controls">
+								<input  id="gate_user" name="gate_user" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">用户密码</label>
+								<div class="controls">
+								<input  id="gate_pwd" name="gate_pwd" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">企业代码</label>
+								<div class="controls">
+								<input  id="gate_corp_code" name="gate_corp_code" value="467111" />***可不填,默认为467111
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">服务代码</label>
+								<div class="controls">
+								<input  id="gate_server_id" name="gate_server_id" value="help" />***可不填,默认为help
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">最大连接数</label>
+								<div class="controls">
+								<input  id="gate_max_connect" name="gate_max_connect" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">最大速度</label>
+								<div class="controls">
+								<input  id="gate_max_speed" name="gate_max_speed" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">节点编码</label>
+								<div class="controls">
+								<input  id="sgip_node_id" name="sgip_node_id" value="3000099050" />***联通通道所需参数，可不填,默认为3000099050，
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">本地端口</label>
+								<div class="controls">
+								<input  id="sgip_local_port" name="sgip_local_port" value="0" />***非联通通道可不填,默认为0,联通通道需监听本地端口用于收状态报告或上行。
+								</div>
+					</div>
+													
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

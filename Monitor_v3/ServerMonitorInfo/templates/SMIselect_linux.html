@@ -1,0 +1,58 @@
+﻿{% extends "table5.html" %}
+{% block title %}服务器LINUX监控管理{% endblock %}
+{% block title1 %}服务器LINUX监控{% endblock %}
+{% block href %}
+                            <li><a href="select.do?monitor_type=0">SQL监控语句管理</a></li>
+                            <li class="active"><a href="select.do?monitor_type=1">LINUX监控语句管理</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+						<option value="ip">服务器IP</option>
+						<option value="monitor_command">LINUX命令</option>
+					</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="hidden" name="monitor_type" value="1" />
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>服务器IP</th>
+											<th>LINUX命令</th>
+											<th nowrap="nowrap">频率</th>
+											<th>更新时间</th>
+											<th nowrap="nowrap">状态</th>
+											<th nowrap="nowrap">服务器负责人</th>
+											<th nowrap="nowrap">追加通知组</th>
+{% if role == 4 %}
+                                                                                        <th>操作</th>
+{% endif %}
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{message.sn}}</td>
+											<td class="text-left"><code>{{message.ip}}</code></td>
+											<td class="text-left"   style="word-break:break-all; word-wrap: break-word;width:50%">{{message.monitor_command}}</td>
+											<td>{{message.frequency}}</td>
+											<td>{{message.last_time|date:"Y-m-d H:i:s"}}</td>
+											{% if message.status == 0 %}
+											<td>开启</td>
+											{% else %}
+											<td style="color:red;">关闭</td>
+											{% endif %}
+											<td>{{message.group_sn}}</td>
+											<td>{{message.add_group_sn|default_if_none:" "}}</td>
+{% if role == 4 %}
+											<td><a href="update?sn={{message.sn}}&monitor_type={{monitor_type}}">修改</a></td>
+{% endif %}
+										</tr>
+										{% endfor %}
+
+{% endblock %}	 

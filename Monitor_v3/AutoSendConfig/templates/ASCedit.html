@@ -1,0 +1,119 @@
+{% extends "form.html" %}
+{% block title %}修改{% endblock %}
+{% block title1 %}线程信息{% endblock %}
+{% block form %}
+					<form  action="update.do" method="post" class="form-horizontal"  id="formID">
+
+                                        <div class="control-group">
+                                                                <label class="control-label">通道类型</label>
+                                                                <div class="controls">
+                                                                        <input id="td_type" name="td_type" class="validate[required]" value="{{td_type}}"  />修改选项:移动,联通,电信
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">通道代码</label>
+                                                                <div class="controls">
+                                                                <input  id="td_code" name="td_code" class="validate[required]" value="{{td_code}}" />
+                                                                </div>
+                                        </div>
+
+                                        {% if td_type == "联通" %}
+                                        <div class="control-group">
+                                                                <label class="control-label">通道接入号</label>
+                                                                <div class="controls">
+                                                                <input  id="td_sp_number" name="td_sp_number" class="validate[required]" value="{{td_sp_number}}" />
+                                                                </div>
+                                        </div>
+                                        {% endif %}         
+                                        <div class="control-group">
+                                                                <label class="control-label">通道签名字数</label>
+                                                                <div class="controls">
+                                                                <input  id="td_sign" name="td_sign" class="validate[required]" value="{{td_sign}}" />***无签名则写0
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">网关ip</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_ip" name="gate_ip" class="validate[required]" value="{{gate_ip}}"/>
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">网关端口</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_port" name="gate_port" class="validate[required]" value="{{gate_port}}"/>
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">用户ID</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_user" name="gate_user" class="validate[required]" value="{{gate_user}}"/>
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">用户密码</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_pwd" name="gate_pwd" class="validate[required]" value="{{gate_pwd}}"/>
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">企业代码</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_corp_code" name="gate_corp_code" value="467111" />***可不填,默认为467111
+                                                                </div>
+                                        </div>
+                                        {% if td_type != "移动" %}
+                                        <div class="control-group">
+                                                                <label class="control-label">服务代码</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_server_id" name="gate_server_id" value="help" />***可不填,默认为help
+                                                                </div>
+                                        </div>
+                                        {% endif %}
+                                        <div class="control-group">
+                                                                <label class="control-label">最大连接数</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_max_connect" name="gate_max_connect" class="validate[required]" value="{{gate_max_connect}}"/>
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">最大速度</label>
+                                                                <div class="controls">
+                                                                <input  id="gate_max_speed" name="gate_max_speed" class="validate[required]" value="{{gate_max_speed}}"/>
+                                                                </div>
+                                        </div>
+                                        {% if td_type == "联通" %}
+                                        <div class="control-group">
+                                                                <label class="control-label">节点编码</label>
+                                                                <div class="controls">
+                                                                <input  id="sgip_node_id" name="sgip_node_id" value="{{sgip_node_id}}" />***联通通道所需参数，可不填,默认为3000099050，
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">本地端口</label>
+                                                                <div class="controls">
+                                                                <input  id="sgip_local_port" name="sgip_local_port" value="{{sgip_local_port}}" />***非联通通道可不填,默认为0,联通通道需监听本地端口用于收状态报告或上行。
+                                                                </div>
+                                        {%  endif %}
+                                        <div class="control-group">
+                                                         	<label class="control-label">状态</label>
+                                                                <div class="controls">
+								{% for table in table_list %}
+									{% if table.status == 6 %}
+                                                                        <input id="open" type="radio" name="status" value='4'  checked/> 关闭
+                                                                        <input id="close" type="radio" name="status" value='1' "/> 开启
+									{% endif %}
+									{% if table.status == 3 %}
+                                                                        <input id="open" type="radio" name="status" value='4'  /> 关闭
+                                                                        <input id="close" type="radio" name="status" value='1' checked/> 开启
+									{% endif %}
+								<input type="hidden" name="status1" value="{{table.status}}" />
+								{% endfor %}
+								</div>
+					</div>
+                                        <input type="hidden" name="id" value="{{sn}}">
+    				        <div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "table6.html" %}
+{% block title %}网关提交记录查询{% endblock %}
+{% block title1 %}网关提交记录查询{% endblock %}
+{% block href %}
+                            <li class='active'><a href="customerSubmit.do"> 提交记录</a></li>
+                            <li><a href="customerSpeed.do">提交速度</a></li>
+                            <li><a href="tdSend.do">通道发送速度</a></li>
+                            <li><a href="request_ip">交互ip</a></li>
+{% endblock %}
+{% block form %}
+	<form action="customerSubmit.do" method="post" class="form-inline" name="formID" id="formID"/>
+			服务器：<select id="server" name="server" class="validate[required]">
+								{% for server1 in server_list %}
+									{% ifequal server1.ip server %}
+									<option value="{{server1.ip}}" selected>{{server1.server_name}}</option>
+									{% else %}
+									<option value="{{server1.ip}}">{{server1.server_name}}</option>
+									{% endifequal %}
+								{% endfor %}
+					</select>
+					&nbsp;&nbsp;第一个关键字:<input type="text" name="search1" id="search"  value="{{search1}}" placeholder="如：手机号码/账号等" class="validate[required]"/>
+					&nbsp;&nbsp;第二个关键字:<input type="text" name="search2" id="search"  value="{{search2}}" placeholder="包含第一个关键字行的其他字符"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;提交时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+		 &nbsp;时：<select name="hour" style="width:70px"> 
+                                        <option value=""></option>                                     
+                                        <option value="01">01</option> 
+                                        <option value="02">02</option> 
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        </select>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />(自由网关只能查询前三天记录)
+ 	</form>	
+			{%if command%}
+                                        <span><code>命令：{{command}}</code></span>
+                                {% else %}
+                                        <span></span>
+                                {%endif%}	
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th>客户提交记录&nbsp;&nbsp;(奇数行为客户提交参数信息Dest_terminal_Id=后面为手机号码，偶数行为提交响应，submitResp:0表示提交成功，其他值表示提交失败。奇偶行需要SequenceNumber值相同才是同一条信息。)</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

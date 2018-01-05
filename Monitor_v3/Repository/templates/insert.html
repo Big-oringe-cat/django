@@ -1,0 +1,66 @@
+{%extends "form.html" %}
+{% block title %}创建知识{% endblock %}
+{% block title1 %}创建知识{% endblock %}
+{% block form %}
+					<form  action="insert" method="post" class="form-horizontal"  id="formID">
+					<div class="control-group">
+								<label class="control-label">业务类型</label>
+								<div class="controls">
+									<select name="yw_type">
+										<option value="短信">短信</option>
+										<option value="彩信">彩信</option>
+										<option value="物联网">物联网</option>
+										<option value="流量">流量</option>
+										<option value="语音">语音</option>
+									</select>
+								</div>
+					</div>
+					
+					
+					<div class="control-group">
+								<label class="control-label">知识类型</label>
+								<div class="controls">
+									<select name="type">
+										<option value="账单">账单</option>
+										<option value="http接口">http接口</option>
+										<option value="标准协议接口">标准协议接口</option>
+										<option value="连接">连接</option>
+										<option value="登录">登录</option>
+										<option value="发送">发送</option>
+										<option value="回调/回执/状态">回调/回执/状态</option>
+										<option value="上行">上行</option>
+										<option value="错误码">错误码</option>
+										<option value="国际">国际</option>
+										<option value="业务定义">业务定义</option>
+										<option value="签名">签名</option>
+										<option value="短信平台">短信平台</option>
+										<option value="方案分享">方案分享</option>
+										<option value="告警处理">告警处理</option>
+									</select>
+								</div>
+					</div>
+					
+					
+					<div class="control-group">
+								<label class="control-label">问题</label>
+								<div class="controls">
+								<textarea  id="Question" name="Question" class="validate[required]"/></textarea>
+								</div>
+					</div>
+					
+					<div class="control-group">
+                                                                <label class="control-label">回答</label>
+                                                                <div class="controls">
+                                                                        <textarea  id="Answer" name="Answer" class="validate[required]"  style="height:130px;"/></textarea>
+                                                                </div>
+                                        </div>				
+	
+					<input type="hidden" name="status" value="0"/>					
+					<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存</button>
+					</div>
+					</form>
+
+					
+{% endblock %}
+

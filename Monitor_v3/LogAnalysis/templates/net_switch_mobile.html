@@ -1,0 +1,45 @@
+{% extends "table2.html" %}
+{% block title %}携号转网号码查询{% endblock %}
+{% block title1 %}携号转网记录展示(没显示即不是携号转网号码){% endblock %}
+{% block form %}
+	<form action="net_switch_mobile.do" method="post" class="form-inline" name="formID" id="formID"/>
+					&nbsp;&nbsp;号码:<input type="text" name="mobile" id="mobile"  value="{{mobile}}" placeholder="如：手机号码" class="validate[required]"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">号码</th>
+											<th nowrap="nowrap">源号码类型</th>
+											<th nowrap="nowrap">现携号转网类型</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{message.mobile}}</td>
+											{% if message.ori == '1' %}
+											<td>移动</td>
+											{% endif %}
+												{% if message.ori == '2' %}
+                                                                                        <td>联通</td>
+											{% endif %}
+                                                                                                {% if message.ori == '3' %}
+                                                                                        <td>电信</td>
+                                                                                        {% endif %}
+
+                                                                                        {% if message.dest == '1' %}
+                                                                                        <td>移动</td>
+                                                                                        {% endif %}
+                                                                                                {% if message.dest == '2' %}
+                                                                                        <td>联通</td>
+                                                                                        {% endif %}
+                                                                                                {% if message.dest = '3' %}
+                                                                                        <td>电信</td>
+                                                                                        {% endif %}
+										</tr>
+										{% endfor %}
+{% endblock %}

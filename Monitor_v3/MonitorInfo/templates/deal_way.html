@@ -1,0 +1,26 @@
+{% extends "form.html" %}
+{% block title %}告警处理方法{% endblock %}
+{% block title1 %}告警处理方法展示{% endblock %}
+{% block form %}
+		<form  action="deal" method="post" class="form-horizontal"  id="formID">
+						{% for list in table_list %}
+						<div class="control-group">
+								<label class="control-label">预警语句</label>
+								<div class="controls">
+									<textarea id="monior_command" name="monitor_command" class="validate[required]" readonly>{{list.monitor_command}}</textarea>
+								</div>
+						</div>
+						<div class="control-group">
+								<label class="control-label">预警处理方法</label>
+								<div class="controls">
+									<textarea id="deal_way" name="deal_way" class="validate[required]">{{list.deal_way}}</textarea>
+								</div>
+						</div>
+						<input type="hidden" name="id" value="{{id}}" />
+						<div class="form-actions">
+						<button type="submit" class="btn btn-primary">保存</button>
+						</div>
+						{% endfor %}
+		</form>							
+{% endblock %}						
+				

@@ -1,0 +1,43 @@
+{% extends "table.html" %}
+{% block title %}知识列表{% endblock %}
+{% block title1 %}知识列表{% endblock %}
+{% block form %}
+	<form action="select" method="post" class="form-inline" name="formID" id="formID"/>
+					<a class="btn" href="insert" >创建知识</a>
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">业务类型</th>
+											<th nowrap="nowrap">知识类型</th>
+											<th nowraip="nowrap">问题</th>
+											<th nowrap="nowrap">回答</th>
+											<th nowraip="nowrap">更新时间</th>
+											<th nowrap="nowrap">状态</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+					 {% for mobile in table_list %}
+						<tr>
+						<td>{{mobile.sn}}</td>
+						<td>{{mobile.yw_type}}</td>
+						<td>{{mobile.type}}</td>
+						<td>{{mobile.Question}}</td>
+						<td>{{mobile.Answer}}</td>
+						<td nowrap="nowrap">{{mobile.update_time}}</td>
+						{% if mobile.status == 0 %}
+						<td nowrap="nowrap">新接入</td>
+						{% elif mobile.status == 1 %}
+						<td>修改</td>
+						{% else %}
+						<td>删除</td>
+						{% endif %}
+						<td><a href="update?sn={{mobile.sn}}">修改</a>&nbsp</td>
+						</tr>
+					{% endfor %}
+{% endblock %}

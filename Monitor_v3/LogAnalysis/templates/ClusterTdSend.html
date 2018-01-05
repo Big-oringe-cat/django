@@ -1,0 +1,44 @@
+{% extends "table2.html" %}
+{% block title %}集群通道发送速度查询{% endblock %}
+{% block title1 %}通道实际发送速度查询{% endblock %}
+{% block form %}
+	<form action="clusterTdSend.do" method="post" class="form-inline" name="formID" id="formID"  />
+						服务器：<select name="server">
+									<option value="210.14.134.81">cluster_64</option>
+								</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;查询选项：<select id="search" name="search" class="validate[required]">
+															{% if search == "nowtype" %}
+															<option value="lasttype">全天发送速度top20</option>
+															<option value="nowtype" selected>当前实时发送速度</option>
+															{%else%}
+															<option value="nowtype">当前实时发送速度</option>
+															<option value="lasttype" selected>全天发送速度top20</option>
+															{%endif%}
+														</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;通道代码:<input type="text" name="td_code" id="td_code" value="{{td_code}}" placeholder="通道代码" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;统计时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+									<span style="color:red">通道名称：{{tdName}}</span></br>
+									<span style="color:red">该通道线程配置的连接数和速度：{{tdSpeed}}</span>
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">发送时间</th>
+											<th nowrap="nowrap">实际发送数量</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.msg_send_time}}</td>
+											<td>{{message.amount}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

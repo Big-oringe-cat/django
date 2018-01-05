@@ -1,0 +1,85 @@
+{% extends "form.html" %}
+{% block title %}ping监控更新{% endblock %}
+{% block title1 %}表备份信息{% endblock %}
+{% block form %}
+					<form  action="ping_update" method="post" class="form-horizontal"  id="formID">
+					{% for mobile in table_list %}
+					 <div class="control-group">
+                                            <label class="control-label">服务器标识</label>
+                                                <div class="controls">
+                                                    <input  id="server_id" name="server_id" class="validate[required]" value={{mobile.server_id}} style="width:240px;" readonly/>
+                                                    </div>
+                                        </div>
+                                        
+                                        <div class="control-group">
+                                                                <label class="control-label">服务器源IP</label>
+                                                                <div class="controls">
+                                                                <input  id="src_ip" name="src_ip" class="validate[required]" value={{mobile.src_ip}} style="width:240px;"/ readonly>
+                                                                </div>
+                                        </div>
+                                         <div class="control-group">
+                                                                <label class="control-label">源服务器IP类型</label>
+                                                                <div class="controls">
+                                                                        <input  id="src_type" name="src_type" value={{mobile.src_type}} style="width:240px;"/ readonly>
+                                                                </div>
+                                        </div>
+                                        
+                                        <div class="control-group">
+                                                                <label class="control-label">目标IP</label>
+                                                                <div class="controls">
+                                                                        <input  id="dest_ip" name="dest_ip" class="validate[required]" value={{mobile.dest_ip}} style="width:240px;"/>
+                                                                </div>
+                                        </div>
+                                        
+                                         <div class="control-group">
+                                                                <label class="control-label">目标IP类型</label>
+                                                                <div class="controls">
+                                                                        <input  id="src_type" name="dest_type" value={{mobile.dest_type}} style="width:240px;"/>
+                                                                </div>
+                                        </div>
+                                        
+                                         <div class="control-group">
+                                                                <label class="control-label">用户类型</label>
+                                                                <div class="controls">
+                                                                        <input  id="dest_comment" name="dest_comment" value={{mobile.dest_comment}} style="width:240px;"/ readonly>
+                                                                </div>
+                                        </div>
+
+					<div class="control-group">
+                                                                <label class="control-label">替换ip</label>
+                                                                <div class="controls">
+                                                                        <input  id="replace_ip" name="replace_ip" value='{{mobile.replace_ip}}' style="width:240px;" readonly/>
+                                                                </div>
+                                        </div>
+                                        
+                                        <div class="control-group">
+								 <label class="control-label">监控等级</label>
+                                                                <div class="controls">
+                                                                        <select id="monitor_level" name="monitor_level" class="validate[required]">
+                                                                                {% if mobile.monitor_level == '0' %}
+                                                                                <option value="0" selected>紧急</option>
+                                                                                <option value="1" >重要</option>
+                                                                                <option value="2" >一般</option>
+                                                                                {% endif %}
+                                                                                {% if mobile.monitor_level == '1' %}
+                                                                                <option value="1" selected>重要</option>
+                                                                                <option value="0" >紧急</option>
+                                                                                <option value="2" >一般</option>
+                                                                                {% endif %}
+                                                                                {% if mobile.monitor_level == '2' %}
+                                                                                <option value="2" selected>一般</option>
+                                                                                <option value="1" >重要</option>
+                                                                                <option value="0" >紧急</option>
+                                                                                {% endif %}
+                                                                        </select>
+                                                                        </div>
+                                        </div>
+					<input type="hidden" name="sn" value="{{mobile.sn}}" />
+					{% endfor %}
+                                        
+                                <div class="form-actions">
+					<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+{% endblock %}
+	

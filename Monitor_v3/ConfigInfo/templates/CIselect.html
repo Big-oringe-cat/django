@@ -1,0 +1,27 @@
+{% extends "table.html" %}
+{% block title %}预警参数管理(config_info表){% endblock %}
+{% block title1 %}预警程序参数信息{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>参数名</th>
+											<th>参数值</th>
+											<th>描述</th>
+											<th>更新时间</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for config in table_list %}
+										<tr>
+											<td>{{config.id}}</td>
+											<td>{{config.key}}</td>
+											<td>{{config.value}}<div></td>
+											<td>{{config.desc_info}}</td>
+											<td>{{config.insert_time|date:"Y-m-d H:i:s"}}</td>
+											<td><a href="update?id={{config.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

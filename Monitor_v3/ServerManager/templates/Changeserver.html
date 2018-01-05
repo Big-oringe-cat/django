@@ -1,0 +1,57 @@
+{% extends "form.html" %}
+{% block title %}服务器负责人管理{% endblock %}
+{% block title1 %}服务器负责人信息{% endblock %}
+{% block form %}
+
+ <div class="control-group">
+ 					<form action="changeserver" method="post" class="form-horizontal" id="formID"/>
+用户为:{{operatorName}}
+                                                                        <label class="control-label">服务器负责人</label>
+                                                                         <div class="controls">
+                                                                                <select  name="group_sn">
+                                                                                {% for username in user_name %}
+											{% if group_sn == username.user_sn %}
+                                                                                        	<option value="{{username.user_sn}}" selected>{{username.user_name}}</option>
+											{% else %}
+                                                                                        	<option value="{{username.user_sn}}">{{username.user_name}}</option>
+											{% endif %}
+                                                                        	{% endfor %}
+                                                                                 </select>
+                                                                        </div>
+{{server_list}}
+                                                                <label class="control-label">服务器负责人及服务器</label>
+                                                                <div class="controls checkbox-group group-name">
+                                                                        <dl class="dl-horizontal">
+                                                                                <span class="help-block"><code>说明：以下为按服务器分配情况进行展示，人员和服务器都需要进行勾选，如涉及到此人员，则人员名称前面的勾必选。</code></span></br>
+                                                                                                                <label class="inline bold"><input type="checkbox" id="serverName_{{group.groupSn}}" name="all_check"/> 全选</label>
+															{% for server in table_list %}
+															{% if group_sn != '0' %}
+
+
+
+															{% for server1 in server_list %}
+{{server.server_sn}}
+{{server1.serverSn}}
+															{% if server.server_sn in server1.serverSn %}
+                                                                                                                                <label class="inline"><input type="checkbox" id="{{server.server_sn}}" name="server_sn" value="" checked="checked"/>{{server.server_name}}</label>
+															{% endif %}
+															 {% endfor %}
+                                                                                                                                <label class="inline"><input type="checkbox" id="{{server.server_sn}}" name="server_sn" value=""/>{{server.server_name}}</label>
+
+
+
+
+
+															{% else %}
+                                                                                                                                <label class="inline"><input type="checkbox" id="{{server.server_sn}}" name="server_sn" value=""/>{{server.server_name}}</label>
+															{% endif %}
+															
+															 {% endfor %}
+                                                                </div>
+                                                        <div class="form-actions">
+                                                        <button type="submit" class="btn btn-primary">保存</button>
+                                                        </div>
+
+                                        </form>
+{% endblock %}
+

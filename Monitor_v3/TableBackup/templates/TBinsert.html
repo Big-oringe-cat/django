@@ -1,0 +1,38 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}表备份信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">服务器IP</label>
+								<div class="controls">
+									<input  id="remote_ip" name="remote_ip" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">数据库名</label>
+								<div class="controls">
+								<input  id="remote_db" name="remote_db" class="validate[required]"  placeholder="如：cmpp_server" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">要备份的数据表</label>
+								<div class="controls">
+								<textarea  id="remote_bak_data_tables" name="remote_bak_data_tables" class="validate[required]" ></textarea>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">备份状态</label>
+								<div class="controls radio-group">
+									<label class="inline"><input id="status" type="radio" name="status" value='0' class="validate[required]"/>开启</label>
+									<label class="inline"><input id="status" type="radio" name="status" value='1' class="validate[required]"/>关闭</label>
+								</div>
+					</div>
+					
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >确定</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

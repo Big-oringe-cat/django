@@ -1,0 +1,51 @@
+{% extends "table.html" %}
+{% block title %}线程管理{% endblock %}
+{% block title1 %}线程信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="thread_param">线程参数</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="insert.do" >添加线程</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>线程名称</th>
+											<th>线程ID</th>
+											<th>参数信息</th>
+											<th>线程状态</th>
+											<th>线程类型</th>
+											<th>应用程序名称</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for thread in table_list %}
+										<tr>
+											<td>{{thread.id}}</td>
+											<td>{{thread.thread_name}}</td>
+											<td>{{thread.thread_id}}</td>
+											<td>{{thread.thread_param}}</td>
+											{% if thread.status == 3 %}
+											<td>已启动</td>
+											{% elif thread.status == 6 %}
+											<td style="color:red;">已关闭</td>
+											{% elif thread.status == 1 or thread.status == 2 %}
+											<td style="color:blue;">正在启动</td>
+											{% elif thread.status == 4 or thread.status == 5 %}
+											<td style="color:blue;">正在关闭</td>
+											{% endif %}
+											<td>{{thread.thread_type}}</td>
+											<td>{{thread.app_name}}</td>
+											<td><a href="update?id={{thread.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

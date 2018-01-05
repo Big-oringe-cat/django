@@ -1,0 +1,55 @@
+{% extends "table5.html" %}
+{% block title %}电信手机号码查询{% endblock %}
+{% block href %}
+
+                            <li><a href="select_cm.do">移动</a></li>
+                            <li><a href="select_un.do">联通</a></li>
+                            <li class="active"><a href="select_cdma.do">电信</a></li>
+{% endblock %}
+{% block form %}
+	<form action="select_cdma.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="province">省份</option>
+										<option value="mobile">手机号码</option>
+										<option value="commport">COM口</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<div class="control-group">
+								<label class="control-label">电信手机卡说明：共有30张手机卡,序号实际对应的为猫池硬件设备上的口，北京同事知悉</label>
+								<div class="controls" style="color:red">
+							        --电信卡使用过程中卡如有疑问请联系:王悦龙
+								</div>
+					</div>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>省份</th>
+											<th>手机号码</th>
+											<th>COM口</th>
+											<th>卡类型</th>
+{% if role == 4 or role == 6  or role == 8 %}
+                                                                                        <th>操作</th>
+{% endif %}
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for user in table_list %}
+										<tr>
+											<td>{{user.id}}</td>
+											<td>{{user.province}}</td>
+											<td>{{user.mobile}}</td>
+											<td>{{user.commport}}</td>
+											<td>{{user.card_type}}</td>
+{% if role == 4 or role == 6 or role == 8  %}
+											<td><a href="update_cdma?id={{user.id}}">修改</a></td>
+{% endif %}
+										</tr>
+										{% endfor %}
+{% endblock %}

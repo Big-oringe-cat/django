@@ -1,0 +1,44 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}通知人员信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">用户ID</label>
+								<div class="controls">
+									<input  id="user_id" name="user_id" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">用户名</label>
+								<div class="controls">
+								<input  id="user_name" name="user_name" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">手机号码</label>
+								<div class="controls">
+							<input  id="mobile" name="mobile" class="validate[required]" />
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">邮箱</label>
+								<div class="controls">
+								<input  id="email" name="email" class="validate[required]" />
+								</div>
+					</div>
+					
+					<div class="control-group">
+								<label class="control-label">状态</label>
+								<div class="controls radio-group">
+									<label class="inline"><input id="open" type="radio" name="status" value='0' class="validate[required]"/> 开启</label>
+									<label class="inline"><input id="close" type="radio" name="status" value='1' class="validate[required]"/> 关闭</label>
+								</div>
+					</div>
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

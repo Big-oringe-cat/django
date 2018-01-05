@@ -1,0 +1,54 @@
+{% extends "table5.html" %}
+{% block title %}手机接收查询(sentsmstable){% endblock %}
+{% block href %}
+
+                            <li><a href="select_cm.do">移动</a></li>
+                            <li><a href="select_un.do">联通</a></li>
+                            <li><a href="select_cdma.do">电信1</a></li>
+                            <li class="active"><a href="select_cdma1.do">电信2</a></li>
+							
+{% endblock %}
+{% block form %}
+	<form action="select_cdma1.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="SentSetIndex">手机号码</option>
+										<option value="PhoneNumber">接入号</option>
+										<option value="SmsContent">内容</option>
+					</select>
+					 起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>接入号</th>
+											<th>手机号码</th>
+											<th>省份</th>
+											<th>接收内容</th>
+											<th>接收时间</th>
+											<th>状态</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for send in table_list %}
+										<tr>
+											<td>{{send.SmsIndex}}</td>
+											<td>{{send.PhoneNumber}}</td>
+											<td>{{send.SentSetIndex}}</td>
+											<td>{{send.province}}</td>
+											<td>{{send.SmsContent}}</td>
+											<td>{{send.SendTime|date:"Y-m-d H:i:s"}}</td>
+                                                                                        {% if send.status == 1 %}
+                                                                                        <td>上行成功</td>
+                                                                                        {% else %}
+											<td style="color:red;">上行失败</td>
+                                                                                        {% endif %}
+										</tr>
+										{% endfor %}
+{% endblock %}

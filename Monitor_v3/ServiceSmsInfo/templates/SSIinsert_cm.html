@@ -1,0 +1,52 @@
+{% extends "form1.html" %}
+{% block title %}下行信息测试(service_sms_info){% endblock %}
+{% block href %}
+                            <li class="active"><a href="insert_cm.do">移动</a></li>
+                            <li><a href="insert_un.do">联通</a></li>
+                            <li><a href="insert_cdma.do">电信</a></li>
+{% endblock %}
+{% block form %}
+					<form  action="insert_cm.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">通道代码</label>
+								<div class="controls">
+									<select id="td_code" name="td_code" class="validate[required]"> 
+									{% for list in tdList %}
+										{% ifequal message.td_code list.td_code%}
+										<option value="{{list.td_code}}" selected>{{list.td_code}}</option>
+										{% else %}
+										<option value="{{list.td_code}}">{{list.td_code}}</option>
+										{% endifequal %}
+									{% endfor %}
+									</select>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">下行接入号</label>
+								<div class="controls">
+									<input  id="code" name="code" class="validate[required]" />(账号的业务代码)
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">下行手机号码</label>
+								<div class="controls checkbox-group group-name all-check-group">
+									<label class="inline bold"><input type="checkbox" id="CommPort" name="all_check"/> 全选</label>
+									{% for province in provinceNames %}
+									<label class="inline"><input type="checkbox" id="{{province.commport}}" name="CommPort" value="{{province.commport}}" class="validate[minCheckbox[1]]"/> {{province.province}}({{province.mobile}}) com {{province.commport}}</label>
+									{% endfor %}
+								</div>
+					</div>
+
+					<div class="control-group">
+								<label class="control-label">下行内容</label>
+								<div class="controls">
+									<textarea id="msg_content" name="msg_content" class="validate[required]"></textarea>
+								</div>
+					</div>
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >提交</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

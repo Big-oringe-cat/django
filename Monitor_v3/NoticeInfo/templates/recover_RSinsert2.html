@@ -1,0 +1,31 @@
+{% extends "form.html" %}
+{% block title %}告警原因添加{% endblock %}
+{% block title1 %}告警原因及处理进度记录{% endblock %}
+{% block form %}
+
+		<form  action="recover_reason22" method="post" class="form-horizontal"  id="formID">
+				
+						<div class="control-group">
+								<label class="control-label">预警原因及处理进度记录</label>
+								<div class="controls">
+									<textarea id="reason" name="reason" class="validate[required]">{{reason}}</textarea>
+								</div>
+						</div>
+								<label class="control-label">预警状态</label>
+								<dl class="dl-horizontal">
+								<div class="controls checkbox-group server-group">
+									<label class="inline"><input type="radio" id="is_recover" name="is_recover" value="0" checked='checked'/>未恢复</label>
+									<label class="inline"><input type="radio" id="is_recover" name="is_recover" value="1" />恢复</label>
+								</div>
+								</dl>
+						<input type="hidden" name="id" value="{{id}}" />
+						<input type="hidden" name="md5" value="{{md5}}" />
+						<input type="hidden" name="note_taker" value="{{note_taker}}" />
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<input type="hidden" name="value" value="{{value}}" />
+							<input type="hidden" name="search" value="{{search}}" />
+						</div>
+		</form>							
+{% endblock %}						
+				

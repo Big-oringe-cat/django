@@ -1,0 +1,38 @@
+{% extends "table5.html" %}
+{% block title %}联通手机号码修改{% endblock %}
+
+{% block form %}
+					<div class="control-group">
+								<label class="control-label">联通手机卡说明：共32张卡（31张全国，1张1709虚拟号码），如果有需要从猫池上取出卡，请使用完及时放回猫池~</label>
+								<div class="controls" style="color:red">
+								--联通卡使用过程中卡如有疑问请联系:吴云
+								</div>
+					</div>
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>省份</th>
+											<th>手机号码</th>
+											<th>COM口</th>
+											<th>卡类型</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+                                                                                <form action="update_un" method="post" class="form-horizontal" id="formID"/>
+										{% for user in table_list %}
+										<tr>
+                                                                                        <td><input type="text" id="id"  name="id" value="{{user.id}}" readonly ></td>
+                                                                                        <td><input type="text" id="province"  name="province" value="{{user.province}}" ></td>
+                                                                                        <td><input type="text" id="mobile"  name="mobile" value="{{user.mobile}}" ></td>
+                                                                                        <td><input type="text" id="commport"  name="commport" value="{{user.commport}}" ></td>
+                                                                                        <td><input type="text" id="card_type"  name="card_type" value="{{user.card_type}}" ></td>
+										</tr>
+										{% endfor %}
+                                                                                        <td align="center"  colspan="5"><button type="submit" class="btn btn-primary">保存</button>
+                                                                                </form>
+{% endblock %}

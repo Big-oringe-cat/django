@@ -1,0 +1,37 @@
+{% extends "table2.html" %}
+{% block title %}分配表{% endblock %}
+{% block title1 %}服务器负责人信息{% endblock %}
+{% block form %}
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">业务负责组</th>
+											<th nowrap="nowrap">责任人</th>
+											<th>负责服务器</th>
+											<th nowrap="nowrap">分配客服</th>
+										       <!-- <th>负责机房</th>-->
+											<th nowrap="nowrap">代理人</th>
+											<th nowrap="nowrap">代理状态</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for manager in table_list %}
+										<tr>
+											<td>{{manager.group_mark}}</td>
+											<td  nowrap="nowrap"><B>{{manager.group_name}}</B></td>
+											<td>{{manager.server_name}}</td>
+											<td>{{manager.service_staff}}</td>
+											<!--<td>{{manager.server_room}}</td>-->
+											<td nowrap="nowrap">{{manager.agent_name}}</td>
+											{% if manager.agentic_state == 0 %}
+											<td><font color="#EA0000">代理中</td>
+											{% endif %}
+											{% if manager.agentic_state == 1 %}
+											<td>未代理</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+{% endblock %}

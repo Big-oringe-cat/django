@@ -1,0 +1,32 @@
+{% extends "table.html" %}
+{% block title %}ip替换管理{% endblock %}
+{% block title1 %}网络监控管理{% endblock %}
+{% block form %}
+	<form action="replace_info" method="post" class="form-inline" name="formID" id="formID"/>
+			&nbsp;&nbsp;服务器ip或替换ip：<input type="text"  name="search1"   value="{{search1}}" />
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="replace_insert" >添加</a>
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">服务器ip或域名</th>
+											<th nowrap="nowrap">替换ip</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+					 {% for mobile in table_list %}
+						<tr>
+						<td>{{mobile.sn}}</td>
+						<td>{{mobile.gate_ip}}</td>
+						<td>{{mobile.replace_ip}}</td>
+						<td><a href="replace_update?sn={{mobile.sn}}">修改</a>&nbsp;&nbsp;<a href="replace_delete?sn={{mobile.sn}}">删除</a></td>
+						</tr>
+					{% endfor %}
+{% endblock %}
+

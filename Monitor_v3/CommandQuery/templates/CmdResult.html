@@ -1,0 +1,48 @@
+{% extends "table2.html" %}
+{% block title %}服务器批量执行{% endblock %}
+{% block title1 %}服务器批量执行结果展示{% endblock %}
+{% block form %}
+	<form action="CommandQuery.do" method="post" class="form-inline" name="formID" id="formID"/>
+					类型：<select id="type" name="type" class="validate[required]">
+									{% if type == "cmpp" %}
+									<option value="cmpp" selected>cmpp</option>
+									<option value="sgip" >sgip</option>
+									<option value="smgp" >smgp</option>
+									{% elif type == "sgip"%}
+									<option value="cmpp" >cmpp</option>
+									<option value="sgip" selected>sgip</option>
+									<option value="smgp" >smgp</option>
+									{% elif type == "smgp"%}
+									<option value="cmpp" >cmpp</option>
+									<option value="sgip" >sgip</option>
+									<option value="smgp" selected>smgp</option>
+									{% else %}
+									<option value="cmpp" >cmpp</option>
+									<option value="sgip" >sgip</option>
+									<option value="smgp" >smgp</option>
+									{% endif %}
+					</select>
+					请输linux命令:<textarea type="text" name="command" id="command"  placeholder="LINUX命令" class="validate[required]">{{command}}</textarea>
+					<input type="submit" class="btn"  value="执行" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">服务器IP</th>
+											<th nowrap="nowrap">执行命令结果</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.server}}</td>
+											<td>{{message.content}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

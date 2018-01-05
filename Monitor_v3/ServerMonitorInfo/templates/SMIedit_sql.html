@@ -1,0 +1,85 @@
+{% extends "form.html" %}
+{% block title %}修改{% endblock %}
+{% block title1 %}服务器SQL监控信息{% endblock %}
+{% block form %}
+					<form  action="modify.do" method="post" class="form-horizontal"  id="formID">
+					{% for message in table_list %}
+					<div class="control-group">
+								<label class="control-label">服务器IP</label>
+								<div class="controls">
+									<input  id="ip" name="ip" class="validate[required]"  value = "{{message.ip}}" readonly/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">SQL语句</label>
+								<div class="controls">
+								<textarea  id="monitor_command" name="monitor_command" class="validate[required]"  readonly>{{message.monitor_command}}</textarea>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">预警阀值</label>
+								<div class="controls">
+								<input  id="value" name="value" class="validate[required]" value = "{{message.value}}"/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">比较符号</label>
+								<div class="controls">
+								<input  id="mark" name="mark" class="validate[required]" value = "{{message.mark}}"/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">执行频率</label>
+								<div class="controls">
+								<input  id="frequency" name="frequency" class="validate[required]" value = "{{message.frequency}}"/>（单位：秒）
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">状态</label>
+								<div class="controls radio-group">
+									{% if message.status == 0 %}
+									<label class="inline"><input id="open" type="radio" name="status" value='0' class="validate[required]" checked="checked"/> 开启</label>
+									<label class="inline"><input id="close" type="radio" name="status" value='1' class="validate[required]"/> 关闭</label>
+									{% else %}
+									<label class="inline"><input id="open" type="radio" name="status" value='0' class="validate[required]"/> 开启</label>
+									<label class="inline"><input id="close" type="radio" name="status" value='1' class="validate[required]" checked="checked"/> 关闭</label>
+									{% endif %}
+								</div>
+					</div>
+                                                                 <div class="control-group">
+                                                                        <label class="control-label">服务器负责人</label>
+                                                                         <div class="controls">
+                                                                                <select id="group_sn" name="group_sn" class="validate[required]">
+                                                                                {% for username in user_name %}
+                                                                                        {% ifequal message.group_sn username.user_sn%}
+                                                                                        <option value="{{message.group_sn}}" selected>{{username.user_name}}</option>
+                                                                                        {% else %}
+                                                                                        <option value="{{message.group_sn}}">{{username.user_name}}</option>
+                                                                                {% endifequal %}
+                                                                        {% endfor %}
+
+                                                                                 </select>
+                                                                        </div>
+                                                                </div>
+					
+					<div class="control-group">
+								<label class="control-label">追加通知组</label>
+								<div class="controls checkbox-group group-name all-check-group">
+									<label class="inline bold"><input type="checkbox" id="GroupName" name="all_check"/> 全选</label>
+									{% for group in GroupNames %}
+											{% if group.groupSnCmp in message.add_group_sn%}
+												<label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}" class="validate[minCheckbox[1]]" checked="checked"/> {{group.groupName}}</label>
+											{% else %}
+												<label class="inline"><input type="checkbox" id="{{group.groupSn}}" name="GroupName" value="{{group.groupSn}}" class="validate[minCheckbox[1]]"/> {{group.groupName}}</label>
+											{% endif %}	
+									{% endfor %}
+								</div>
+					</div>
+					<input type="hidden" name="sn" value="{{message.sn}}" />
+					<input type="hidden" name="monitor_type" value="0" />
+					{% endfor %}
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+{% endblock %}

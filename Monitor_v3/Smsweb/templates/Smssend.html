@@ -1,0 +1,67 @@
+{% extends "table6.html" %}
+{% block title %}短信平台发送端发送记录查询{% endblock %}
+{% block title1 %}发送记录展示{% endblock %}
+{% block href %}
+                            <li><a href="Smssubmit">提交记录</a></li>
+                            <li class='active'><a href="Smssend">发送记录</a></li>
+{% endblock %}
+{% block form %}
+	<form action="Smssend" method="post" class="form-inline" name="formID" id="formID"/>
+					&nbsp;&nbsp;第一个关键字:<input type="text" name="search1" id="search"  value="{{search1}}" placeholder="手机号码或通道代码" class="validate[required]"/>
+					&nbsp;&nbsp;第二个关键字:<input type="text" name="search2" id="search"  value="{{search2}}" placeholder="包含第一个关键字行的其他字符"/>
+					&nbsp;&nbsp;查询时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" placeholder="默认为今天"/>
+					 &nbsp;时：<select name="hour" style="width:70px"> 
+                                        <option value=""></option>                                     
+                                        <option value="01">01</option> 
+                                        <option value="02">02</option> 
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        </select>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+ 				<p></p>
+ 				{%if command%}
+					<span><code>命令：{{command}}</code></span>
+ 				{% else %}
+ 					<span></span>
+				{%endif%}
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">服务器IP</th>
+											<th nowrap="nowrap">查询结果</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.server}}</td>
+											<td>{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "form.html" %}
+{% block form %}
+					
+	<form action="dutyzhanshi" method="post" class="form-horizontal" id="formID"/>
+		<h3 align="center">2017年{{month}}月份运维值班表</h3>
+		<div align="center">
+			<select name="month">
+				{% for month1 in count %}
+					 {% if month1.id == month %}	
+                        			<option value="{{month1.id}}" selected>{{month1.id}}月份</option>
+				{% else %}
+                        			<option value="{{month1.id}}">{{month1.id}}月份</option>
+					{% endif %}
+				{% endfor %}
+                         </select>
+                	<button type="submit" class="btn">查看</button>
+		</div>
+		<h4 align="center" style="color:red;">晚班对接：（12:00-13:00 18:00-20:00）</h4>
+		 <table width="60%" height="400" border="1" align="center" cellpadding="0" cellspacing="0">
+   			<tr>
+    				<td align="center" valign="middle">值班日期</td>
+    				<td align="center" valign="middle">值班人员</td>
+				<td align="center" valign="middle">备注<br>晚班时间：11:00-20:00<br></td>
+    				<td align="center" valign="middle">调休安排</td>
+    				<td align="center" valign="middle">值班人员号码</td>
+   			</tr>
+			{% for duty in table_list %}
+   			<tr>
+  				<td align="center" valign="middle">{{duty.duty_time|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.duty_name|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.content|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.rest_time|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.mobile|default_if_none:" "}}</td>
+   				</tr>
+			{% endfor %}
+   			<tr>
+    				<td align="center"  colspan="5">双休日节假日值班时间：09:00-18:00  升级反馈：13716413611、15201186062</td>
+   			</tr>
+ 		</table>
+<p>
+                 <table width="60%" height="200" border="1" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                                <td align="center" valign="middle"  colspan="5">晚间运维支持人员表</td>
+                        </tr>
+                        <tr>
+                                <td align="center" valign="middle">日期</td>
+                                <td align="center" valign="middle">对接时间</td>
+                                <td align="center" valign="middle">支持人员</td>
+                                <td align="center" valign="middle">支持地点</td>
+                                <td align="center" valign="middle">备用人员</td>
+                        </tr>
+                        <tr>
+                                <td align="center" valign="middle" rowspan="3">工作日</td>
+                                <td align="center" valign="middle">18:00-20:00</td>
+                                <td align="center" valign="middle">当天晚班同事</td>
+                                <td align="center" valign="middle">在公司</td>
+                                <td align="center" valign="middle">当月值晚班的另一同事</td>
+                                </tr>
+                        <tr>
+                                <td align="center" valign="middle">20:00-22:00</td>
+                                <td align="center" valign="middle">当天对接同事</td>
+                                <td align="center" valign="middle">在家</td>
+                                <td align="center" valign="middle">当月值对接的另一同事</td>
+                                </tr>
+                        <tr>
+                                <td align="center" valign="middle">22:00-09:00</td>
+                                <td align="center" valign="middle">当天晚班同事</td>
+                                <td align="center" valign="middle">在家</td>
+                                <td align="center" valign="middle">当月值晚班的另一同事</td>
+                                </tr>
+                        <tr>
+                                <td align="center" valign="middle">双休日</td>
+                                <td align="center" valign="middle">18:00-08:00</td>
+                                <td align="center" valign="middle">当天晚班同事</td>
+                                <td align="center" valign="middle">在家</td>
+                                <td align="center" valign="middle">当月值晚班的另一同事</td>
+                                </tr>
+                        <tr>
+                                <td align="center" valign="middle">节假日</td>
+                                <td align="center" valign="middle">18:00-08:00</td>
+                                <td align="center" valign="middle">当天晚班同事</td>
+                                <td align="center" valign="middle">在家</td>
+                                <td align="center" valign="middle">当月值晚班的另一同事</td>
+                                </tr>
+                </table>
+	</form>
+					
+{% endblock %}

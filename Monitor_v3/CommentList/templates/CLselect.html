@@ -1,0 +1,46 @@
+{% extends "table.html" %}
+{% block title %}监控分类管理{% endblock %}
+{% block title1 %}监控分类信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="comment">分类名称</option>
+										<option value="monitor_type">监控类型</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+{% if role == 4 %}
+					<a class="btn" href="insert.do" >添加类别</a>
+{% endif %}
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>监控类别</th>
+											<th>监控类型</th>
+{% if role == 4 %}
+                                                                                        <th>操作</th>
+{% endif %}
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for comment in table_list %}
+										<tr>
+											<td>{{comment.id}}</td>
+											<td>{{comment.comment}}</td>
+											{% if comment.monitor_type == '0' %}
+											<td>SQL语句</td>
+											{% else %}
+											<td>LINUX命令</td>
+											{% endif %}
+{% if role == 4 %}
+											<td><a href="update?id={{comment.id}}">修改</a></td>
+{% endif %}
+										</tr>
+										{% endfor %}
+{% endblock %}

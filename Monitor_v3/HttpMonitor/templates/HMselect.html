@@ -1,0 +1,53 @@
+{% extends "table.html" %}
+{% block title %}HTTP监控{% endblock %}
+{% block title1 %}HTTP监控信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="monitor_name">监控名称</option>
+										<option value="monitor_url">监控地址</option>
+										<option value="content">监控参数</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />&nbsp;&nbsp;
+					<a class="btn" href="insert.do" >添加HTTP监控</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">监控名称</th>
+											<th nowrap="nowrap">方法</th>
+											<th>URL地址</th>
+											<th style="word-wrap: break-word">参数</th>
+											<th>期望结果</th>
+											<th nowrap="nowrap">频率(秒)</th>
+											<th nowrap="nowrap">状态</th>
+											<th>添加时间</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for monitor in table_list %}
+										<tr>
+											<td>{{monitor.id}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><code>{{monitor.monitor_name}}</code></td>
+											<td>{{monitor.method}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><code>{{monitor.monitor_url}}</code></td>
+											<td style="word-break:break-all; word-wrap: break-word">{{monitor.content}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{monitor.response}}</td>
+											<td>{{monitor.frequence}}</td>
+											{% if monitor.status == 0 %}
+											<td>开启</td>
+										    {% else %}
+											<td style="color:red;">关闭</td>
+											{% endif %}
+											<td>{{monitor.last_time|date:"Y-m-d H:i:s"}}</td>
+											<td><a href="update?id={{monitor.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

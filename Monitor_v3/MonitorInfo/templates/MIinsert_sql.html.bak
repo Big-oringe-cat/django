@@ -1,0 +1,74 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}SQL监控语句{% endblock %}
+{% block form %}
+				<form action="insert.do" method="post" class="form-horizontal" id="formID"/>
+							<div class="control-group">
+								<label class="control-label">语句说明：</label>
+								<div class="controls">
+									<span class="help-block"><code>1、sql语句末尾无需加分号。例子:select b.user_id,a.yw_code,a.err,count(*) as amount from submit_message_send_history_201608 a,cmpp_user b where a.err!=0 and a.user_sn=b.user_sn group by 1,2,3 limit 10</code></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">SQL语句</label>
+								<div class="controls">
+									<textarea id="monitor_command" name="monitor_command" class="validate[required]" placeholder="sql语句查询的结果字段：user_id,td_code,err_code传给程序解析amount结果给预警内容进行判断"></textarea>
+									<span class="help-block">* 告警内容中用${字段名}来取所查询的列对应的实际值进行展示。 如：${amount}</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">预警内容</label>
+								<div class="controls">
+									<textarea id="warning_content" name="warning_content" class="validate[required]" ></textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">描述</label>
+								<div class="controls">
+									<select id="comment" name="comment" class="validate[required]"> 
+									{% for list in commentList %}
+										<option value="{{list.comment}}">{{list.comment}}</option>
+									{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+                                                                <div class="controls">
+								 <span class="help-block">一般:(弹屏) 重要:(短信+弹屏) 紧急:(电话+短信)</span>
+								</div>
+							</div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">监控等级</label>
+                                                                <div class="controls">
+                                 		       		<select name="monitor_level">
+                                                			<option value="2">一般</option>
+                                               			 	<option value="1">重要</option>
+                                               			 	<option value="0">紧急</option>
+                                      			  	</select>
+								</div>
+							</div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">告警次数</label>
+                                                                <div class="controls">
+							<input type='text' style="width:205px;"  id='alarm_count' name='alarm_count' value='3' placeholder="连续告警通知次数"/>
+								</div>
+							</div>
+                                                        <div class="control-group">
+                                                                <label class="control-label">告警频率</label>
+                                                                <div class="controls">
+							<input type='text' style="width:205px;" id='alarm_frequency' name='alarm_frequency' value='50' placeholder="达到多少次的倍数时重复告警"/>
+								</div>
+							</div>
+							<div class="control-group">
+                                                                <label class="control-label"> 告警时间段</label>
+                                                                <div class="controls">
+							<input type="time" style="width:70px;"  value="08:00"  name="startTime" placeholder="开始时间"/>-<input type="time" style="width:70px;" value="21:00"  name ="endTime" placeholder="结束时间"/>
+							 <span class="help-block">格式HH:MM</span>
+								</div>
+							</div>
+							<input type="hidden" name="monitor_type" value="0" />
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">保存并配置服务器</button>
+							</div>
+					</form>
+{% endblock %}

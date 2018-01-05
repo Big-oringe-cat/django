@@ -1,0 +1,52 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}服务器负责人{% endblock %}
+{% block form %}
+				<form action="insert.do" method="post" class="form-horizontal" id="formID"/>
+
+							<div class="control-group">
+                                                                <label class="control-label">业务负责组</label>
+                                                                <div class="controls">
+                                                                <select name="group_mark">
+	                               					<option value="售前组">售前组</option>
+									<option value="网络组">网络组</option>
+									<option value="系统组">系统组</option> 
+	                                				<option value="售后组" selected>售后组</option	> 
+								</select>
+								</div>
+
+
+							<div class="control-group">
+								<label class="control-label">负责人组</label>
+								<div class="controls">
+									<select id="groupName" name="groupName" class="validate[required]"> 
+									{% for group in groupNames %}
+										<option value="{{group.groupSn}}"> {{group.groupName}}</option>
+									{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">负责服务器</label>
+								<div class="controls checkbox-group group-name all-check-group">
+									<label class="inline bold"><input type="checkbox" id="ServerName" name="all_check"/> 全选</label>
+									{% for server in serverNames %}
+									<label class="inline"><input type="checkbox" id="{{server.serverName}}" name="ServerName" value="{{server.serverSn}}"/> {{server.serverName}}</label>
+									{% endfor %}
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">代理人组</label>
+								<div class="controls">
+									<select id="AgentName" name="AgentName" class="validate[required]"> 
+									{% for group in groupNames %}
+										<option value="{{group.groupSn}}"> {{group.groupName}}</option>
+									{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">保存</button>
+							</div>
+					</form>
+{% endblock %}

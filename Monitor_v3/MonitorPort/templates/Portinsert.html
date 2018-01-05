@@ -1,0 +1,49 @@
+{% extends "form.html" %}
+
+{% block title %}端口监控添加{% endblock %}
+
+{% block title1 %}端口监控{% endblock %}
+
+{% block form %}
+					
+					<form action="insert.do" method="post" class="form-horizontal" id="formID"/>
+
+							<div class="control-group">
+							    <label class="control-label">监控协议 </label>
+							    <div class="controls">
+								<select name="parameter_name">
+                                <option value="cmpp20.gateParameter">cmpp20.gateParameter</option> 
+                                <option value="sgip12.gateParameter">sgip12.gateParameter</option> 
+                                <option value="smgp30.gateParameter">smgp30.gateParameter</option> 
+                                </select> 
+
+							  </div>
+
+							<div class="control-group">
+
+								<label class="control-label">IP:端口</label>
+							   <div class="controls">
+									<input id="parameter_value" name="parameter_value" placeholder="127.0.0.0:3306" class="validate[required]">
+								</div>
+							</div>
+							
+							<div class="control-group">
+
+								<label class="control-label" >状态</label>
+								<div class="controls checkbox-group">
+                                    <label class="inline"><input id="status" type="radio" name="status" value='0' class="btn"/>开启</label>                                  
+									<label class="inline"><input id="status" type="radio" name="status" value='1' class="btn"/>关闭</label>
+
+								</div>
+
+							</div>
+
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">保存</button>
+								
+							</div>
+
+					</form>
+					
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "form.html" %}
+
+{% block title %}值班表{% endblock %}
+
+{% block title1 %}值班信息填写{% endblock %}
+
+{% block form %}
+					
+	<form action="duty_table" method="post" class="form-horizontal" id="formID"/>
+		{% if day == '31' %}
+		<div align="right"><input type="button" class="btn" value="发邮件" onclick="window.location.href ='sendemail?month={{month}}'" /></div>
+		{% endif %}
+		<h3 align="center">2017年{{month}}月份运维值班表</h3> 
+		<div align="center">
+			<select name="month">
+				{% for month1 in count %}
+					 {% if month1.id == month %}	
+                        			<option value="{{month1.id}}" selected>{{month1.id}}月份</option>
+				{% else %}
+                        			<option value="{{month1.id}}">{{month1.id}}月份</option>
+					{% endif %}
+				{% endfor %}
+                         </select>
+                	<button type="submit" class="btn">查看</button>
+			<input type="button" class="btn" value="修改" onclick="window.location.href ='dutyedit?month={{month}}'" />
+		</div>
+		<h4 align="center" style="color:red;">晚班对接：（12:00-13:00 18:00-20:00）</h4>
+		 <table width="60%" height="500" border="1" align="center" cellpadding="0" cellspacing="0">
+   			<tr>
+    				<td align="center" valign="middle">值班日期</td>
+    				<td align="center" valign="middle">值班人员</td>
+				<td align="center" valign="middle">备注<br>晚班时间：11:00-20:00<br>早班时间：08:00-17:00</td>
+    				<td align="center" valign="middle">调休安排</td>
+    				<td align="center" valign="middle">值班人员号码</td>
+   			</tr>
+			{% for duty in table_list %}
+   			<tr>
+  				<td align="center" valign="middle">{{duty.duty_time|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.duty_name|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.content|default_if_none:" "}}</td>
+				<td align="center" valign="middle">{{duty.rest_time|default_if_none:" "}}</td>
+    				<td align="center" valign="middle">{{duty.mobile|default_if_none:" "}}</td>
+   				</tr>
+			{% endfor %}
+   			<tr>
+    				<td align="center"  colspan="7">双休日节假日值班时间：09:00-18:00  升级反馈：13716413611、15201186062</td>
+   			</tr>
+ 		</table>
+		<p>
+	</form>
+					
+{% endblock %}

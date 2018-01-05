@@ -1,0 +1,60 @@
+{% extends "table.html" %}
+{% block title %}业务服务器{% endblock %}
+{% block title1 %}网络监控管理{% endblock %}
+{% block form %}
+	<form action="server_info" method="post" class="form-inline" name="formID" id="formID"/>
+ 	   <select name="search">
+			{% if search == 'private_ip' %}
+						<option value="server_ip">服务器ip</option>
+						<option value="private_ip" selected>私网IP</option>
+						<option value="server_id">服务器标识</option>
+						<option value="server_desc">服务器名称</option>
+			{% elif search == 'server_id' %}
+						<option value="server_ip">服务器ip</option>
+						<option value="private_ip">私网IP</option>
+						<option value="server_id" selected>服务器标识</option>
+						<option value="server_desc">服务器名称</option>
+			{% elif search == 'server_desc' %}
+						<option value="server_ip">服务器ip</option>
+						<option value="private_ip">私网IP</option>
+						<option value="server_id">服务器标识</option>
+						<option value="server_desc" selected>服务器名称</option>
+			{% else %}
+						<option value="server_ip" selected>服务器ip</option>
+						<option value="private_ip">私网IP</option>
+						<option value="server_id">服务器标识</option>
+						<option value="server_desc">服务器名称</option>
+			{% endif %}
+	    </select>
+			<input type="text" name="value" placeholder="查询关键词" value='{{value}}'/>	<!--  	&nbsp;&nbsp;服务器ip：<input type="text"  name="search1"   value="{{search1}}" />    -->
+			<input type="submit" class="btn"  value="查询" />
+			<a class="btn" href="server_insert" >添加</a>
+	</form>		
+{% endblock %}
+
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">服务器IP</th>
+											<th nowrap="nowrap">私网IP</th>
+											<th nowraip="nowrap">服务器标识</th>
+											<th nowrap="nowrap">服务器名称</th>
+											<th nowrap="nowrap">域名</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+					 {% for mobile in table_list %}
+						<tr>
+						<td>{{mobile.sn}}</td>
+						<td>{{mobile.server_ip}}</td>
+						<td>{{mobile.private_ip}}</td>
+						<td>{{mobile.server_id}}</td>
+						<td>{{mobile.server_desc}}</td>
+						<td>{{mobile.domain_name}}</td>
+						<td><a href="server_update?sn={{mobile.sn}}">修改</a>&nbsp;&nbsp;<a href="server_delete?sn={{mobile.sn}}">删除</a></td>
+						</tr>
+					{% endfor %}
+{% endblock %}
+

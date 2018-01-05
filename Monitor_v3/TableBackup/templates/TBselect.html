@@ -1,0 +1,51 @@
+{% extends "table.html" %}
+{% block title %}表备份管理{% endblock %}
+{% block title1 %}表备份信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="remote_ip">服务器IP</option>
+										<option value="remote_db">数据库名</option>
+										<option value="remote_bak_data_tables">备份数据表名</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="insert.do" >添加表备份</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th>服务器IP</th>
+											<th>数据库名</th>
+											<th>备份数据表</th>
+											<th>频率(ms)</th>
+											<th nowrap="nowrap">最后备份时间</th>
+											<th nowrap="nowrap">备份状态</th>
+											<th nowrap="nowrap">插入时间</th>
+											<th nowrap="nowrap">操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for server in table_list %}
+										<tr>
+											<td>{{server.id}}</td>
+											<td>{{server.remote_ip}}</td>
+											<td>{{server.remote_db}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><code>{{server.remote_bak_data_tables}}</code></td>
+											<td  nowrap="nowrap">{{server.interval_time}}</td>
+											<td>{{server.remote_last_bak_time}}</td>
+											{% if server.status == 0 %}
+											<td>开启</td>
+											{% else %}
+											<td style="color:red;">关闭</td>
+											{% endif %}
+											<td>{{server.insert_time}}</td>
+											<td><a href="update?id={{server.id}}">修改</a>&nbsp;&nbsp;<a href="delete?id={{server.id}}">删除</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

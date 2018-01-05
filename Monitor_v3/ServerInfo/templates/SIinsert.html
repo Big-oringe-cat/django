@@ -1,0 +1,61 @@
+{% extends "form.html" %}
+{% block title %}添加{% endblock %}
+{% block title1 %}服务器信息{% endblock %}
+{% block form %}
+					<form  action="insert.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">服务器IP</label>
+								<div class="controls">
+									<input  id="ip" name="ip" class="validate[required]" style="width:240px;"/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">服务器名</label>
+								<div class="controls">
+								<input  id="server_name" name="server_name" class="validate[required]" placeholder="如：cmpp_220或cluster_64-发送端1" style="width:240px;"/>
+								</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">数据库名称</label>
+								<div class="controls">
+							<input  id="db_name" name="db_name" class="validate[required]"  placeholder="如：cmpp_server，没有数据库填0" style="width:240px;"/> &nbsp;&nbsp;
+								</div>
+					</div>
+					<div class="control-group">
+									<label class="control-label">所在机房</label>
+									<div class="controls">
+										<select name="server_room">
+											<option value="北京数北多线机房">北京数北多线机房</option>
+											<option value="北京三元桥电信通机房">北京三元桥电信通机房</option>
+											<option value="北京三元桥联通机房">北京三元桥联通机房</option>
+											<option value="北京上地电信机房">北京上地电信机房</option>
+											<option value="北京沙河移动机房">北京沙河移动机房</option>
+											<option value="上海移动机房">上海移动机房</option>
+											<option value="上海电信机房">上海电信机房</option>
+											<option value="福建移动机房">福建移动机房</option>
+											<option value="福建联通机房">福建联通机房</option>
+											<option value="厦门移动机房">厦门移动机房</option>
+											<option value="河北移动机房">河北移动机房</option>
+											<option value="河北电信机房">河北电信机房</option>
+											<option value="深圳电信机房">深圳电信机房</option>
+											<option value="辽宁联通机房">辽宁联通机房</option>
+											<option value="扬州电信机房">扬州电信机房</option>
+											<option value="宁波电信机房">宁波电信机房</option>
+											<option value="北京马驹桥电信机房">北京马驹桥电信机房</option>
+										</select>
+									</div>
+					</div>
+					<div class="control-group">
+								<label class="control-label">状态</label>
+								<div class="controls radio-group">
+									<label class="inline"><input id="open" type="radio" name="status" value='0' class="validate[required]" checked/> 开启</label>
+									<label class="inline"><input id="close" type="radio" name="status" value='1' class="validate[required]"/> 关闭</label>
+								</div>
+					</div>
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" name="config" value="config">保存并配置监控命令</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

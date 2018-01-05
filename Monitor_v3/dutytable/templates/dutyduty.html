@@ -1,0 +1,53 @@
+{% extends "form.html" %}
+
+{% block form %}
+					
+	<form action="duty_table" method="post" class="form-horizontal" id="formID"/>
+		 <table width="50%" height="300" border="1" align="center" cellpadding="0" cellspacing="0">
+   			<tr>
+    				<td align="center" valign="middle"  colspan="5">晚间运维支持人员表</td>
+   			</tr>
+   			<tr>
+    				<td align="center" valign="middle">日期</td>
+    				<td align="center" valign="middle">对接时间</td>
+				<td align="center" valign="middle">支持人员</td>
+    				<td align="center" valign="middle">支持地点</td>
+    				<td align="center" valign="middle">备用人员</td>
+   			</tr>
+   			<tr>
+  				<td align="center" valign="middle" rowspan="3">工作日</td>
+    				<td align="center" valign="middle">18:00-20:00</td>
+    				<td align="center" valign="middle">当天晚班同事</td>
+    				<td align="center" valign="middle">在公司</td>
+    				<td align="center" valign="middle">当月值晚班的另一同事</td>
+   				</tr>
+   			<tr>
+    				<td align="center" valign="middle">20:00-22:00</td>
+    				<td align="center" valign="middle">当天早班同事</td>
+    				<td align="center" valign="middle">在家</td>
+    				<td align="center" valign="middle">当月值早班的另一同事</td>
+   				</tr>
+   			<tr>
+    				<td align="center" valign="middle">22:00-08:00</td>
+    				<td align="center" valign="middle">当天晚班同事</td>
+    				<td align="center" valign="middle">在家</td>
+    				<td align="center" valign="middle">当月值晚班的另一同事</td>
+   				</tr>
+   			<tr>
+  				<td align="center" valign="middle">双休日</td>
+    				<td align="center" valign="middle">18:00-08:00</td>
+    				<td align="center" valign="middle">当天晚班同事</td>
+    				<td align="center" valign="middle">在家</td>
+    				<td align="center" valign="middle">当月值晚班的另一同事</td>
+   				</tr>
+   			<tr>
+  				<td align="center" valign="middle">节假日</td>
+    				<td align="center" valign="middle">18:00-08:00</td>
+    				<td align="center" valign="middle">当天晚班同事</td>
+    				<td align="center" valign="middle">在家</td>
+    				<td align="center" valign="middle">当月值晚班的另一同事</td>
+   				</tr>
+ 		</table>
+	</form>
+					
+{% endblock %}

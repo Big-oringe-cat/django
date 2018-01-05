@@ -1,0 +1,48 @@
+{% extends "table.html" %}
+{% block title %}告警明细查询{% endblock %}
+{% block title1 %}最新预警展示{% endblock %}
+
+{% block form %}
+	<form action="notice_detail" method="post" class="form-inline" />
+					<select name="search">
+						{% if search == 'monitor_sn' %}
+						<option value="content" >预警内容</option>
+						<option value="monitor_sn" selected>监控语句序号</option>
+						{% else %}
+						<option value="content" selected>预警内容</option>
+						<option value="monitor_sn">监控语句语序</option>
+						{% endif %}
+					</select>
+                                                   起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="{{startTime}}" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="{{endTime}}" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" value='{{value}}'  placeholder="查询关键词"/>
+					<input type="submit" class="btn btn-primary"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+{% block thread %}
+						
+										<tr>
+											<th>ID</th>
+											<th>预警内容</th>
+											<th  nowrap="nowrap">服务器编号</th>
+											<th  nowrap="nowrap">通知类型</th>
+											<th  nowrap="nowrap"> 插入时间</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										
+										{% for mobile in table_list %}
+{{alarm_uname3}}
+										<tr>
+											<td>{{mobile.sn}}</td>
+											<td style="word-break:break-all; word-wrap: break-word"><div title="monitor_sn:{{mobile.monitor_sn}}">{{mobile.content}}</div></td>
+											<td style="word-break:break-all; word-wrap: break-word"> {{mobile.server_id}}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{mobile.comment}}</td>
+											<td nowrap="nowrap">{{mobile.insert_time|date:"Y-m-d H:i:s"}}</td>
+										</tr>
+										{% endfor %}
+
+{% endblock %}						
+				

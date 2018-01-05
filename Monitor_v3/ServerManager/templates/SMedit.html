@@ -1,0 +1,78 @@
+{% extends "form.html" %}
+{% block title %}修改{% endblock %}
+{% block title1 %}通知用户组信息{% endblock %}
+{% block form %}
+					<form  action="modify.do" method="post" class="form-horizontal"  id="formID">
+					{% for message in table_list %}
+					<div class="control-group">
+							<label class="control-label">责任人</label>
+							<div class="controls">
+								<select name="groupName">
+								{% for group in GroupNames %}
+								{{group.groupSn}}
+								{{message.group_sn}}
+									{% ifequal group.groupSn message.group_sn %}
+									<option value="{{group.groupSn}}" selected>{{group.groupName}}</option>
+									{% else %}
+									<option value="{{group.groupSn}}">{{group.groupName}}</option>
+									{% endifequal %}
+								{% endfor %}
+								</select>
+							</div>
+					</div>
+
+					<div class="control-group">
+                                                                <label class="control-label">业务负责组</label>
+                                                                <div class="controls">
+                                                                <select name="group_mark">
+                                                                        <option value="售前组">售前组</option>
+                                                                        <option value="网络组">网络组</option>
+                                                                        <option value="系统组">系统组</option>
+                                                                        <option value="售后组" selected>售后组</option  >
+                                                                </select>
+                                                                </div> 
+					</div>
+
+					<div class="control-group">
+								<label class="control-label">负责服务器</label>
+								<div class="controls checkbox-group group-name all-check-group">
+									<label class="inline bold"><input type="checkbox" id="ServerName" name="all_check"/> 全选</label>
+									{% for server in ServerNames %}
+											{% if server.serverSn in message.server_sn%}
+												<label class="inline"><input type="checkbox" id="{{server.serverSn}}" name="ServerName" value="{{server.serverSn}}" class="validate[minCheckbox[1]]" checked="checked"/> {{server.serverName}}</label>
+											{% else %}
+												<label class="inline"><input type="checkbox" id="{{server.serverSn}}" name="ServerName" value="{{server.serverSn}}" class="validate[minCheckbox[1]]"/> {{server.serverName}}</label>
+											{% endif %}	
+									{% endfor %}
+								</div>
+					</div>
+					  <div class="control-group">
+							<label class="control-label">分配客服</label>
+							<div class="controls">
+							<input type='text' style="width:500px;" name='service_staff' value='{{message.service_staff}}' />
+							</div>
+					 </div>
+					  <div class="control-group">
+							<label class="control-label">代理人组</label>
+							<div class="controls">
+								<select name="agentName">
+								{% for group in GroupNames %}
+								{{group.groupSn}}
+								{{message.group_sn}}
+									{% ifequal group.groupSn message.agent_sn %}
+									<option value="{{group.groupSn}}" selected>{{group.groupName}}</option>
+									{% else %}
+									<option value="{{group.groupSn}}">{{group.groupName}}</option>
+									{% endifequal %}
+								{% endfor %}
+								</select>
+							</div>
+					</div>
+					<input type="hidden" name="id" value="{{message.id}}" />
+					{% endfor %}
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

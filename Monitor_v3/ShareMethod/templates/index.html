@@ -1,0 +1,158 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<!-- container-fluid -->
+	<head>
+		<title>运维操作平台</title>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="static/css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="static/css/unicorn.main.css" />
+		<link rel="stylesheet" href="static/css/unicorn.grey.css" class="skin-color" />
+		<style type="text/css">
+			html,body{ height: 100%;}
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<h1><a href="index.html">运维操作平台</a></h1>		
+		</div>
+		<div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+                <li><a title="" href="#"><i class="icon icon-user"></i> <span class="text">{{username}}</span></a></li>
+                <li><a title="" href="logout"><i class="icon icon-share-alt"></i> <span class="text">退出</span></a></li>
+            </ul>
+        </div>
+            
+		<div id="sidebar">
+			<a href="#" class="visible-phone"><i class="icon icon-home"></i>预警菜单</a>
+			<ul>
+				<!-- <li><a href="NoticeInfo/select" target="mainframe"><i class="icon icon-exclamation-sign"></i> <span>首页</span></a></li> --!>
+                                <li class="submenu">
+                                <a href="#"><i class="icon icon-list-alt"></i>监控信息 <span class="label">&gt;&gt;</span></a>
+                                        <ul>
+                                                <li><a href="NoticeInfo/newreason_select.do" target="mainframe">告警展示</a></li>
+                                              <!--  <li><a href="NoticeInfo/newreason_select.do" target="mainframe">未处理</a></li>
+                                                <li><a href="NoticeInfo/select" target="mainframe">需跟进</a></li>
+                                                <li><a href="NoticeInfo/NIselect_Ignored_select" target="mainframe">忽略告警</a></li> --!>
+                                                <li><a href="NoticeInfo/notice_detail" target="mainframe">告警明细查询</a></li>
+						<li><a href="MonitorPort/select.do" target="mainframe"><span>TCP端口监控</span> </a></li>
+						<li><a href="Chart/alarm_statistics" target="mainframe">告警处理统计</a></li>
+					        <li><a href="Chart/chart" target="mainframe">告警统计展示</a></li>
+                                        </ul>
+                                </li>
+<!--                                <li class="submenu">
+                                        <a href="#"><i class="icon icon-list-alt"></i> <span>告警处理记录展示</span> <span class="label">&gt;&gt;</span></a>
+                                        <ul>
+                                                <li><a href="NoticeInfo/reason_select.do" target="mainframe">已处理记录</a></li>
+                                                <li><a href="NoticeInfo/recovered_select.do" target="mainframe">已恢复记录</a></li> 
+                                                <li><a href="NoticeInfo/notice_detail" target="mainframe">告警明细查询</a></li>
+                                        </ul>
+                                </li>
+
+				<li class="submenu">
+					<a href="#"><i class="icon icon-list-alt"></i> <span>监控命令管理</span> <span class="label">&gt;&gt;</span></a>
+					<ul>
+						<li><a href="MonitorInfo/select.do?monitor_type=0" target="mainframe">SQL语句</a></li>
+						<li><a href="MonitorInfo/select.do?monitor_type=1" target="mainframe">LINUX命令</a></li>
+					</ul>
+				</li> 
+			
+				<li><a href="ServerInfo/select.do" target="mainframe"><i class="icon icon-hdd"></i> <span>服务器管理</span></a></li>
+				<li class="submenu"><a href="#"><i class="icon icon-tasks"></i> <span>服务器监控管理</span> <span class="label">&gt;&gt;</span></a>
+					<ul>
+						<li><a href="ServerMonitorInfo/select.do?monitor_type=0" target="mainframe">sql语句监控</a></li>  
+						<li><a href="ServerMonitorInfo/select.do?monitor_type=1" target="mainframe">linux命令监控</a></li>    
+					</ul>
+				</li>
+				<li><a href="FailureNotification/select.do" target="mainframe"><i class="icon icon-warning-sign"></i> <span>故障通知</span></a></li>
+				<li><a href="MonitorPort/select.do" target="mainframe"><i class="icon icon-cog"></i> <span>TCP端口监控</span> </a></li>
+				<li><a href="HttpMonitor/select.do" target="mainframe"><i class="icon icon-cog"></i> <span>HTTP监控</span></a></li>
+				<li><a href="CheckTable/select.do" target="mainframe"><i class="icon icon-wrench"></i> <span>整理表管理</span></a></li>-->
+				
+			<!--	<li class="submenu"><a href="#"><i class="icon icon-user"></i> <span>通知用户管理</span> <span class="label">&gt;&gt;</span></a>
+					<ul>
+						<li><a href="UserGroup/select.do" target="mainframe">用户组管理</a></li>
+						<li><a href="UserInfo/select.do" target="mainframe">用户管理</a></li>
+					</ul>
+				</li>
+				<li class="submenu"><a href="#"><i class="icon icon-user"></i> <span>系统管理</span> <span class="label">&gt;&gt;</span></a> --!>
+				<li class="submenu"><a href="#"><i class="icon icon-user"></i>监控配置 <span class="label">&gt;&gt;</span></a>
+					<ul>
+                                                <li><a href="MonitorInfo/select.do?monitor_type=0" target="mainframe">监控命令管理</a></li>
+                                                <li><a href="ServerMonitorInfo/select.do?monitor_type=0" target="mainframe">服务器监控管理</a></li>
+<!--						<li><a href="AdminUser/select.do" target="mainframe">人员管理</a></li> --!>
+						<li><a href="CommentList/select.do" target="mainframe">监控分类管理</a></li>
+						<li><a href="ServerInfo/select.do" target="mainframe">服务器管理</a></li>
+                                                <li><a href="UserGroup/select.do" target="mainframe">用户组管理</a></li>
+                                                <li><a href="UserInfo/select.do" target="mainframe">用户管理</a></li>
+					<!--	<li><a href="ServerManager/room_select.do" target="mainframe">机房负责人</a></li> -->
+						<li><a href="ConfigInfo/select.do" target="mainframe">预警参数管理</a></li>
+                                                <li><a href="LogQuery/select.do" target="mainframe">操作日志</a></li>
+					<!--	<li><a href="ServerManager/serverinfomation" target="mainframe">网络监控管理</a></li> -->
+					</ul>
+				</li>
+		<!--		<li class="submenu"><a href="#"><i class="icon icon-user"></i> <span>统计分析</span> <span class="label">&gt;&gt;</span></a>
+					<ul>
+						<li><a href="Chart/chart" target="mainframe">图标展示</a></li>
+						<li><a href="Chart/alarm_statistics" target="mainframe">告警处理统计</a></li>
+					</ul>
+				</li>
+              --!>
+                                <li class="submenu">
+                                        <a href="#"><i class="icon icon-list-alt"></i>日志查询<span class="label">&gt;&gt;</span></a>
+                                        <ul>
+                                                        <li><a href="LogAnalysis/customerSubmit.do" target="mainframe">自有网关日志查询</a></li>
+                                                        <li><a href="CommandQuery/clusterSubmit.do" target="mainframe">集群日志查询</a></li>
+                                                        <li><a href="Smsweb/Smssubmit" target="mainframe">短信平台日志查询</a></li>
+                                                        <li><a href="LiuliangQuery/flowreceive" target="mainframe">流量提交日志</a></li>
+                                                        <li><a href="VoiceQuery/voicereceive" target="mainframe">语音提交日志</a></li>
+                                                        <li><a href="clusterlog/HttpLog" target="mainframe">集群日志</a></li>
+                                        </ul>
+                                </li>
+				<li><a href="DNSManage/select.do?type=0" target="mainframe"><i class="icon icon-file"></i>域名查询</a></li>
+				<li><a href="TableBackup/select.do" target="mainframe"><i class="icon icon-file"></i>表备份管理</a></li>
+                                <li class="submenu"><a href="#"><i class="icon icon-tasks"></i>31省测试平台 <span class="label">&gt;&gt;</span></a>
+                                        <ul>
+                                        <li class="active"><a href="PhoneCard/select_un.do" target="mainframe"> <span>手机卡查询</span></a></li>
+                                        <li><a href="OutBox/insert_un.do" target="mainframe">上行测试</span></a></li>
+                                        <li><a href="DeliverQuery/select_un.do" target="mainframe">上行回复结果</a></li>
+                                      <!--  <li><a href="DeliverQuery/select_auto_un.do" target="mainframe">上行表接收</a></li> --!>
+                                      <!--  <li><a href="SendQuery/select_auto_un.do" target="mainframe">状态报告表接收</a></li> --!>
+                                        <li><a href="SendQuery/select_un.do" target="mainframe">下发手机接收记录</a></li>
+	                                <li><a href="ServiceSmsInfo/insert_un.do" target="mainframe"> <span>下发测试</span></a></li>
+                                        <li><a href="AutoSendConfig/select.do" target="mainframe">下行线程控制</a></li>
+                                        <li><a href="AutoSendConfig/option.do" target="mainframe">配置文件查看修改</a></li>
+                                        </ul>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-list-alt"></i>网络ping监控 <span class="label">&gt;&gt;</span></a>
+					<ul>
+						<li><a href="Monitor_ping/ping_info" target="mainframe">网络分钟级监控</a></li>
+						<li><a href="Monitor_ping/server_info" target="mainframe">业务服务器管理</a></li>
+						<li><a href="Monitor_ping/replace_info" target="mainframe">不可ping地址处理</a></li>
+						<li><a href="Monitor_ping/site_info" target="mainframe">监测点管理</a></li>
+					</ul>
+				</li>
+				<li><a href="ServerManager/select.do?type=0" target="mainframe"><i class="icon icon-hdd"></i>运维工作分配</a></li>
+				<li><a href="dutytable/duty_table" target="mainframe"><i class="icon icon-hdd"></i>运维工作值班</a></li>
+				<li><a href="NoticeInfo/FailureNotification.do" target="mainframe"><i class="icon icon-file"></i>故障及升级通知</a></li>
+                                <li><a href="LogAnalysis/net_switch_mobile.do" target="mainframe"><i class="icon icon-list-alt"></i>携号转网号码查询</a></li>
+				<li><a href="Repository/select" target="mainframe"><i class="icon icon-list-alt"></i>知识列表</a></li>
+				<li><a class="sidebar-toggler tip-top" data-original-title="折叠" href="#"><i class="icon icon-step-backward"></i></a></li>
+			</ul>
+		</div>
+		
+		<div id="content">
+			<!--<iframe src="NoticeInfo/newreason_select.do" width="100%" height="100%" frameborder="0" name="mainframe" id="mainframe">			--!>
+			<iframe src="Chart/chart" width="100%" height="100%" frameborder="0" name="mainframe" id="mainframe">			
+			</iframe>
+		</div>
+
+            <script src="static/js/jquery.min.js"></script>
+            <script src="static/js/bootstrap.min.js"></script>
+            <script src="static/js/unicorn.js"></script>
+            <script type="text/javascript">	
+				
+			</script>
+	</body>
+</html>

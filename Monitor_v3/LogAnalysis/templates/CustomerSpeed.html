@@ -1,0 +1,52 @@
+{% extends "table6.html" %}
+{% block title %}网关客户提交速度查询{% endblock %}
+{% block title1 %}客户提交速度查询{% endblock %}
+{% block href %}
+                            <li><a href="customerSubmit.do"> 提交记录</a></li>
+                            <li class='active'><a href="customerSpeed.do">提交速度</a></li>
+                            <li><a href="tdSend.do">通道发送速度</a></li>
+                            <li><a href="request_ip">交互ip</a></li>
+{% endblock %}
+{% block form %}
+	<form action="customerSpeed.do" method="post" class="form-inline" name="formID" id="formID"  />
+					服务器：<select id="server" name="server" class="validate[required]">
+								{% for server1 in server_list %}
+									{% ifequal server1.ip server %}
+									<option value="{{server1.ip}}" selected>{{server1.server_name}}</option>
+									{% else %}
+									<option value="{{server1.ip}}">{{server1.server_name}}</option>
+									{% endifequal %}
+								{% endfor %}
+							</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;查询选项：<select id="search" name="search" class="validate[required]">
+															{% if search == "nowtype" %}
+															<option value="nowtype" selected>当前实时提交速度</option>
+															<option value="lasttype">全天速度top20</option>
+															{%else%}
+															<option value="lasttype" selected>全天速度top20</option>
+															<option value="nowtype">当前实时提交速度</option>
+															{%endif%}
+														</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;业务代码:<input type="text" name="user_sp_number" id="user_sp_number" value="{{user_sp_number}}" placeholder="客户业务代码" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;统计时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+											<th nowrap="nowrap">客户提交速度展示&nbsp;&nbsp;&nbsp;&nbsp;(第一列为客户每秒提交数量，第二列为时间，单位为秒)</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

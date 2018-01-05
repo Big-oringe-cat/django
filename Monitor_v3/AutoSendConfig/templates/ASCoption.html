@@ -1,0 +1,42 @@
+{% extends "form.html" %}
+{% block title %}31省自动下发配置{% endblock %}
+{% block title1 %}deliver.properties文件配置{% endblock %}
+{% block form %}
+                                        <form  action="option.do" method="post" class="form-horizontal"  id="formID" content="text/html;charset=UTF-8"″>
+
+					<div class="control-group">
+								<label class="control-label">说明：</label>
+								<div class="controls">
+								deliver.properties配置文件修改
+								</div>
+					</div>
+
+                                        <div class="control-group">
+                                                                <label class="control-label">表名</label>
+                                                                <div class="controls">
+                                                                <input  id="table_name" name="table_name" value="deliver_sms_info" readonly=true/>
+                                                                </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                                                <label class="control-label">下发接入号</label>
+                                                                <div class="controls">
+                                                                <input  id="sp_number" name="sp_number"  value="{{sp_number}}"  style="overflow:auto"/> &nbsp  ** sp_number的多个用英文逗号隔开
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">通道代码</label>
+                                                                <div class="controls">
+                                                                <input  id="yw_code" name="yw_code" value="{{yw_code}}" style="overflow:auto"/> &nbsp  **yw_code的多个用英文逗号隔开
+                                                                </div>
+                                        </div>
+                                        <div class="control-group">
+                                                                <label class="control-label">下发信息</label>
+                                                                <div class="controls">
+								<textarea cols=10 rows=5 id="msg_content" name="msg_content" style="overflow:auto">{{msg_content}}</textarea>&nbsp  **msg_content的多个用#隔开 
+                                                                </div>
+                                        <div class="form-actions">
+                                                                <button type="submit" class="btn btn-primary" >修改</button>
+                                        </div>
+                                        </form>
+{% endblock %}

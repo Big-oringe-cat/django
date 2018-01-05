@@ -1,0 +1,46 @@
+{% extends "table5.html" %}
+{% block title %}手机上行情况查询（outbox/sendedoutbox/badoutbox）{% endblock %}
+{% block href %}
+
+                            <li><a href="select_cm.do">移动</a></li>
+                            <li class="active"><a href="select_un.do">联通</a></li>
+{% endblock %}
+
+{% block form %}
+	<form action="select_un.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="Sender">手机号码</option>
+										<option value="ReceiverMobileNo">接入号</option>
+										<option value="Msg">内容</option>
+					</select>
+					 起止时间：<input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker" name="startTime"/> - <input type="text" data-date-format="yyyy-mm-dd" value="" class="datepicker"  name ="endTime"/>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>接入号</th>
+											<th>手机号码</th>
+											<th>上行内容</th>
+											<th>上行时间</th>
+											<th>状态</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for deliver in table_list %}
+										<tr>
+											<td>{{deliver.id}}</td>
+											<td>{{deliver.ReceiverMobileNo}}</td>
+											<td>{{deliver.Sender}}</td>
+											<td>{{deliver.Msg}}</td>
+											<td>{{deliver.SendTime|date:"Y-m-d H:i:s"}}</td>
+											<td>{{deliver.status}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "table2.html" %}
+{% block title %}语音客户提交记录查询{% endblock %}
+{% block title1 %}语音提交记录查询{% endblock %}
+{% block form %}
+	<form action="voicereceive" method="post" class="form-inline" name="formID" id="formID"  />
+					&nbsp;&nbsp;&nbsp;&nbsp;提交号码：<input type="text" name="mobile" id="mobile" value="{{mobile}}" placeholder="手机号码" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;提交时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th nowrap="nowrap">序号</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td  style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

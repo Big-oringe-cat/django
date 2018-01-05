@@ -1,0 +1,22 @@
+{% extends "form.html" %}
+{% block title %}监控命令配置{% endblock %}
+{% block title1 %}参照已有服务器的监控进行配置{% endblock %}
+{% block form %}
+					<form  action="CommandConfig.do" method="post" class="form-horizontal"  id="formID">
+					
+					<div class="control-group">
+								<label class="control-label">请选择要参照的服务器</label>
+								<div class="controls">
+									<select id="serverName" name="serverName" class="validate[required]"> 
+										{% for server in serverNames %}
+										<option value="{{server.serverSn}}">{{server.serverName}}</option>
+										{% endfor %}
+									</select>
+								</div>
+					</div>
+    				<div class="form-actions">
+								<button type="submit" class="btn btn-primary" >保存</button>
+					</div>
+					</form>	
+				  	
+{% endblock %}

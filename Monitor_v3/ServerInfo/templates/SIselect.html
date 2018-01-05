@@ -1,0 +1,48 @@
+{% extends "table.html" %}
+{% block title %}服务器管理{% endblock %}
+{% block title1 %}服务器信息{% endblock %}
+{% block form %}
+	<form action="select.do" method="post" class="form-inline" />
+					<select name="search">
+										<option value="server_name">服务器名称</option>
+										<option value="server_room">机房名称</option>
+										<option value="ip">IP地址</option>
+										<option value="db_name">数据库名</option>
+									</select>
+					<input type="text" name="value" placeholder="查询关键词"/>
+					<input type="submit" class="btn"  value="查询" />
+					<a class="btn" href="insert.do" >添加服务器</a>
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>ID</th>
+											<th>IP</th>
+											<th>数据库名</th>
+											<th>服务器名称</th>
+											<th>所在机房</th>
+											<th>状态</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for server in table_list %}
+										<tr>
+											<td>{{server.id}}</td>
+											<td>{{server.ip}}</td>
+											<td>{{server.db_name}}</td>
+											<td>{{server.server_name}}</td>
+											<td style="color:purple;">{{server.server_room}}</td>
+											{% if server.status == 0 %}
+											<td>开启</td>
+											{% else %}
+											<td style="color:red;">关闭</td>
+											{% endif %}
+											<td><a href="update?id={{server.id}}">修改</a></td>
+										</tr>
+										{% endfor %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "table.html" %}
+{% block title %}服务器网络监控信息{% endblock %}
+{% block title1 %}服务器网络监控信息{% endblock %}
+{% block form %}
+
+</script>
+	<form action="" method="post" class="form-inline" name="formID" id="formID" />
+					服务器：<select id="server" name="server" class="validate[required]">
+								{% for server1 in server_list %}
+									{% ifequal server1.ip server %}
+									<option value="{{server1.ip}}" selected>{{server1.server_name}}</option>
+									{% else %}
+									<option value="{{server1.ip}}">{{server1.server_name}}</option>
+									{% endifequal %}
+								{% endfor %}
+					</select>
+					<input type="submit"  class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th>监控IP</th>
+											<th>监控类型</th>
+											<th>描述</th>
+											<th>操作</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for comment in table_list %}
+										<tr>
+											<td>{{comment.sn}}</td>
+											<td>{{comment.ip}}</td>
+											<td>{{comment.operator}}</td>
+											<td>{{comment.comment}}</td>
+											<td><a href="update?id={{comment.id}}">修改</a>&nbsp;&nbsp;<a href="delete?id={{comment.id}}">删除</a></td>
+										</tr>
+										{% endfor %}
+										
+{% endblock %}

@@ -1,0 +1,20 @@
+from django.conf.urls import patterns, include, url
+
+urlpatterns = patterns('',
+    url(r'^ping_info', 'Monitor_ping.views.ping_info'),
+    url(r'^ping_insert', 'Monitor_ping.views.ping_insert'),
+    url(r'^ping_delete', 'Monitor_ping.views.ping_delete'),
+    url(r'^ping_update', 'Monitor_ping.views.ping_update'),
+    url(r'^server_info', 'Monitor_ping.views.server_info'),
+    url(r'^server_insert', 'Monitor_ping.views.server_insert'),
+    url(r'^server_delete', 'Monitor_ping.views.server_delete'),
+    url(r'^server_update', 'Monitor_ping.views.server_update'),
+    url(r'^replace_info', 'Monitor_ping.views.replace_info'),
+    url(r'^replace_insert', 'Monitor_ping.views.replace_insert'),
+    url(r'^replace_delete', 'Monitor_ping.views.replace_delete'),
+    url(r'^replace_update', 'Monitor_ping.views.replace_update'),
+    url(r'^site_info', 'Monitor_ping.views.site_info'),
+    url(r'^site_insert', 'Monitor_ping.views.site_insert'),
+    url(r'^site_delete', 'Monitor_ping.views.site_delete'),
+    url(r'^site_update', 'Monitor_ping.views.site_update'),
+)

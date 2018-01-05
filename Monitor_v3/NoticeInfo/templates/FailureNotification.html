@@ -1,0 +1,73 @@
+{% extends "form.html" %}
+
+{% block title %}故障及升级切换通知{% endblock %}
+
+{% block title1 %}通知信息填写{% endblock %}
+
+{% block form %}
+					
+					<form action="FailureNotification.do" method="post" class="form-horizontal" id="formID"/>
+
+							<div class="control-group">
+							    <label class="control-label">通知分类：</label>
+							    <div class="controls">
+									<select name="notice_type">
+	                                <option value="请选择">---请选择---</option> 
+	                                <option value="机房网络故障">机房网络故障</option> 
+	                                <option value="运营商网络故障">运营商网络故障</option	> 
+	                                <option value="公司业务网络升级">公司业务网络升级</option> 
+	                                </select> 
+							  	</div>	
+							 </div>
+							<div class="control-group">
+								<label class="control-label">影响服务器：</label>
+								<div class="controls">
+									<input type="text" id="servers" name="servers" placeholder="如：cmpp_75,cmpp_80等" class="validate[required]"/>
+								</div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label">内部通知内容：</label>
+							    <div class="controls">
+									<textarea type="text" id="content_owner" name="content_owner" class="validate[required]"></textarea>
+							  	</div>
+							 </div>
+							<div class="control-group">
+							    <label class="control-label">告知客户解释原因建议：</label>
+							    <div class="controls">
+									<textarea type="text" id="content_user" name="content_user" class="validate[required]"></textarea>
+							  	</div>
+							 </div>
+							
+							<div class="control-group">
+								<label class="control-label">开始时间：</label>
+								<div class="controls">
+								<input  id="startTime"  name="startTime" class="validate[required]"/>(年-月-日  时:分)
+								</div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label">影响时间 ：</label>
+							    <div class="controls">
+							<input type="text"  name="time" />(自定义时间) 
+							  </div>
+							<div class="control-group">
+								<label class="control-label" >通知方式：</label>
+								<div class="controls radio-group">
+									<!--  <label class="inline"><input id="check_box_list2" type="radio" name="check_box_list" value="phone" class="validate[required]"/> 电话</label>  -->
+									<label class="inline"><input id="check_box_list3" type="radio" name="check_box_list" value="email" class="validate[required]"/> 邮件(全体销售和客服及技术部相关人)</label>
+									<label class="inline"><input id="check_box_list3" type="radio" name="check_box_list" value="email_yunwei" class="validate[required]"/> 邮件(运维组测试)</label>
+									<label class="inline"><input id="check_box_list4" type="radio" name="check_box_list" value="screen" class="validate[required]"/> 弹屏(全体客服)</label>
+									<label class="inline"><input  id="check_box_list1" type="radio" name="check_box_list"  value="sms_kf" class="validate[required]"/> 短信(全体客服)</label>
+									<label class="inline"><input  id="check_box_list2" type="radio" name="check_box_list"  value="sms_xs" class="validate[required]"/> 短信(全体销售)</label>
+									<label class="inline"><input  id="check_box_list5" type="radio" name="check_box_list"  value="email_jishu" class="validate[required]"/> 邮件(全体技术部)</label>
+								</div>
+							</div>
+
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">发送</button>
+								
+							</div>
+
+					</form>
+					
+
+{% endblock %}

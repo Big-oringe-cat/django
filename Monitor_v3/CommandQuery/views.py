@@ -560,3 +560,119 @@ def request_ip(req):
         return render_to_response("request_ip.html",locals())
     else:
         return render_to_response('request_ip.html',locals())
+
+def td_speed(req):
+    if req.method == 'POST':
+        type = req.REQUEST.get('type','cluster_64')
+        pro = req.REQUEST.get('pro','http')
+        user_id = req.REQUEST.get('user_id','')
+        if pro == 'http':
+            command="grep -a '"+user_id+"' /hskj/logs/httpPostLog.log |awk -F[\;:]+ '{print $6}'|sort|uniq"
+        elif pro == 'cmpp':
+            command="grep -a '"+user_id+"' /hskj/logs/cmpp_info.log |grep -a 'submitResp'|awk -F[' ':]+ '{print $(NF-3)}'|sort|uniq"
+        elif pro == 'sgip':
+            command="grep -a '"+user_id+"' /hskj/logs/sgip_info.log |grep -a 'return_code'|awk  '{print $9}'|sort|uniq"
+        else:
+            command="grep -a '"+user_id+"' /hskj/logs/smgp_info.log |grep -a 'return_code'|awk  '{print $9}'|sort|uniq"
+        username = 'bjywb'
+        pkey_file='/home/bjywb/.ssh/hskj_20130620_bjywb'
+        table_list = []
+        server_list ={}
+        if type == "cluster_64":
+            server_list = {"c1_56":["210.14.134.81",10056],"c1_57":["210.14.134.81",10057],"c1_58":["210.14.134.81",10058]}
+            for line in server_list.values():
+                    server = line[0]
+                    port = line[1]
+                    if port == 10056:
+                        server_ip = "172.16.10.56"
+                    if port == 10057:
+                        server_ip = "172.16.10.57"
+                    if port == 10058:
+                        server_ip = "172.16.10.58"
+                    s = paramiko.SSHClient()
+                    s.load_system_host_keys()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'&U*I(O1208')
+                    s.connect(server,port,username,pkey=key,timeout=10)
+                    stdin,stdout,stderr = s.exec_command(command)
+                    for result in stdout.readlines():
+                        table_list.append({'server':server_ip,'content':result})
+        if type == "cluster_227":
+            server_list = {"c2_24":["202.108.253.227",10024],"c2_25":["202.108.253.227",10025],"c2_33":["202.108.253.227",10033],"c2_34":["202.108.253.227",10034]}
+            for line in server_list.values():
+                    server = line[0]
+                    port = line[1]
+                    if port == 10024:
+                        server_ip = "172.17.90.24"
+                    if port == 10025:
+                        server_ip = "172.17.90.25"
+                    if port == 10033:
+                        server_ip = "172.17.90.33"
+                    if port == 10034:
+                        server_ip = "172.17.90.34"
+                    s = paramiko.SSHClient()
+                    s.load_system_host_keys()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'&U*I(O1208')
+                    s.connect(server,port,username,pkey=key,timeout=10)
+                    stdin,stdout,stderr = s.exec_command(command)
+                    for result in stdout.readlines():
+                        table_list.append({'server':server_ip,'content':result})
+        if type == "cluster_35":
+            server_list = {"c3_61":["36.110.168.35",10061],"c3_62":["36.110.168.35",10062],"c3_63":["36.110.168.35",10063]}
+            for line in server_list.values():
+                    server = line[0]
+                    port = line[1]
+                    if port == 10061:
+                        server_ip = "172.17.130.61"
+                    if port == 10062:
+                        server_ip = "172.17.130.62"
+                    if port == 10063:
+                        server_ip = "172.17.130.63"
+                    s = paramiko.SSHClient()
+                    s.load_system_host_keys()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'&U*I(O1208')
+                    s.connect(server,port,username,pkey=key,timeout=10)
+                    stdin,stdout,stderr = s.exec_command(command)
+                    for result in stdout.readlines():
+                        table_list.append({'server':server_ip,'content':result})
+        if type == "cluster_226":
+            server_list = {"c4_61":["111.13.124.226",10061],"c4_62":["111.13.124.226",10062],"c4_63":["111.13.124.226",10063]}
+            for line in server_list.values():
+                    server = line[0]
+                    port = line[1]
+                    if port == 10061:
+                        server_ip = "172.17.140.61"
+                    if port == 10062:
+                        server_ip = "172.17.140.62"
+                    if port == 10063:
+                        server_ip = "172.17.140.63"
+                    s = paramiko.SSHClient()
+                    s.load_system_host_keys()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'&U*I(O1208')
+                    s.connect(server,port,username,pkey=key,timeout=10)
+                    stdin,stdout,stderr = s.exec_command(command)
+                    for result in stdout.readlines():
+                        table_list.append({'server':server_ip,'content':result})
+        if type == "cluster_21":
+            server_list = {"c5_61":["222.73.121.21",10061],"c5_62":["222.73.121.21",10062]}
+            for line in server_list.values():
+                    server = line[0]
+                    port = line[1]
+                    if port == 10061:
+                        server_ip = "172.17.30.61"
+                    if port == 10062:
+                        server_ip = "172.17.30.62"
+                    s = paramiko.SSHClient()
+                    s.load_system_host_keys()
+                    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'&U*I(O1208')
+                    s.connect(server,port,username,pkey=key,timeout=10)
+                    stdin,stdout,stderr = s.exec_command(command)
+                    for result in stdout.readlines():
+                        table_list.append({'server':server_ip,'content':result})
+        return render_to_response("td_speed.html",locals())
+    else:
+        return render_to_response('td_speed.html',locals())

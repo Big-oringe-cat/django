@@ -105,10 +105,10 @@ DATABASES = {
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'monitor_ping',
-        'USER': 'yunwei',
-        'PASSWORD': 'mobile707',
-        'HOST': '',
-        'PORT': '',
+        'USER': 'root',
+        'PASSWORD': '666666',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -135,11 +135,11 @@ STATIC_URL='/media/'
 
 STATIC_ROOT = 'static'
 
-if socket.gethostname() == 'alarm-kvm.zhaowei':
-    STATIC_PATH='/hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/static'
+if socket.gethostname() == 'cat.com':
+    STATIC_PATH='/workspace/monitor/Monitor_v3/static'
 
     TEMPLATE_DIRS = (
-                 '/hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/ShareMethod/templates',
+                 '/workspace/monitor/Monitor_v3/ShareMethod/templates',
                  )
 
 else:

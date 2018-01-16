@@ -7,12 +7,8 @@ import pymysql
 import logging
 import socket
 
-if  socket.gethostname() == 'alarm-kvm.zhaowei':
-    filename_info="/hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/info.log"
-    filename_error="/hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/error.log"
-else:
-    filename_info="E:\workspace\Monitor_v3_doc\Monitor_v3\info.log"
-    filename_error="E:\workspace\Monitor_v3_dco\Monitor_v3\error.log"
+filename_info="/workspace/monitor/Monitor_v3/info.log"
+filename_error="/workspace/monitor/Monitor_v3/error.log"
    
 def InfoLog(message):
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -28,10 +24,10 @@ def ErrorLog(message):
     logging.error(message)
     
 def connDB():
-    if socket.gethostname() == 'alarm-kvm.zhaowei':
-        conn=  pymysql.connect(host='172.17.140.9',port=3306,user='notice_plate',passwd='hskj&U*I(O1207',db='monitor_v3',charset='utf8')
+    if socket.gethostname() == 'cat.com':
+        conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='666666',db='monitor_v3',charset='utf8')
     else:
-        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='monitor_server',charset='utf8')
+        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='monitor_server',charset='utf8')
     try:
         conn.ping()
     except:
@@ -40,58 +36,58 @@ def connDB():
     cur = conn.cursor()
     return (conn,cur)
 def connDB_12():
-    conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='z1f7r3',db='monitor',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='666666',db='monitor',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_13():
-    conn=  pymysql.connect(host='192.168.130.11',port=3306,user='root',passwd='z1f7r3',db='duty',charset='utf8')
+    conn=  pymysql.connect(host='192.168.130.11',port=3306,user='root',passwd='666666',db='duty',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_14():
-    conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='z1f7r3',db='monitor_ping',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='666666',db='monitor_ping',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 
 def connDB1():
-    if socket.gethostname() == 'alarm-kvm.zhaowei':
-        conn=  pymysql.connect(host='172.17.140.9',port=3306,user='notice_plate',passwd='hskj&U*I(O1207',db='super_plate',charset='utf8')
+    if socket.gethostname() == 'cat.com':
+        conn=  pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='666666',db='super_plate_gate',charset='utf8')
     else:
-        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='monitor_server',charset='utf8')
+        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='monitor_server',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB2():
-    if socket.gethostname() == 'alarm-kvm.zhaowei':
-        conn=  pymysql.connect(host='172.17.140.9',port=3306,user='notice_plate',passwd='hskj&U*I(O1207',db='remote_bak_server',charset='utf8')
+    if socket.gethostname() == 'cat.com':
+        conn=  pymysql.connect(host='172.17.140.9',port=3306,user='root',passwd='666666',db='remote_bak_server',charset='utf8')
     else:
-        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='monitor_server',charset='utf8')
+        conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='monitor_server',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_cm():
-    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='provinces_test_cm',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='provinces_test_cm',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_un():
-    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='provinces_test_un',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='provinces_test_un',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_cdma():
-    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='spcard',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='spcard',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 #def connDB_cdma1():
-#    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='provinces_test_cdma1',charset='utf8')
+#    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='provinces_test_cdma1',charset='utf8')
 #    cur = conn.cursor()
 #    return (conn,cur)
 def connDB_auto():
-    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='sms_server',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='sms_server',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_yw(server,dbname,port):
-    conn=  pymysql.connect(host=server,port=port,user='remote_query',passwd='20141024',db=dbname,charset='utf8')
+    conn=  pymysql.connect(host=server,port=port,user='root',passwd='666666',db=dbname,charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 def connDB_RS():
-    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='z1f7r3',db='repository',charset='utf8')
+    conn=  pymysql.connect(host='127.0.0.1',user='root',passwd='666666',db='repository',charset='utf8')
     cur = conn.cursor()
     return (conn,cur)
 

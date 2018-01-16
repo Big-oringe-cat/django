@@ -5,7 +5,8 @@
                             <li class="active"><a href="clusterSubmit.do">提交记录</a></li>
                             <li><a href="clusterSpeed.do">提交速度</a></li>
                             <li><a href="clusterSend.do">发送记录</a></li>
-			    <li><a href="request_ip">交互ip</a></li>
+			    <li><a href="request_ip">交互ip</a></li> 
+			    <li><a href="td_speed.do">通道发送速度</a></li> 
 {% endblock %}
 {% block form %}
 	<form action="clusterSubmit.do" method="post" class="form-inline" name="formID" id="formID"/>
@@ -16,30 +17,42 @@
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_21">cluster_local</option>
 										{% elif type == "cluster_226" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226" selected>cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_21">cluster_local</option>
 										{% elif type == "cluster_35" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35" selected>cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_21">cluster_local</option>
 										{% elif type == "cluster_21" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35" s>cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21" selected>cluster_21</option>
+										<option value="cluster_21">cluster_local</option>
+										{% elif type == "cluster_local" %}
+                                                                                <option value="cluster_64">cluster_64</option>
+                                                                                <option value="cluster_227">cluster_227</option>
+                                                                                <option value="cluster_35" s>cluster_35</option>
+                                                                                <option value="cluster_226">cluster_226</option>
+										<option value="cluster_21">cluster_21</option>
+                                                                                <option value="cluster_local" selected>cluster_local</option>
 										{% else %}
 										<option value="cluster_64" selected>cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_21">cluster_local</option>
 										{% endif %}
 									</select>
 					&nbsp;&nbsp;第一个关键字:<input type="text" name="search1" id="search"  value="{{search1}}" placeholder="如：手机号码/账号等" class="validate[required]"/>

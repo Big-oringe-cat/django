@@ -1,0 +1,84 @@
+{% extends "table2.html" %}
+{% block title %}集群客户提交速度查询{% endblock %}
+{% block title1 %}客户提交速度查询{% endblock %}
+{% block form %}
+{{command}}
+	<form action="clusterSpeed.do" method="post" class="form-inline" name="formID" id="formID"/>
+					服务器：<select name="type">
+											{% if type == "cluster_227" %}
+												<option value="cluster_227" selected>cluster_227</option>
+												<option value="cluster_64">cluster_64</option>
+												<option value="cluster_35">cluster_35</option>
+												<option value="cluster_226">cluster_226</option>
+											{% elif type == "cluster_64" %}
+												<option value="cluster_64" selected>cluster_64</option>
+												<option value="cluster_227">cluster_227</option>
+												<option value="cluster_35">cluster_35</option>
+												<option value="cluster_226">cluster_226</option>
+											{% elif type == "cluster_35" %}
+												<option value="cluster_35" selected>cluster_35</option>
+												<option value="cluster_227">cluster_227</option>
+												<option value="cluster_64">cluster_64</option>
+												<option value="cluster_226">cluster_226</option>
+											{% else %}
+												<option value="cluster_226" selected>cluster_226</option>
+												<option value="cluster_64">cluster_64</option>
+												<option value="cluster_35">cluster_35</option>
+												<option value="cluster_227">cluster_227</option>
+											{% endif %}
+							</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;查询选项：<select id="search1" name="search1" class="validate[required]">
+															{% if search1 == "nowtype" %}
+															<option value="nowtype" selected>当前实时提交速度</option>
+															<option value="lasttype">全天速度top20</option>
+															{%else%}
+															<option value="lasttype" selected>全天提交速度top20</option>
+															<option value="nowtype">当前实时提交速度</option>
+															{%endif%}
+														</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;客户协议类型：<select id="search2" name="search2" class="validate[required]">
+															{% if search2 == "cmpp" %}
+															<option value="cmpp" selected>cmpp协议</option>
+															<option value="http">http协议</option>
+															<option value="sgip">sgip协议</option>
+															<option value="smgp">smgp协议</option>
+															{% elif search2 == "sgip" %}
+															<option value="cmpp">cmpp协议</option>
+															<option value="http">http协议</option>
+															<option value="sgip" selected>sgip协议</option>
+															<option value="smgp">smgp协议</option>
+															{% elif search2 == "smgp" %}
+															<option value="cmpp" >cmpp协议</option>
+															<option value="http">http协议</option>
+															<option value="sgip">sgip协议</option>
+															<option value="smgp" selected>smgp协议</option>
+															{%else%}
+															<option value="http" selected>http协议</option>
+															<option value="cmpp">cmpp协议</option>
+															<option value="sgip">sgip协议</option>
+															<option value="smgp">smgp协议</option>
+															{%endif%}
+														</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;账号ID:<input type="text" name="user_id" id="user_id" value="{{user_id}}" placeholder="账号ID" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;统计时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn"  value="查询" />
+ 	</form>	
+				
+{% endblock %}
+
+							
+{% block thread %}
+										<tr>
+											<th>序号</th>
+											<th nowrap="nowrap">【由于http协议一次性可以最多提交200个号码，http协议的查询只是每秒的提交请求频率，不完全是每秒的提交号码数，针对一次只提交一个号码的客户，请求频率数等于提交号码数。】&nbsp;&nbsp;&nbsp;&nbsp;(第一列为客户每秒提交数量，第二列为时间，单位为秒)</th>
+										</tr>
+{% endblock %}
+
+{% block tbody %}
+										{% for message in table_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{message.content}}</td>
+										</tr>
+										{% endfor %}
+{% endblock %}

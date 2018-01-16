@@ -18,12 +18,14 @@ def GateLog(req,command,html,server,port):
         user_sp_number = req.REQUEST.get('user_sp_number','0')
         td_code = req.REQUEST.get('td_code','0')
         search = req.REQUEST.get('search','0')
-        username = 'bjywb'
-        pkey_file='/home/bjywb/.ssh/hskj_20130620_bjywb'
+        ##username = 'bjywb'
+        username = 'root'
+        ##pkey_file='/home/bjywb/.ssh/hskj_20130620_bjywb'
+        pkey_file='/root/.ssh/id_rsa'
         s = paramiko.SSHClient()
         s.load_system_host_keys()
         s.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-        key = paramiko.RSAKey.from_private_key_file(pkey_file,"&U*I(O1208")
+        key = paramiko.RSAKey.from_private_key_file(pkey_file,"666666")
         s.connect(server,port,username,pkey=key,timeout=10)
         stdin,stdout,stderr = s.exec_command(command)
         #cmd_result = stdout.read(),stderr.read()
@@ -41,7 +43,7 @@ def GateLog(req,command,html,server,port):
             if serverlist.get("ip") == server:
                 serverName = serverlist.get("server_name")
         if 'cmpp' in serverName:
-            dbname = "cmpp_server"
+            dbname = "cluster_server"
         if 'smgp' in serverName:
             dbname = "smgp_server_new"
         if 'sgip' in serverName:

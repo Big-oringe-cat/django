@@ -9,7 +9,8 @@
 			    <li class="active"><a href="td_speed.do">通道发送速度</a></li> 
 {% endblock %}
 {% block form %}
-	<form action="clusterSubmit.do" method="post" class="form-inline" name="formID" id="formID"/>
+	<form action="td_speed.do" method="post" class="form-inline" name="formID" id="formID"/>
+
 									服务器：<select name="type">
 										{% if type == "cluster_227" %}
 										<option value="cluster_64">cluster_64</option>
@@ -17,34 +18,54 @@
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_local">cluster_local</option>
 										{% elif type == "cluster_226" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226" selected>cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_local">cluster_local</option>
 										{% elif type == "cluster_35" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35" selected>cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_local">cluster_local</option>
 										{% elif type == "cluster_21" %}
 										<option value="cluster_64">cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
-										<option value="cluster_35" s>cluster_35</option>
+										<option value="cluster_35" >cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21" selected>cluster_21</option>
+										<option value="cluster_local">cluster_local</option>
+										{% elif type == "cluster_local" %}
+                                                                                <option value="cluster_64">cluster_64</option>
+                                                                                <option value="cluster_227">cluster_227</option>
+                                                                                <option value="cluster_35" >cluster_35</option>
+                                                                                <option value="cluster_226">cluster_226</option>
+                                                                                <option value="cluster_21" >cluster_21</option>
+                                                                                <option value="cluster_local" selected>cluster_local</option>
 										{% else %}
 										<option value="cluster_64" selected>cluster_64</option>
 										<option value="cluster_227">cluster_227</option>
 										<option value="cluster_35">cluster_35</option>
 										<option value="cluster_226">cluster_226</option>
 										<option value="cluster_21">cluster_21</option>
+										<option value="cluster_local">cluster_local</option>
 										{% endif %}
 									</select>
-					&nbsp;&nbsp;第一个关键字:<input type="text" name="search1" id="search"  value="{{search1}}" placeholder="如：手机号码/账号等" class="validate[required]"/>
-					&nbsp;&nbsp;第二个关键字:<input type="text" name="search2" id="search"  value="{{search2}}" placeholder="包含第一个关键字行的其他字符"/>
+									&nbsp;&nbsp;&nbsp;&nbsp;查询选项：<select id="search" name="search" class="validate[required]">
+                                                                                                                        {% if search == "nowtype" %}
+                                                                                                                        <option value="lasttype">全天发送速度top20</option>
+                                                                                                                        <option value="nowtype" selected>当前实时发送速度</option>
+                                                                                                                        {%else%}
+                                                                                                                        <option value="nowtype">当前实时发送速度</option>
+                                                                                                                        <option value="lasttype" selected>全天发送速度top20</option>
+                                                                                                                        {%endif%}
+                                                                                                          </select>
+					&nbsp;&nbsp;通道代码:<input type="text" name="td_code" id="td_code"  value="{{td_code}}" placeholder="通道代码" class="validate[required]"/>
 					&nbsp;&nbsp;查询时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>&nbsp;时：<select name="hour"  style="width:70px"> 
 					<option value=""></option>      				
 					<option value="01">01</option> 
@@ -86,8 +107,8 @@
 {% block thread %}
 										<tr>
 											<th nowrap="nowrap">序号</th>
-											<th nowrap="nowrap">服务器IP</th>
-											<th nowrap="nowrap">查询结果</th>
+											<th nowrap="nowrap">发送端ip</th>
+                                                                                        <th nowrap="nowrap">通道实际发送速度展示&nbsp;&nbsp;&nbsp;&nbsp;(第一列为通道每秒发送数量，第二列为时间，单位为>秒)</th>
 										</tr>
 {% endblock %}
 
@@ -95,8 +116,8 @@
 										{% for message in table_list %}
 										<tr>
 											<td>{{ forloop.counter }}</td>
-											<td>{{message.server}}</td>
-											<td  style="word-break:break-all; word-wrap: break-word">{{message.content|safe}}</td>
+											<td>{{ message.sender }}</td>
+                                                                                        <td style="word-break:break-all; word-wrap: break-word">{{message.content}}</td>
 										</tr>
 										{% endfor %}
 {% endblock %}

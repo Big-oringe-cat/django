@@ -587,7 +587,7 @@ def td_speed(req):
     if req.method == 'POST':
         NowTime = time.strftime('%Y-%m-%d %H:%M:%S')
         td_code = req.REQUEST.get('td_code','0')
-        search2 = req.REQUEST.get('search2','0')
+        ##search2 = req.REQUEST.get('search2','0')
         hour = req.REQUEST.get('hour','')
         type = req.REQUEST.get('type','cluster_local')
         nowDate = time.strftime('%Y-%m-%d')
@@ -613,7 +613,7 @@ def td_speed(req):
                 logName_sgip = "/hskj/logs/sgip_info.log."+startTime
                 logName_smgp = "/hskj/logs/smgp_info.log."+startTime
         ##command = "grep -a  '"+search1+"' "+logName_http+" "+logName_cmpp+" "+logName_sgip+" "+logName_smgp+"|grep -a '"+startTime+" "+hour+"' | grep -a '"+search2+"'|grep -v -a '\-\-'|grep -v 'send test'|grep -v 'receive test'|grep -v 'report'"
-        command = "for i in {"+logName_http+","+logName_cmpp+","+logName_sgip+","+logName_smgp+"};do tail -10000 $i;done | grep -a 'yw_code: "+td_code+"' |grep -a '"+nowDate+" "+hour+"'| grep -a \"waitSubmitRespMap\" | awk -F \",\" '{print $1}' | sort | uniq -c "
+        command = "for i in {"+logName_http+","+logName_cmpp+","+logName_sgip+","+logName_smgp+"};do tail -10000 $i;done | grep -a 'yw_code: "+td_code+"' |grep -a '"+startTime+" "+hour+"'| grep -a \"waitSubmitRespMap\" | awk -F \",\" '{print $1}' | sort | uniq -c|sort -k1 -nr | head -20 "
         username = 'root'
         pkey_file='/root/.ssh/id_rsa'
         table_list = []
@@ -637,8 +637,8 @@ def td_speed(req):
                     for result in stdout.readlines():
                         ##result=re.sub(td_code,'<strong style="color:red;">'+td_code+'</strong>',result)
                         result=re.sub(td_code,'',result)
-                        if search2 != "":
-                            result=re.sub(search2,''+search2+'',result)
+                        ##if search2 != "":
+                        ##    result=re.sub(search2,''+search2+'',result)
                         result=re.sub('return','',result)
                         table_list.append({'server':server_ip,'content':result,'sender':sender_code})
         NowTime = time.strftime('%Y-%m-%d %H:%M:%S')

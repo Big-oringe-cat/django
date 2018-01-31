@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^request_ip', 'CommandQuery.views.request_ip'),
     url(r'^usepro', 'CommandQuery.views.usepro'),
     url(r'^td_speed', 'CommandQuery.views.td_speed'),
+    url(r'^routing', 'CommandQuery.views.routing'),
 )
 

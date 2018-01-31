@@ -65,7 +65,7 @@
                                                                                                                         <option value="lasttype" selected>全天发送速度top20</option>
                                                                                                                         {%endif%}
                                                                                                           </select>
-					&nbsp;&nbsp;通道代码:<input type="text" name="td_code" id="td_code"  value="{{td_code}}" placeholder="通道代码" class="validate[required]"/>
+					&nbsp;&nbsp;通道代码:<input type="text" name="td_code" id="td_code"  value="{{td_code}}" placeholder="通道代码" class="validate[required]" required oninvalid="setCustomValidity('请填写通道代码')" oninput="setCustomValidity('')"/>
 					&nbsp;&nbsp;查询时间：<input  type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>&nbsp;时：<select name="hour"  style="width:70px"> 
 					<option value=""></option>      				
 					<option value="01">01</option> 

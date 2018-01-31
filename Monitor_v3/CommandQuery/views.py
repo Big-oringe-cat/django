@@ -636,7 +636,7 @@ def td_speed(req):
                     stdin,stdout,stderr = s.exec_command(command)
                     for result in stdout.readlines():
                         ##result=re.sub(td_code,'<strong style="color:red;">'+td_code+'</strong>',result)
-                        result=re.sub(td_code,'',result)
+                        ##result=re.sub(td_code,'',result)
                         ##if search2 != "":
                         ##    result=re.sub(search2,''+search2+'',result)
                         result=re.sub('return','',result)
@@ -645,3 +645,5 @@ def td_speed(req):
         return render_to_response("td_speed.html",locals())
     else:
         return render_to_response("td_speed.html",locals())
+def routing(req):
+    return render_to_response("routing.html",locals())

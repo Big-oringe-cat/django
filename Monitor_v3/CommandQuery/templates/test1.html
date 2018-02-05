@@ -1,0 +1,22 @@
+{% extends "table6.html" %}
+{% block title %}集群接收端提交记录查询{% endblock %}
+{% block title1 %}提交记录展示{% endblock %}
+{% block href %}
+                            <li><a href="clusterSubmit.do">提交记录</a></li>
+                            <li><a href="clusterSpeed.do">提交速度</a></li>
+                            <li><a href="clusterSend.do">发送记录</a></li>
+			    <li><a href="request_ip">交互ip</a></li> 
+			    <li class="active"><a href="td_speed.do">通道发送速度</a></li> 
+{% endblock %}
+{% block form %}
+				{%if test1%}
+					<span><code>测试：{{test1}}</code></span>
+				{%endif%}
+ 				{%if command%}
+					<span><code>命令：{{command}}</code></span>
+ 				{% else %}
+ 					<span></span>
+				{%endif%}
+{% endblock %}
+
+							

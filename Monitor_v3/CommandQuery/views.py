@@ -585,35 +585,40 @@ def request_ip(req):
 
 def td_speed(req):
     if req.method == 'POST':
+        search=req.REQUEST.get('search','lasttype')
         NowTime = time.strftime('%Y-%m-%d %H:%M:%S')
         td_code = req.REQUEST.get('td_code','0')
         ##search2 = req.REQUEST.get('search2','0')
         hour = req.REQUEST.get('hour','')
-        type = req.REQUEST.get('type','cluster_local')
+        type = req.REQUEST.get('type','cluster_64')
         nowDate = time.strftime('%Y-%m-%d')
         startTime = req.REQUEST.get('startTime',nowDate)
         nowDate = time.strftime('%Y-%m-%d')
+        test1 = {"search":search,"NowTime":NowTime,"td_code":td_code,"hour":hour,"type":type,"nowDate":nowDate,"startTime":startTime}
         logName_http=""
         logName_cmpp=""
         if startTime == "":
             startTime = nowDate
             logName_http = "/hskj/logs/info.log"
-            logName_cmpp = "/hskj/logs/cmpp_info.log"
-            logName_sgip = "/hskj/logs/sgip_info.log"
-            logName_smgp = "/hskj/logs/smgp_info.log"
+            #logName_cmpp = "/hskj/logs/cmpp_info.log"
+            #logName_sgip = "/hskj/logs/sgip_info.log"
+            #logName_smgp = "/hskj/logs/smgp_info.log"
         else:
             if startTime == nowDate:
                 logName_http = "/hskj/logs/info.log"
-                logName_cmpp = "/hskj/logs/cmpp_info.log"
-                logName_sgip = "/hskj/logs/sgip_info.log"
-                logName_smgp = "/hskj/logs/smgp_info.log"
+                #logName_cmpp = "/hskj/logs/cmpp_info.log"
+                #logName_sgip = "/hskj/logs/sgip_info.log"
+                #logName_smgp = "/hskj/logs/smgp_info.log"
             else:
                 logName_http = "/hskj/logs/info.log."+startTime
-                logName_cmpp = "/hskj/logs/cmpp_info.log."+startTime
-                logName_sgip = "/hskj/logs/sgip_info.log."+startTime
-                logName_smgp = "/hskj/logs/smgp_info.log."+startTime
+                #logName_cmpp = "/hskj/logs/cmpp_info.log."+startTime
+                #logName_sgip = "/hskj/logs/sgip_info.log."+startTime
+                #logName_smgp = "/hskj/logs/smgp_info.log."+startTime
         ##command = "grep -a  '"+search1+"' "+logName_http+" "+logName_cmpp+" "+logName_sgip+" "+logName_smgp+"|grep -a '"+startTime+" "+hour+"' | grep -a '"+search2+"'|grep -v -a '\-\-'|grep -v 'send test'|grep -v 'receive test'|grep -v 'report'"
-        command = "for i in {"+logName_http+","+logName_cmpp+","+logName_sgip+","+logName_smgp+"};do tail -10000 $i;done | grep -a 'yw_code: "+td_code+"' |grep -a '"+startTime+" "+hour+"'| grep -a \"waitSubmitRespMap\" | awk -F \",\" '{print $1}' | sort | uniq -c|sort -k1 -nr | head -20 "
+        if search == "lasttype":
+            command = "tail -10000 "+logName_http+"| grep -a 'yw_code: "+td_code+"' |grep -a '"+startTime+" "+hour+"'| grep -a \"waitSubmitRespMap\" | awk -F \",\" '{print $1}' | sort | uniq -c|sort -k1 -nr | head -10"
+        else:
+            command = "tail -10000 "+logName_http+"| grep -a 'yw_code: "+td_code+"' |grep -a '"+startTime+" "+hour+"'| grep -a \"waitSubmitRespMap\" | awk -F \",\" '{print $1}' | sort | uniq -c"
         username = 'root'
         pkey_file='/root/.ssh/id_rsa'
         table_list = []
@@ -631,19 +636,22 @@ def td_speed(req):
                     s = paramiko.SSHClient()
                     s.load_system_host_keys()
                     s.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-                    key = paramiko.RSAKey.from_private_key_file(pkey_file,'666666')
-                    s.connect(server,22,username,pkey=key,timeout=10)
+                    ##key = paramiko.RSAKey.from_private_key_file(pkey_file,'666666')
+                    s.connect(server,22,username,password = '666666',timeout=10)
                     stdin,stdout,stderr = s.exec_command(command)
                     for result in stdout.readlines():
                         ##result=re.sub(td_code,'<strong style="color:red;">'+td_code+'</strong>',result)
                         ##result=re.sub(td_code,'',result)
                         ##if search2 != "":
                         ##    result=re.sub(search2,''+search2+'',result)
-                        result=re.sub('return','',result)
+                        result=re.sub('return', '',result)
                         table_list.append({'server':server_ip,'content':result,'sender':sender_code})
         NowTime = time.strftime('%Y-%m-%d %H:%M:%S')
         return render_to_response("td_speed.html",locals())
+        #return HttpResponse("search="+search+"NowTime="+NowTime+";td_code="+td_code+";hour:"+hour+";type="+type+";nowDate="+nowDate+";startTime="+startTime)
     else:
         return render_to_response("td_speed.html",locals())
+def test1(req):
+    return render_to_response("test1.html",locals())
 def routing(req):
     return render_to_response("routing.html",locals())

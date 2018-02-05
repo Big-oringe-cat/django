@@ -96,6 +96,9 @@
 					<input type="submit" class="btn"  value="查询" />(64集群可查询半个月记录,其他集群可查询一个月记录)
  	</form>	
  				<p></p>
+				{%if test1%}
+					<span><code>测试：{{test1}}</code></span>
+				{%endif%}
  				{%if command%}
 					<span><code>命令：{{command}}</code></span>
  				{% else %}

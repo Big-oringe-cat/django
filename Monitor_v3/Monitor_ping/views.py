@@ -2,7 +2,7 @@ from django import forms
 from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render_to_response
-
+import time
 import ShareMethod.views
 from tracemalloc import Snapshot
 
@@ -36,10 +36,18 @@ def ping_info(req):
 def ping_insert(req):
     operatorName=req.session.get('username')
     if req.method == 'POST':
+        style="display:none;"
         server_id=req.REQUEST.get('server_id','')
         dest_ip=req.REQUEST.get('dest_ip','')
         dest_type=req.REQUEST.get('dest_type','')
         dest_comment=req.REQUEST.get('dest_comment','')
+        nowDate = time.strftime('%Y-%m-%d')
+        startTime = req.REQUEST.get('startTime',nowDate)
+        stopTime = req.REQUEST.get('stopTime',nowDate)
+        if dest_comment != "用户":
+            style="display:block;"
+            startTime=''
+            stopTime=''
         monitor_level=req.REQUEST.get('monitor_level','')
         sql2="select replace_ip from replace_info where gate_ip='"+dest_ip+"'"
         conn2,cur2=ShareMethod.views.connDB_14()
@@ -57,7 +65,7 @@ def ping_insert(req):
             src_ip=str(row1[0])
             src_type=str(row1[1])
         ShareMethod.views.connClose(conn1, cur1)
-        sql="insert into ping_info(server_id,src_ip,dest_ip,src_type,dest_type,dest_comment,replace_ip,flag,monitor_level) values ('"+server_id+"','"+src_ip+"','"+dest_ip+"','"+src_type+"','"+dest_type+"','"+dest_comment+"','"+replace_ip+"',1,"+monitor_level+")"
+        sql="insert into ping_info(server_id,src_ip,dest_ip,src_type,dest_type,dest_comment,replace_ip,flag,monitor_level,start_time,stop_time) values ('"+server_id+"','"+src_ip+"','"+dest_ip+"','"+src_type+"','"+dest_type+"','"+dest_comment+"','"+replace_ip+"',1,"+monitor_level+",'"+startTime+"','"+stopTime+"')"
         try:
             conn,cur=ShareMethod.views.connDB_14()
             SqlResult=ShareMethod.views.exeInsert(cur,sql)
@@ -103,8 +111,13 @@ def ping_update(req):
         src_type=req.REQUEST.get('src_type','')
         dest_comment=req.REQUEST.get('dest_comment','')
         replace_ip=req.REQUEST.get('replace_ip','')
+        nowDate = time.strftime('%Y-%m-%d')
+        startTime = req.REQUEST.get('startTime',nowDate)
+        stopTime = req.REQUEST.get('stopTime',nowDate)
+        if dest_comment != '用户':
+            startTime,stopTime='',''
         monitor_level=req.REQUEST.get('monitor_level','')
-        sql1="update ping_info set dest_ip='"+dest_ip+"',dest_type='"+dest_type+"',dest_comment='"+dest_comment+"',replace_ip='"+replace_ip+"',monitor_level="+monitor_level+" where sn="+str(sn)
+        sql1="update ping_info set dest_ip='"+dest_ip+"',dest_type='"+dest_type+"',dest_comment='"+dest_comment+"',replace_ip='"+replace_ip+"',start_time='"+startTime+"',stop_time='"+stopTime+"',monitor_level="+monitor_level+" where sn="+str(sn)
         try:
             conn1,cur1=ShareMethod.views.connDB_14()
             SqlResult=ShareMethod.views.exeUpdate(cur1,sql1)
@@ -120,7 +133,7 @@ def ping_update(req):
         ShareMethod.views.connClose(conn,cur)
         table_list = []
         for row in cur:
-            table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'src_type':row[4],'dest_type':row[5],'dest_comment':row[6],'replace_ip':row[7],'monitor_level':str(row[9])})
+            table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'src_type':row[4],'dest_type':row[5],'dest_comment':row[6],'replace_ip':row[7],'monitor_level':str(row[9]),'startTime':row[11],'stopTime':row[12]})
         return render_to_response('ping_update.html',{'table_list':table_list})
 
 
@@ -176,7 +189,8 @@ def server_insert(req):
         server_id=req.REQUEST.get('server_id','')
         server_desc=req.REQUEST.get('server_desc','')
         domain_name=req.REQUEST.get('domain_name','')
-        sql="insert into server_info (server_ip,private_ip,server_id,server_desc,domain_name) values ('"+server_ip+"','"+private_ip+"','"+server_id+"','"+server_desc+"','"+domain_name+"')"
+        type=req.REQUEST.get('type','')
+        sql="insert into server_info (server_ip,private_ip,server_id,server_desc,domain_name,type,status) values ('"+server_ip+"','"+private_ip+"','"+server_id+"','"+server_desc+"','"+domain_name+"','"+type+"','0')"
         sql2="update ping_info set src_type='"+server_desc+"' where src_ip='"+server_ip+"'"
         try:
             conn,cur=ShareMethod.views.connDB_14()

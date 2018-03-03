@@ -217,7 +217,7 @@ def role_sn(username):
     role='1'
     for row in cur:
         role=row[0]
-    if username == '吴伟杰' or username == '吴云' or username == '仉晓甜' or username == '郭小蕾' or username == '黄振根' or username == '叶军跃' or username == '张阿明':
+    if username == '吴伟杰' or username == '吴云' or username == '仉晓甜' or username == '郭小蕾' or username == '黄振根' or username == '叶军跃' or username == '张阿明' or username == '苗伟' or username == 'admin':
         role = 4
     return role
 def index(req):

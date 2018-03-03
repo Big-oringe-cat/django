@@ -67,3 +67,6 @@
 2017-07-13 14:39:36,705 - /hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/ShareMethod/views.py - views.py - [line:28] - ERROR - Can't convert 'int' object to str implicitly操作人：仉晓甜
 2017-07-13 14:48:14,273 - /hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/ShareMethod/views.py - views.py - [line:28] - ERROR - Can't convert 'int' object to str implicitly操作人：仉晓甜
 2017-09-27 10:41:05,702 - /hskj/web/apache/htdocs/Monitor_v3_doc/Monitor_v3/ShareMethod/views.py - views.py - [line:28] - ERROR - (1062, "Duplicate entry '202.108.253.227-112.35.10.165' for key 'Index_2'")操作人：仉晓甜
+2018-03-02 19:07:50,733 - /workspace/monitor/Monitor_v3/ShareMethod/views.py - views.py - [line:24] - ERROR - (1364, "Field 'type' doesn't have a default value")操作人：苗伟
+2018-03-02 19:43:52,182 - /workspace/monitor/Monitor_v3/ShareMethod/views.py - views.py - [line:24] - ERROR - (1364, "Field 'type' doesn't have a default value")操作人：苗伟
+2018-03-02 19:45:20,969 - /workspace/monitor/Monitor_v3/ShareMethod/views.py - views.py - [line:24] - ERROR - (1364, "Field 'type' doesn't have a default value")操作人：苗伟

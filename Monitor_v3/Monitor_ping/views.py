@@ -15,7 +15,7 @@ def ping_info(req):
     pageType = req.REQUEST.get('pageType', '0')
     curPage = int(req.REQUEST.get('curPage', '1'))
     allPage = int(req.REQUEST.get('allPage', '1'))
-    sql="select sn,server_id,src_ip,dest_ip,dest_type,dest_comment,replace_ip,monitor_level,src_type,flag from ping_info where 1=1 and (server_id like '%" + search1 + "%' or src_ip like '%" + search1 + "%') and (dest_ip like '%" + search2 + "%' or replace_ip like '%" + search2 + "%' or dest_type like '%" + search2 + "%' or dest_comment like '%" + search2 + "%') and (dest_comment like '%" + search3 + "%') order by sn"
+    sql="select sn,server_id,src_ip,dest_ip,dest_type,dest_comment,replace_ip,monitor_level,src_type,flag,start_time,stop_time from ping_info where 1=1 and (server_id like '%" + search1 + "%' or src_ip like '%" + search1 + "%') and (dest_ip like '%" + search2 + "%' or replace_ip like '%" + search2 + "%' or dest_type like '%" + search2 + "%' or dest_comment like '%" + search2 + "%') and (dest_comment like '%" + search3 + "%') order by sn"
     sql2="select count(*) from ping_info where 1=1 and (server_id like '%" + search1 + "%' or src_ip like '%" + search1 + "%') and (dest_ip like '%" + search2 + "%' or replace_ip like '%" + search2 + "%' or dest_type like '%" + search2 + "%' or dest_comment like '%" + search2 + "%') and (dest_comment like '%" + search3 + "%')"
     print(sql2)
     if allPostCounts == 0:
@@ -29,7 +29,7 @@ def ping_info(req):
     ShareMethod.views.exeQuery(cur, sql)
     table_list=[]
     for row in cur:
-        table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'dest_type':row[4],'dest_comment':row[5],'replace_ip':row[6],'monitor_level':row[7],'src_type':row[8],'flag':row[9]})
+        table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'dest_type':row[4],'dest_comment':row[5],'replace_ip':row[6],'monitor_level':row[7],'src_type':row[8],'flag':row[9],'startTime':row[10],'stopTime':row[11]})
     ShareMethod.views.connClose(conn,cur)
     return render_to_response('ping_info.html',locals())
 
@@ -41,7 +41,7 @@ def ping_insert(req):
         dest_ip=req.REQUEST.get('dest_ip','')
         dest_type=req.REQUEST.get('dest_type','')
         dest_comment=req.REQUEST.get('dest_comment','')
-        nowDate = time.strftime('%Y-%m-%d')
+        nowDate = time.strftime('%Y-%m-%d %H:%M:%S')
         startTime = req.REQUEST.get('startTime',nowDate)
         stopTime = req.REQUEST.get('stopTime',nowDate)
         if dest_comment != "用户":
@@ -112,12 +112,11 @@ def ping_update(req):
         dest_comment=req.REQUEST.get('dest_comment','')
         replace_ip=req.REQUEST.get('replace_ip','')
         nowDate = time.strftime('%Y-%m-%d')
-        startTime = req.REQUEST.get('startTime',nowDate)
         stopTime = req.REQUEST.get('stopTime',nowDate)
         if dest_comment != '用户':
-            startTime,stopTime='',''
+            stopTime=''
         monitor_level=req.REQUEST.get('monitor_level','')
-        sql1="update ping_info set dest_ip='"+dest_ip+"',dest_type='"+dest_type+"',dest_comment='"+dest_comment+"',replace_ip='"+replace_ip+"',start_time='"+startTime+"',stop_time='"+stopTime+"',monitor_level="+monitor_level+" where sn="+str(sn)
+        sql1="update ping_info set dest_ip='"+dest_ip+"',dest_type='"+dest_type+"',dest_comment='"+dest_comment+"',replace_ip='"+replace_ip+"',stop_time='"+stopTime+"',monitor_level="+monitor_level+" where sn="+str(sn)
         try:
             conn1,cur1=ShareMethod.views.connDB_14()
             SqlResult=ShareMethod.views.exeUpdate(cur1,sql1)
@@ -133,7 +132,7 @@ def ping_update(req):
         ShareMethod.views.connClose(conn,cur)
         table_list = []
         for row in cur:
-            table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'src_type':row[4],'dest_type':row[5],'dest_comment':row[6],'replace_ip':row[7],'monitor_level':str(row[9]),'startTime':row[11],'stopTime':row[12]})
+            table_list.append({'sn':row[0],'server_id':row[1],'src_ip':row[2],'dest_ip':row[3],'src_type':row[4],'dest_type':row[5],'dest_comment':row[6],'replace_ip':row[7],'monitor_level':str(row[9]),'stopTime':row[12]})
         return render_to_response('ping_update.html',{'table_list':table_list})
 
 

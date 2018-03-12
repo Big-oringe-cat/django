@@ -6,30 +6,31 @@
                                             window.onload=function(){
                                                 var hide=document.getElementById("dest_comment");
                                                 if (hide.value=="用户") {
-                                                    var sum1=document.getElementById("startTime");
+                                                    var sum1=document.getElementById("startTime_div");
                                                     sum1.style.display="block";
-                                                    var sum2=document.getElementById("stopTime");
+                                                    var sum2=document.getElementById("stopTime_div");
                                                     sum2.style.display="block";
                                                 }
                                                 else {
-                                                    var sum1=document.getElementById("startTime");
+                                                    var sum1=document.getElementById("startTime_div");
                                                     sum1.style.display="none";
-                                                    var sum2=document.getElementById("stopTime");
+                                                    var sum2=document.getElementById("stopTime_div");
                                                     sum2.style.display="none";
+
                                                 }
                                             }
                                             function Hide(){
                                                 var hide=document.getElementById("dest_comment");
                                                 if (hide.value=="用户") {
-                                                   var sum1=document.getElementById("startTime");
-                                                   sum1.style.display="block";
-                                                   var sum2=document.getElementById("stopTime");
-                                                   sum2.style.display="block";
+                                                    var sum1=document.getElementById("startTime_div");
+                                                    sum1.style.display="block";
+                                                    var sum2=document.getElementById("stopTime_div");
+                                                    sum2.style.display="block";
                                                 }
                                                 else {
-                                                    var sum1=document.getElementById("startTime");
+                                                    var sum1=document.getElementById("startTime_div");
                                                     sum1.style.display="none";
-                                                    var sum2=document.getElementById("stopTime");
+                                                    var sum2=document.getElementById("stopTime_div");
                                                     sum2.style.display="none";
                                                 }
                                             }
@@ -81,17 +82,17 @@
 								</div>
 					</div>
 
-                                        <div class="control-group">
-                                            <label class="control-label">开始监控时间</label>
+                                        <div id='startTime_div' class="control-group">
+                                            <label id='startTime_label' class="control-label">开始监控时间</label>
                                             <div class="controls">
-                                                <input style="{{style}}" type="text" id="startTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
+                                                <input  type="datetime" id="startTime" data-date-format="yyyy-mm-dd hh:ii:ss"   class="datetimepicker" value="{{startTime}}" name="startTime" class="validate[required]"/>
                                             </div>
                                         </div>
 
-                                        <div class="control-group">
-                                            <label class="control-label">结束监控时间</label>
+                                        <div id='stopTime_div' class="control-group">
+                                            <label id='stopTime_label' class="control-label">结束监控时间</label>
                                             <div class="controls">                                                                
-                                                <input  type="text" id="stopTime" data-date-format="yyyy-mm-dd"  class="datepicker" value="{{stopTime}}" name="stopTime" class="validate[required]"/>
+                                                <input  type="datetime" id="stopTime" data-date-format="yyyy-mm-dd hh:ii:ss"  class="datetimepicker" value="{{stopTime}}" name="stopTime" class="validate[required]"/>
                                             </div>
                                         </div>
                                         
